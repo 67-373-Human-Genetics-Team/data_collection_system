@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @participant.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @participant.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @participant.email %>
+</p>
+
+<p>
+  <strong>Started at:</strong>
+  <%= @participant.started_at %>
+</p>
+
+<p>
+  <strong>Datetime:</strong>
+  <%= @participant.datetime %>
+</p>
+
+<p>
+  <strong>Completed at:</strong>
+  <%= @participant.completed_at %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>

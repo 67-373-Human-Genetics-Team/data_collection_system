@@ -1,0 +1,37 @@
+<h1>Listing participants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Started at</th>
+      <th>Datetime</th>
+      <th>Completed at</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @participants.each do |participant| %>
+      <tr>
+        <td><%= participant.first_name %></td>
+        <td><%= participant.last_name %></td>
+        <td><%= participant.email %></td>
+        <td><%= participant.started_at %></td>
+        <td><%= participant.datetime %></td>
+        <td><%= participant.completed_at %></td>
+        <td><%= link_to 'Show', participant %></td>
+        <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
+        <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Participant', new_participant_path %>
