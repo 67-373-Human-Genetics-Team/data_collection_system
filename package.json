@@ -1,0 +1,13 @@
+{
+  "name": "SurveyApp",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=0.10"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "mongoose": "3.8.8",
+    "jade": "1.3.0"
+  }
+}
