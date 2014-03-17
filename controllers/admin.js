@@ -1,7 +1,7 @@
 var Survey = require('../models/survey');
 
 exports.newsurvey = function(req,res) {
-	res.render('survey_form');
+	res.render('survey_form', {header: 'New Survey'});
 };
 
 exports.list = function(req,res) {
