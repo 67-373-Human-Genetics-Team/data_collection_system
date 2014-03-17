@@ -1,4 +1,11 @@
-div.surveyform
-	form(name='survey', action='/surveys/new', method='post')
-		input(type='text', name='name')
-		input(type="submit", value="Create")
+doctype html
+html(lang="en")
+    head
+        title SurveyApp
+    body
+        h1= header
+        div.surveyform
+            form(name='survey', action='/surveys/new', method='post')
+                input(type='text', name='name')
+                input(type='hidden' name='status' value='Unpublished')
+                input(type="submit", value="Create")
