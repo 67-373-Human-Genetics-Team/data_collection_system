@@ -1,11 +1,11 @@
 var express = require('express');
+var app = express();
 var mongoose = require('mongoose');
 var controllers = {
 	survey : require('./controllers/survey'),
 	admin : require('./controllers/admin'),
 	api : require('./controllers/api')
 };
-var app = module.exports = express.createServer();
 
 mongoose.connect('mongodb://localhost/surveyapp');
  
