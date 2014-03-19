@@ -1,0 +1,35 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.table-theme th {
+    padding: 12px 10px;
+    text-align: left;
+}
+
+.table-theme td {
+    padding: 11px 10px 0;
+    font-size: 14px;
+}
+
+.table-theme th {
+    border-bottom: 2px solid black
+}
+
+#delete-button {
+    color: red;
+    font-weight: 400;
+}
+
+#delete-button:hover {
+    font-weight: 700;
+}
