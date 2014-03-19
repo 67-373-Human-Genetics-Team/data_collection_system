@@ -11,9 +11,10 @@ exports.list = function(req,res) {
 		} else {
 			var names = [];
 			for (var i=0; i<surveys.length; i++) {
-				names.push(surveys.name);
+				names.push(surveys[i].name);
 			}
-			res.render('surveys', {header: 'Surveys', names : names})
+            console.log(names);
+			res.render('surveys', {header: 'Surveys', names : names});
 		}
 	});
 };

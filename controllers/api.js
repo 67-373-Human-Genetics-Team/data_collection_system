@@ -6,7 +6,10 @@ exports.post = function(req,res) {
 			if (err) { 
 				res.send(err);
 			} else {
-				res.send('Survey saved!');
+                res.writeHead(302, {
+                    'Location': '/admin/surveys'
+                });
+                res.end();
 			}
 	});
 };
