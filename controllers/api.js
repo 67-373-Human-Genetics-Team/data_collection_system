@@ -13,3 +13,13 @@ exports.post = function(req,res) {
 			}
 	});
 };
+
+exports.delete = function(req,res) {
+    Survey.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send('Deleted');
+        }
+    });
+};

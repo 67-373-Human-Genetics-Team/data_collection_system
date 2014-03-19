@@ -22,6 +22,7 @@ app.get('/', controllers.survey.home);
 app.get('/admin/surveys', controllers.admin.list);
 app.get('/admin/survey/new', controllers.admin.newsurvey);
 app.post('/api/new', controllers.api.post);
+app.delete('/api/surveys/:id', controllers.api.delete);
 
 app.listen(3000);
 console.log("Express server listening on port 3000");

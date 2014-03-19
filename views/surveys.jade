@@ -2,12 +2,26 @@ doctype html
 html(lang="en")
   head
     title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+      function removeSurvey(id) {
+        $.ajax('/api/surveys/'+id, {
+          cache: false,
+          type: 'DELETE',
+          success: function(data) {
+            $('#survey-'+id).remove();
+          }
+        });
+      }
   body
     h1= header
     ul
-      if (names.length < 1)
+      if (surveys.length < 1)
         p There are no surveys. Time to make one.
       else
-        each name in names
-          li= name
+        each survey in surveys
+          li(id='survey-'+survey._id)
+            = survey.name
+            | &nbsp;
+            a(onclick='removeSurvey("'+survey._id+'")') X
     a(class='button', href='/admin/survey/new') New Survey
