@@ -15,13 +15,20 @@ html(lang="en")
       }
   body
     h1= header
-    ul
-      if (surveys.length < 1)
-        p There are no surveys. Time to make one.
-      else
-        each survey in surveys
-          li(id='survey-'+survey._id)
-            = survey.name
-            | &nbsp;
-            a(onclick='removeSurvey("'+survey._id+'")') X
     a(class='button', href='/admin/survey/new') New Survey
+    if (surveys.length < 1)
+      p There are no surveys. Time to make one.
+    else
+      table(class='table-theme')
+        thead
+          tr
+            th Name
+            th Status
+            th
+        tbody
+          each survey in surveys
+            tr(id='survey-'+survey._id)
+              td= survey.name
+              td= survey.status
+              td
+                a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
