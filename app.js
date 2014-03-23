@@ -20,6 +20,8 @@ app.configure(function(){
 
 // Routes
 app.get('/', controllers.survey.home);
+app.get('/login', controllers.survey.login);
+app.get('/logout', controllers.survey.logout);
 app.get('/admin/surveys', controllers.admin.list);
 app.get('/admin/survey/new', controllers.admin.newsurvey);
 app.post('/api/new', controllers.api.post);
