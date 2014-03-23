@@ -24,7 +24,10 @@ app.get('/login', controllers.surveyapp.login);
 app.get('/logout', controllers.surveyapp.logout);
 app.get('/admin/surveys', controllers.admin.list);
 app.get('/admin/survey/new', controllers.admin.newsurvey);
-app.post('/api/new', controllers.api.post);
+
+// API Routes
+app.get('/api/surveys/:id', controllers.api.get);
+app.post('/api/surveys/new', controllers.api.post);
 app.delete('/api/surveys/:id', controllers.api.delete);
 
 app.listen(3000);
