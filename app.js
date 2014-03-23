@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var controllers = {
-	survey : require('./controllers/survey'),
+	surveyapp : require('./controllers/surveyapp'),
 	admin : require('./controllers/admin'),
 	api : require('./controllers/api')
 };
@@ -19,9 +19,9 @@ app.configure(function(){
 });
 
 // Routes
-app.get('/', controllers.survey.home);
-app.get('/login', controllers.survey.login);
-app.get('/logout', controllers.survey.logout);
+app.get('/', controllers.surveyapp.home);
+app.get('/login', controllers.surveyapp.login);
+app.get('/logout', controllers.surveyapp.logout);
 app.get('/admin/surveys', controllers.admin.list);
 app.get('/admin/survey/new', controllers.admin.newsurvey);
 app.post('/api/new', controllers.api.post);
