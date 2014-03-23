@@ -7,7 +7,6 @@ exports.get = function(req,res) {
             res.send(err);
         } else {
             res.send(survey);
-            console.log(survey);
         }
     });
 };

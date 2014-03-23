@@ -11,3 +11,29 @@ exports.login = function(req,res) {
 exports.logout = function(req,res) {
     res.render('logout', {name: 'Logout'});
 }
+
+exports.surveys = function(req,res) {
+    Survey.find(function(err,surveys) {
+        if (err) {
+            res.send("You've encountered an error.");
+        } else {
+            var names = [];
+            for (var i=0; i<surveys.length; i++) {
+                names.push(surveys[i].name);
+            }
+            console.log(names);
+            res.render('surveys', {header: 'Surveys', surveys: surveys});
+        }
+    });
+};
+
+exports.getSurvey = function(req,res){
+    Survey.findById(req.params.id, function(err,survey) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(survey);
+            console.log(survey);
+        }
+    });
+};

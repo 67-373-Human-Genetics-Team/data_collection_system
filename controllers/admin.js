@@ -14,7 +14,7 @@ exports.list = function(req,res) {
 				names.push(surveys[i].name);
 			}
             console.log(names);
-			res.render('surveys', {header: 'Surveys', surveys: surveys});
+			res.render('admin_surveys', {header: 'Surveys', surveys: surveys});
 		}
 	});
 };

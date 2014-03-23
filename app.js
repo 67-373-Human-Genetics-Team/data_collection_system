@@ -22,6 +22,8 @@ app.configure(function(){
 app.get('/', controllers.surveyapp.home);
 app.get('/login', controllers.surveyapp.login);
 app.get('/logout', controllers.surveyapp.logout);
+app.get('/surveys', controllers.surveyapp.surveys);
+app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 app.get('/admin/surveys', controllers.admin.list);
 app.get('/admin/survey/new', controllers.admin.newsurvey);
 

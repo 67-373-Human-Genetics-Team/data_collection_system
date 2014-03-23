@@ -4,17 +4,19 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
-      function getSurvey(id) {
+      function removeSurvey(id) {
         $.ajax('/api/surveys/'+id, {
           cache: false,
-          type: 'GET',
+          type: 'DELETE',
           success: function(data) {
-            window.location.replace("/surveys/"+id);
+            $('#survey-'+id).remove();
           }
         });
       }
   body
+    h1 Admin
     h1= header
+    a(class='button', href='/admin/survey/new') New Survey
     if (surveys.length < 1)
       p There are no surveys. Time to make one.
     else
@@ -23,9 +25,11 @@ html(lang="en")
           tr
             th Name
             th Status
+            th
         tbody
           each survey in surveys
             tr(id='survey-'+survey._id)
-              td 
-                a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name 
+              td= survey.name
               td= survey.status
+              td
+                a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
