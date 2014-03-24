@@ -17,9 +17,11 @@ html(lang="en")
     h1 Admin
     h1= header
     p= survey.status
-    if survey.questions < 1
+    if survey.questions.length < 1
       p There are no questions in this survey yet.
     else
       p= survey.questions
-    
-    p= survey.responses
+    if survey.responses.length < 1
+      p There are no responses in this survey yet.
+    else
+      p= survey.responses
