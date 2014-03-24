@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+      function removeSurvey(id) {
+        $.ajax('/api/surveys/'+id, {
+          cache: false,
+          type: 'DELETE',
+          success: function(data) {
+            $('#survey-'+id).remove();
+          }
+        });
+      }
+  body
+    h1 Admin
+    h1= header
+    p= survey.status
+    if survey.questions < 1
+      p There are no questions in this survey yet.
+    else
+      p= survey.questions
+    
+    p= survey.responses

@@ -24,8 +24,11 @@ app.get('/login', controllers.surveyapp.login);
 app.get('/logout', controllers.surveyapp.logout);
 app.get('/surveys', controllers.surveyapp.surveys);
 app.get('/surveys/:id', controllers.surveyapp.getSurvey);
+
 app.get('/admin/surveys', controllers.admin.listSurveys);
+app.get('/admin/surveys/:id', controllers.admin.showSurvey);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
+
 app.get('/admin/questions', controllers.admin.listQuestions);
 app.get('/admin/questions/new', controllers.admin.newQuestion);
 
