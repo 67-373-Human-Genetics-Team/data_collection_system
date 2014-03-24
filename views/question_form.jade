@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        title SurveyApp
+        include includes/head
+    body
+        h1= header
+        div.questionform
+            form(name='survey', action='/api/new', method='post')
+                
+                label Question: 
+                input(type='text', name='query')
+                br
+
+                label Type: 
+                select(name='types')
+                    option(value='text') Text
+                    option(value='dropdown') Dropdown
+                    option(value='checkbox') Checkbox
+                    option(value='radiobutton') Radio Button
+                br
+
+                label Options: 
+                input(type='textarea', name='options')
+                br
+                
+                input(type="submit", value="Create")

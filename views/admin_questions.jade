@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+  body
+    h1 Admin
+    h1= header
+    a(class='button', href='/admin/questions/new') New Question
+    if (questions.length < 1)
+      p There are no Questions. Time to make some.
+    else
+      table(class='table-theme')
+        thead
+          tr
+            th Question
+            th Type
+            th
+        tbody
+          each question in questions
+            tr(id='question-'+question._id)
+              td= question.query
+              td= question.type
+              td

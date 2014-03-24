@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var QuestionSchema = new Schema({
 	type: String,
 	query: String,
-	options: [String]
+	q_options: [String]
 });
 
 module.exports = mongoose.model('Question', QuestionSchema);
