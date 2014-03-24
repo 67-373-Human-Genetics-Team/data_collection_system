@@ -41,16 +41,16 @@ exports.deleteSurvey = function(req,res) {
 
 /* Question API */
 // Create new question
-exports.postQuestion = function(req,res) {
-    new Question({query: req.body.query, type: req.body.types, q_options: req.body.options}).save(
-        function (err) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.writeHead(302, {
-                    'Location': '/admin/questions'
-                });
-                res.end();
-            }
-    });
-}
+// exports.postQuestion = function(req,res) {
+//     new Question({query: req.body.query, type: req.body.types, q_options: req.body.options}).save(
+//         function (err) {
+//             if (err) {
+//                 res.send(err);
+//             } else {
+//                 res.writeHead(302, {
+//                     'Location': '/admin/questions'
+//                 });
+//                 res.end();
+//             }
+//     });
+// }

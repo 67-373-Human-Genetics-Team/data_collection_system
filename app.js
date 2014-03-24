@@ -29,14 +29,14 @@ app.get('/admin/surveys', controllers.admin.listSurveys);
 app.get('/admin/surveys/:id', controllers.admin.showSurvey);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
 
-app.get('/admin/questions', controllers.admin.listQuestions);
-app.get('/admin/questions/new', controllers.admin.newQuestion);
+// app.get('/admin/questions', controllers.admin.listQuestions);
+// app.get('/admin/questions/new', controllers.admin.newQuestion);
 
 // API Routes
 app.get('/api/surveys/:id', controllers.api.getSurvey);
 app.post('/api/surveys/new', controllers.api.postSurvey);
 app.delete('/api/surveys/:id', controllers.api.deleteSurvey);
-app.post('/api/questions/new', controllers.api.postQuestion)
+// app.post('/api/questions/new', controllers.api.postQuestion);
 
 app.listen(3000);
 console.log("Express server listening on port 3000");

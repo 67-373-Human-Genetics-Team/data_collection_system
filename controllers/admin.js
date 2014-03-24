@@ -27,16 +27,16 @@ exports.showSurvey = function(req,res) {
 };
 
 /* Question Controller */
-exports.newQuestion = function(req,res) {
-	res.render('question_form', {header: 'New Question'});
-};
+// exports.newQuestion = function(req,res) {
+// 	res.render('question_form', {header: 'New Question'});
+// };
 
-exports.listQuestions = function(req,res) {
-	Question.find(function(err,questions) {
-		if (err) {
-			res.send("You've encountered an error.");
-		} else {
-			res.render('admin_questions', {header: 'Questions', questions: questions});
-		}
-	});
-};
+// exports.listQuestions = function(req,res) {
+// 	Question.find(function(err,questions) {
+// 		if (err) {
+// 			res.send("You've encountered an error.");
+// 		} else {
+// 			res.render('admin_questions', {header: 'Questions', questions: questions});
+// 		}
+// 	});
+// };

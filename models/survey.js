@@ -1,11 +1,12 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
-	ObjectId = Schema.ObjectId;
+	ObjectId = Schema.ObjectId
+    Question = require('./question.js').schema;
 
 var SurveySchema = new Schema({
 	name: String,
 	status: String,
-	questions: [ObjectId],
+	questions: [Question],
 	responses: [ObjectId]
 });
 
