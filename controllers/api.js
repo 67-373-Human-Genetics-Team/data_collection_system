@@ -1,7 +1,9 @@
 var Survey = require('../models/survey');
+var Question = require('../models/question');
 
+/* Survey API */
 // Retrieve survey by ID
-exports.get = function(req,res) {
+exports.getSurvey = function(req,res) {
     Survey.findById(req.params.id, function(err,survey) {
         if (err) {
             res.send(err);
@@ -12,7 +14,7 @@ exports.get = function(req,res) {
 };
 
 // Create new survey
-exports.post = function(req,res) {
+exports.postSurvey = function(req,res) {
 	new Survey({name: req.body.name, status: req.body.status}).save(
 		function (err) {
 			if (err) { 
@@ -27,7 +29,7 @@ exports.post = function(req,res) {
 };
 
 // Delete survey by ID
-exports.delete = function(req,res) {
+exports.deleteSurvey = function(req,res) {
     Survey.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
             res.send(err);
@@ -36,3 +38,19 @@ exports.delete = function(req,res) {
         }
     });
 };
+
+/* Question API */
+// Create new question
+exports.postQuestion = function(req,res) {
+    new Question({query: req.body.query, type: req.body.types, q_options: req.body.options}).save(
+        function (err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.writeHead(302, {
+                    'Location': '/admin/questions'
+                });
+                res.end();
+            }
+    });
+}

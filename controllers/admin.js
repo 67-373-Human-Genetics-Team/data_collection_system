@@ -36,7 +36,7 @@ exports.listQuestions = function(req,res) {
 				queries.push(questions[i].query);
 			}
 			console.log(queries);
-			res.render('admin_questions', {header: 'Questions', questions: queries});
+			res.render('admin_questions', {header: 'Questions', questions: questions});
 		}
 	});
 };

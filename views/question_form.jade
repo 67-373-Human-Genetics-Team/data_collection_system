@@ -6,7 +6,7 @@ html(lang="en")
     body
         h1= header
         div.questionform
-            form(name='survey', action='/api/new', method='post')
+            form(name='survey', action='/api/questions/new', method='post')
                 
                 label Question: 
                 input(type='text', name='query')
@@ -17,11 +17,11 @@ html(lang="en")
                     option(value='text') Text
                     option(value='dropdown') Dropdown
                     option(value='checkbox') Checkbox
-                    option(value='radiobutton') Radio Button
+                    option(value='radio button') Radio Button
                 br
 
                 label Options: 
                 input(type='textarea', name='options')
                 br
-                
+
                 input(type="submit", value="Create")

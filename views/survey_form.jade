@@ -6,7 +6,7 @@ html(lang="en")
     body
         h1= header
         div.surveyform
-            form(name='survey', action='/api/new', method='post')
+            form(name='survey', action='/api/surveys/new', method='post')
                 input(type='text', name='name')
                 input(type='hidden' name='status' value='Unpublished')
                 input(type="submit", value="Create")
