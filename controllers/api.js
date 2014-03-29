@@ -29,7 +29,7 @@ exports.postSurvey = function(req,res) {
 };
 
 // Add question to survey
-exports.postQuestion = function (req,res) {
+exports.postQuestion = function(req,res) {
     var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options});
     Survey.findById(req.body.id, 
         function (err,survey) {
@@ -42,7 +42,23 @@ exports.postQuestion = function (req,res) {
                 console.log(survey);
             }
         });
-}
+};
+
+// Publish survey
+exports.publishSurvey = function(req,res) {
+    Survey.findById(req.params.id, 
+        function (err,survey){
+            if (err) {
+                res.send(err);
+            } else {
+                survey.status = "Published";
+                survey.start_date = Date.now();
+                survey.save();
+                res.send('Published survey.');
+                console.log(survey);
+            }
+        });
+};
 
 // Delete question in survey by ID
 exports.deleteQuestion = function(req,res) {

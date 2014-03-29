@@ -7,8 +7,8 @@ var SurveySchema = new Schema({
 	name: String,
 	status: String,
     created_at: {type: Date, default: Date.now},
-    start_date: {type: Date}
-    end_date: {type: Date}
+    start_date: Date,
+    end_date: Date,
 	questions: [Question],
 	responses: [ObjectId]
 });
