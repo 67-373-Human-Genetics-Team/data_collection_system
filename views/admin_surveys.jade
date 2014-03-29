@@ -1,3 +1,17 @@
+mixin prettyDate(date)
+  -var d = new Date(date)
+  -var month = d.getMonth()+1
+  -var day = d.getDate()
+  -var year = d.getFullYear()
+  -var t = d.toLocaleTimeString("en-US", {hour12: true})
+  if (t.length == 10)
+    -var time = t.substr(0, t.length-6)
+  else
+    -var time = t.substr(0, t.length-5)
+  -var meridiem = t.slice(-2)
+  -var format_date = month+'/'+day+'/'+year+' '+time+meridiem
+  span= format_date
+
 doctype html
 html(lang="en")
   head
@@ -85,8 +99,9 @@ html(lang="en")
               tr(id='survey-'+survey._id)
                 td
                   a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                td= survey.start_date
-                td= survey.end_date
+                td 
+                  +prettyDate(survey.start_date)
+                td --
                 td= survey.questions.length
                 td= survey.responses.length
                 td(id='close-survey-'+survey._id)
@@ -97,8 +112,10 @@ html(lang="en")
               tr(id='survey-'+survey._id)
                 td
                   a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                td= survey.start_date
-                td= survey.end_date
+                td
+                  +prettyDate(survey.start_date)
+                td
+                  +prettyDate(survey.end_date)
                 td= survey.questions.length
                 td= survey.responses.length
                 td(id='close-survey-'+survey._id)
