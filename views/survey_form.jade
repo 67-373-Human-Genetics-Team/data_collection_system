@@ -4,6 +4,7 @@ html(lang="en")
         title SurveyApp
         include includes/head
     body
+        include includes/nav
         h1= header
         div.surveyform
             form(name='survey', action='/api/surveys/new', method='post')

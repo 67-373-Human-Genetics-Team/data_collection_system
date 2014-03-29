@@ -4,7 +4,7 @@ html(lang="en")
     title SurveyApp
     include includes/head
   body
-    h1 Admin
+    include includes/nav
     h1= header
     a(class='button', href='/admin/questions/new') New Question
     if (questions.length < 1)
