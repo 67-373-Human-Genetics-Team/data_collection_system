@@ -53,7 +53,7 @@ exports.deleteQuestion = function(req,res) {
                 res.send(err);
             } else {
                 for (var i=0; i < survey.questions.length; i++) {
-                    if (survey.questions[i]._id === question_id) {
+                    if (survey.questions[i]._id == question_id) {
                         survey.questions.splice(i,1);
                     }
                 }
