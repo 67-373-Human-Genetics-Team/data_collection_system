@@ -60,6 +60,25 @@ exports.publishSurvey = function(req,res) {
         });
 };
 
+// Unpublish survey
+
+
+// Close survey
+exports.closeSurvey = function(req,res) {
+    Survey.findById(req.params.id,
+        function (err,survey) {
+            if (err) {
+                res.send(err);
+            } else {
+                survey.status = "Closed";
+                survey.end_date = Date.now();
+                survey.save();
+                res.send('Closed survey.');
+                console.log(survey);
+            }
+        });
+};
+
 // Delete question in survey by ID
 exports.deleteQuestion = function(req,res) {
     var question_id = req.params.question_id;
