@@ -9,19 +9,27 @@ html(lang="en")
           cache: false,
           type: 'DELETE',
           success: function(data) {
-            $('#survey-'+id).remove();
+            window.location.replace("/admin/surveys");
           }
         });
       }
   body
     h1 Admin
-    h1= header
-    p= survey.status
+    h1= header 
+      span
+        a(id='delete-button' onclick='removeSurvey("'+survey._id+'")')  x
+    p This survey is 
+      span=survey.status.toLowerCase()
+      
     if survey.questions.length < 1
-      p There are no questions in this survey yet.
+      p There are no questions in this survey yet. Let's add some.
     else
       p= survey.questions
-    if survey.responses.length < 1
-      p There are no responses in this survey yet.
+
+    div.question-box
+      include includes/question_form
+
+    if survey.status === "Unpublished"
+      p
     else
       p= survey.responses

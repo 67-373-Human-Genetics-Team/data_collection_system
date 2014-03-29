@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var SurveySchema = new Schema({
 	name: String,
 	status: String,
+    created_at: {type: Date, default: Date.now},
 	questions: [Question],
 	responses: [ObjectId]
 });

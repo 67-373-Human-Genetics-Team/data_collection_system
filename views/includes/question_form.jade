@@ -1,0 +1,18 @@
+form(name='question', action='/api/questions/new', method='post')
+    label Enter Question 
+        input(id='query' type='text', name='query')
+    p
+
+    label Question Type 
+        select(id='type' name='type')
+            option(value='text') Text
+            option(value='dropdown') Dropdown
+            option(value='checkbox') Checkbox
+            option(value='radio button') Radio Button
+    p
+
+    label Question Options 
+        input(id='options' type='textarea', name='options')
+    p
+    input(type='hidden' name='id' value=survey._id)
+    input(type="submit", value="Add Question")

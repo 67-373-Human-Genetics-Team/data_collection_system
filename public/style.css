@@ -37,3 +37,8 @@ ul {
 #delete-button:hover {
     font-weight: 700;
 }
+
+.question-box {
+    background-color: #ededed;
+    width: 50%;
+}

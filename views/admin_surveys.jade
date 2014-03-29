@@ -29,6 +29,7 @@ html(lang="en")
           tr
             th Name
             th Status
+            th Questions
             th
         tbody
           each survey in surveys
@@ -36,5 +37,6 @@ html(lang="en")
               td
                 a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
               td= survey.status
+              td= survey.questions.length
               td
                 a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
