@@ -44,13 +44,32 @@ exports.postQuestion = function (req,res) {
         });
 }
 
+// Delete question in survey by ID
+exports.deleteQuestion = function(req,res) {
+    var question_id = req.params.question_id;
+    Survey.findById(req.params.survey_id, 
+        function (err,survey) {
+            if (err) {
+                res.send(err);
+            } else {
+                for (var i=0; i < survey.questions.length; i++) {
+                    if (survey.questions[i]._id === question_id) {
+                        survey.questions.splice(i,1);
+                    }
+                }
+                survey.save();
+                res.send('Deleted question.');
+            }
+        });
+};
+
 // Delete survey by ID
 exports.deleteSurvey = function(req,res) {
     Survey.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
             res.send(err);
         } else {
-            res.send('Deleted');
+            res.send('Deleted survey.');
         }
     });
 };

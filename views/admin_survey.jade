@@ -13,6 +13,15 @@ html(lang="en")
           }
         });
       }
+      function removeQuestion(survey_id,question_id) {
+        $.ajax('/api/surveys/'+survey_id+'/questions/'+question_id, {
+          cache: false,
+          type: 'DELETE',
+          success: function(data) {
+            $('#question-'+question_id).remove();
+          }
+        });
+      }
   body
     h1 Admin
     h1= header 
@@ -38,7 +47,7 @@ html(lang="en")
               td= question.type
               td= question.query_options
               td
-                a(id='delete-button' onclick='removeQuestion("'+question._id+'")') x
+                a(id='delete-button' onclick='removeQuestion("'+survey._id+'","'+question._id+'")') x 
 
     div.question-box
       include includes/question_form
