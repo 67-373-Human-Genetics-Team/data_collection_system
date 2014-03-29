@@ -20,11 +20,25 @@ html(lang="en")
         a(id='delete-button' onclick='removeSurvey("'+survey._id+'")')  x
     p This survey is 
       span=survey.status.toLowerCase()
-      
+
     if survey.questions.length < 1
       p There are no questions in this survey yet. Let's add some.
     else
-      p= survey.questions
+      table(class='table-theme')
+        thead
+          tr
+            th Question
+            th Type
+            th Options
+            th
+        tbody
+          each question in survey.questions
+            tr(id='question-'+question._id)
+              td= question.query
+              td= question.type
+              td= question.query_options
+              td
+                a(id='delete-button' onclick='removeQuestion("'+question._id+'")') x
 
     div.question-box
       include includes/question_form
