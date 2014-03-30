@@ -14,18 +14,19 @@ html(lang="en")
         });
       }
   body
-    h1= header
-    if (surveys.length < 1)
-      p There are no surveys. Time to make one.
-    else
-      table(class='table-theme')
-        thead
-          tr
-            th Name
-            th Status
-        tbody
-          each survey in surveys
-            tr(id='survey-'+survey._id)
-              td 
-                a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name 
-              td= survey.status
+    #content-area
+      h1= header
+      if (surveys.length < 1)
+        p There are no surveys. Time to make one.
+      else
+        table(class='table-theme')
+          thead
+            tr
+              th Name
+              th Status
+          tbody
+            each survey in surveys
+              tr(id='survey-'+survey._id)
+                td 
+                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name 
+                td= survey.status

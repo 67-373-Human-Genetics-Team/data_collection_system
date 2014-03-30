@@ -8,6 +8,11 @@ body {
     font-size: 13px;
 }
 
+#content-area {
+    margin: auto;
+    width: 70%;
+}
+
 ul {
     list-style-type: none;
 }
@@ -18,8 +23,15 @@ ul {
 
 #nav {
    list-style-type: none;
-   margin: 0;
    padding: 15px;
+   margin: auto;
+   width: 70%;
+}
+
+#logo {
+    font-size: 150%;
+    margin-right: 50px;
+    padding-left: 0px !important;
 }
 
 #nav li {
@@ -37,12 +49,6 @@ ul {
     color: #ff581a;
     font-weight: 400;
     font-size: 105%;
-}
-
-#logo {
-    font-size: 150%;
-    margin-left: 100px;
-    margin-right: 50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -79,4 +85,6 @@ h1, h2, h3, h4, h5, h6 {
 .question-box {
     background-color: #ededed;
     width: 50%;
+    padding: 20px;
+    margin-top: 10px;
 }
