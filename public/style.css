@@ -13,10 +13,16 @@ body {
     width: 70%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
 ul {
     list-style-type: none;
 }
 
+
+/* Navigation Bar */
 #nav-container {
     background-color: #f2f2f2;
 }
@@ -50,11 +56,10 @@ ul {
     font-weight: 400;
     font-size: 105%;
 }
+/* End Navigation Bar */
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-}
 
+/* Table Styling */
 .table-theme th {
     padding: 12px 20px;
     text-align: left;
@@ -72,6 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 .table-theme tr:hover {
     font-weight: 400;
 }
+/* End Table Styling */
 
 #delete-button {
     color: red;
