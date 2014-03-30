@@ -1,16 +1,6 @@
 mixin prettyDate(date)
   -var d = new Date(date)
-  -var month = d.getMonth()+1
-  -var day = d.getDate()
-  -var year = d.getFullYear()
-  -var t = d.toLocaleTimeString("en-US", {hour12: true})
-  if (t.length == 10)
-    -var time = t.substr(0, t.length-6)
-  else
-    -var time = t.substr(0, t.length-5)
-  -var meridiem = t.slice(-2)
-  -var format_date = month+'/'+day+'/'+year+' '+time+meridiem
-  span= format_date
+  span= dateFormat(d, "dd mmm yyyy h:MM TT")
 
 doctype html
 html(lang="en")
@@ -57,68 +47,69 @@ html(lang="en")
       }
   body
     include includes/nav
-    h1= header
-    a(class='button', href='/admin/surveys/new') New Survey
-    if (surveys.length < 1)
-      p There are no surveys. Time to make one.
-    else
-      h3 Unpublished Surveys
-      table(class='table-theme' id='unpublished-surveys')
-        thead
-          tr
-            th Name
-            th Questions
-            th
-            th
-        tbody
-          each survey in surveys
-            if survey.status == "Unpublished"
-              tr(id='survey-'+survey._id)
-                td
-                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                td= survey.questions.length
-                td(id='publish-survey-'+survey._id)
-                  a(onclick='publishSurvey("'+survey._id+'")') Publish
-                td
-                  a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
+    div(id='content-area')
+      h1= header
+      a(class='button', href='/admin/surveys/new') New Survey
+      if (surveys.length < 1)
+        p There are no surveys. Time to make one.
+      else
+        h3 Unpublished Surveys
+        table(class='table-theme' id='unpublished-surveys')
+          thead
+            tr
+              th Name
+              th Questions
+              th
+              th
+          tbody
+            each survey in surveys
+              if survey.status == "Unpublished"
+                tr(id='survey-'+survey._id)
+                  td
+                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
+                  td= survey.questions.length
+                  td(id='publish-survey-'+survey._id)
+                    a(onclick='publishSurvey("'+survey._id+'")') Publish
+                  td
+                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
 
-      h3 Published Surveys
-      table(class='table-theme' id='published-surveys')
-        thead
-          tr
-            th Name
-            th Start
-            th End
-            th Questions
-            th Responses
-            th
-            th
-        tbody
-          each survey in surveys
-            if survey.status == "Published"
-              tr(id='survey-'+survey._id)
-                td
-                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                td 
-                  +prettyDate(survey.start_date)
-                td --
-                td= survey.questions.length
-                td= survey.responses.length
-                td(id='close-survey-'+survey._id)
-                  a(onclick='closeSurvey("'+survey._id+'")') Close Survey
-                td
-                  a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
-            if survey.status == "Closed"
-              tr(id='survey-'+survey._id)
-                td
-                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                td
-                  +prettyDate(survey.start_date)
-                td
-                  +prettyDate(survey.end_date)
-                td= survey.questions.length
-                td= survey.responses.length
-                td(id='close-survey-'+survey._id)
-                  a(href='#') See Results
-                td
-                  a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
+        h3 Published Surveys
+        table(class='table-theme' id='published-surveys')
+          thead
+            tr
+              th Name
+              th Start
+              th End
+              th Questions
+              th Responses
+              th
+              th
+          tbody
+            each survey in surveys
+              if survey.status == "Published"
+                tr(id='survey-'+survey._id)
+                  td
+                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
+                  td 
+                    +prettyDate(survey.start_date)
+                  td --
+                  td= survey.questions.length
+                  td= survey.responses.length
+                  td(id='close-survey-'+survey._id)
+                    a(onclick='closeSurvey("'+survey._id+'")') Close Survey
+                  td
+                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
+              if survey.status == "Closed"
+                tr(id='survey-'+survey._id)
+                  td
+                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
+                  td
+                    +prettyDate(survey.start_date)
+                  td
+                    +prettyDate(survey.end_date)
+                  td= survey.questions.length
+                  td= survey.responses.length
+                  td(id='close-survey-'+survey._id)
+                    a(href='#') See Results
+                  td
+                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x

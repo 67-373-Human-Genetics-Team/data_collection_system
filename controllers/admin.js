@@ -1,5 +1,6 @@
 var Survey = require('../models/survey');
 var Question = require('../models/question');
+var dateFormat = require('dateformat');
 
 /* Survey Controller */
 exports.newSurvey = function(req,res) {
@@ -11,7 +12,7 @@ exports.listSurveys = function(req,res) {
 		if (err) {
 			res.send("You've encountered an error.");
 		} else {
-			res.render('admin_surveys', {header: 'Surveys', surveys: surveys});
+			res.render('admin_surveys', {header: 'Surveys', surveys: surveys, dateFormat: dateFormat});
 		}
 	});
 };
