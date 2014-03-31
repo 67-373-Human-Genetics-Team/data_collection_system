@@ -94,3 +94,20 @@ ul {
     padding: 20px;
     margin-top: 10px;
 }
+
+label {
+    display: block;
+    margin: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#add-option {
+    font-weight: 400;
+}
+
+#add-option:hover {
+    font-weight: 700;
+}

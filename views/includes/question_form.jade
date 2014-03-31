@@ -1,18 +1,38 @@
-form(name='question', action='/api/questions/new', method='post')
+form(name='question' action='/api/questions/new' method='post')
     label Enter Question 
-        input(id='query' type='text', name='query')
-    p
+        input(id='query' type='text' name='query')
 
     label Question Type 
-        select(id='type' name='type')
-            option(value='text') Text
-            option(value='dropdown') Dropdown
-            option(value='checkbox') Checkbox
-            option(value='radio button') Radio Button
-    p
+        select(id='question-type' name='type')
+            option(value='Text') Text
+            option(value='Textarea') Textarea
+            option(value='Checkbox') Checkbox
+            option(value='Radio Button') Radio Button
+            option(value='Dropdown') Dropdown
+            option(value='Number') Number
+            option(value='Patent') Patent
+            option(value='Publication') Publication
+            option(value='Company') Company
 
-    label Question Options 
-        input(id='options' type='textarea', name='options')
-    p
+    //- Checkbox, Radiobutton, Dropdown form
+    label(id='options' class='hidden') Enter Options
+        br 
+        input(id='options-element' type='textarea' name='options')
+        br
+        a(id='add-option' onclick='addOption()') + Add Option
+
+    //- Number form
+    label(id='number' class='hidden') Enter Range
+        br
+        input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
+        span  to 
+        input(id='max' type='textarea' name='max' placeholder='Maximum')
+
     input(type='hidden' name='id' value=survey._id)
-    input(type="submit", value="Add Question")
+    input(type="submit" value="Add Question")
+
+
+
+
+
+

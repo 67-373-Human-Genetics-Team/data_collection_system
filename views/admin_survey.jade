@@ -22,6 +22,33 @@ html(lang="en")
           }
         });
       }
+      $(document).ready(function() {
+        $("#question-type").change(function() {
+          if (($(this).val() === "Checkbox") || ($(this).val() === "Radio Button") || ($(this).val() === "Dropdown")) {
+            // Remove option boxes previously and add one
+            $('#options input').remove();
+            $('#options br').remove();
+            $('<input id="options-element" type="textarea" name="options"</input>').insertBefore('#add-option');
+            $('<br>').insertBefore('#options-element');
+            $('<br>').insertBefore('#add-option');
+            $('#options').hide();
+            $('#number').hide();
+            $("#options").slideDown("slow");
+          } else if ($(this).val() === "Number") {
+            $('#options').hide();
+            $('#number').hide();
+            $("#number").slideDown("slow");
+          } else {
+            $('#options').hide();
+            $('#number').hide();
+          }
+        });
+      });
+      function addOption() {
+        $('#options-element').clone().insertBefore('#add-option');
+        $('<br>').insertBefore('#add-option');
+      }
+    //- End Script
   body
     include includes/nav
     #content-area
