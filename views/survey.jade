@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+    head
+        title SurveyApp
+        include includes/head
+    body
+        include includes/nav_public
+        #content-area
+            h1= survey.name
+                span  Survey
+            each question in survey.questions
+                div(id='question'+question._id)
+                    h3= question.query

@@ -111,3 +111,18 @@ label {
 #add-option:hover {
     font-weight: 700;
 }
+
+/* Start survey button */
+#get-survey {
+    color: white;
+    background-color: #6ca562;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#get-survey:hover {
+    background-color: #7bae72;
+}
+/* End start survey button */

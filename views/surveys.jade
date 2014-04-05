@@ -14,19 +14,21 @@ html(lang="en")
         });
       }
   body
+    include includes/nav_public
     #content-area
       h1= header
       if (surveys.length < 1)
-        p There are no surveys. Time to make one.
+        p There are no surveys that you can take right now.
       else
         table(class='table-theme')
           thead
             tr
               th Name
-              th Status
+              th 
           tbody
             each survey in surveys
-              tr(id='survey-'+survey._id)
-                td 
-                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name 
-                td= survey.status
+              if (survey.status === "Published")
+                tr(id='survey-'+survey._id)
+                td= survey.name 
+                td
+                  a(id='get-survey' onclick='getSurvey("'+survey._id+'")') Start

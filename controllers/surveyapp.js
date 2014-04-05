@@ -32,7 +32,7 @@ exports.getSurvey = function(req,res){
         if (err) {
             res.send(err);
         } else {
-            res.send(survey);
+            res.render('survey', { survey: survey });
             console.log(survey);
         }
     });
