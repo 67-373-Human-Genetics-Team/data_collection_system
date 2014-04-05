@@ -6,8 +6,8 @@ $(function() {
       // Remove option boxes previously and add one
       $('#options input').remove();
       $('#options br').remove();
-      $('<input id="options-element" type="textarea" name="options"</input>').insertBefore('#add-option');
-      $('<br>').insertBefore('#options-element');
+      $('<br>').insertBefore('#add-option');
+      $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
       $('<br>').insertBefore('#add-option');
       $('#options').hide();
       $('#number').hide();
@@ -69,6 +69,6 @@ function postQuestion() {
 }
 
 function addOption() {
-  $('#options-element').clone().insertBefore('#add-option');
+  $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
   $('<br>').insertBefore('#add-option');
 }
