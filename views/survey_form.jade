@@ -5,11 +5,12 @@ html(lang="en")
         include includes/head
     body
         include includes/nav
-        h1= header
-        div.surveyform
-            form(name='survey', action='/api/surveys/new', method='post')
-                input(type='text', name='name' placeholder='Survey Name')
-                br
-                input(type='hidden' name='status' value='Unpublished')
-                br
-                input(type="submit", value="Create")
+        #content-area
+            h1= header
+            div.surveyform
+                form(name='survey', action='/api/surveys/new', method='post')
+                    input(type='text', name='name' placeholder='Survey Name')
+                    br
+                    input(type='hidden' name='status' value='Unpublished')
+                    br
+                    input(type="submit", value="Create")

@@ -12,7 +12,7 @@ exports.listSurveys = function(req,res) {
 		if (err) {
 			res.send("You've encountered an error.");
 		} else {
-			res.render('admin_surveys', {header: 'Surveys', surveys: surveys, dateFormat: dateFormat});
+			res.render('admin_listsurveys', {header: 'Surveys', surveys: surveys, dateFormat: dateFormat});
 		}
 	});
 };

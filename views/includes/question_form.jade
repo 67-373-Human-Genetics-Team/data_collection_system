@@ -1,4 +1,4 @@
-form(name='question' action='/api/questions/new' method='post')
+form(id='question-form')
     label Enter Question 
         input(id='query' type='text' name='query')
 
@@ -22,14 +22,14 @@ form(name='question' action='/api/questions/new' method='post')
         a(id='add-option' onclick='addOption()') + Add Option
 
     //- Number form
-    label(id='number' class='hidden') Enter Range
-        br
-        input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
-        span  to 
-        input(id='max' type='textarea' name='max' placeholder='Maximum')
+    //- label(id='number' class='hidden') Enter Range
+    //-     br
+    //-     input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
+    //-     span  to 
+    //-     input(id='max' type='textarea' name='max' placeholder='Maximum')
 
-    input(type='hidden' name='id' value=survey._id)
-    input(type="submit" value="Add Question")
+    input(id='survey-id' type='hidden' name='id' value=survey._id)
+    input(type='submit' value='Add Question')
 
 
 
