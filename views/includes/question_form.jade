@@ -1,32 +1,42 @@
 form(id='question-form')
-    label Enter Question 
-        input(id='query' type='text' name='query')
 
     label Question Type 
         select(id='question-type' name='type')
-            option(value='Text') Text
-            option(value='Textarea') Textarea
+            option(value='Short Text') Short Text
+            option(value='Long Text') Long Text
             option(value='Checkbox') Checkbox
-            option(value='Radio Button') Radio Button
+            option(value='Multiple Choice') Multiple Choice
             option(value='Dropdown') Dropdown
             option(value='Number') Number
             option(value='Patent') Patent
             option(value='Publication') Publication
             option(value='Company') Company
 
-    //- Checkbox, Radiobutton, Dropdown form
+    label Enter Question 
+        input(id='query' type='text' name='query')
+
+    //- Form for checkbox, multiple choice and dropdown questions
     label(id='options' class='hidden') Enter Options
         br 
         input(type='textarea' name='options')
         br
         a(id='add-option' onclick='addOption()') + Add Option
 
-    //- Number form
-    //- label(id='number' class='hidden') Enter Range
-    //-     br
-    //-     input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
-    //-     span  to 
-    //-     input(id='max' type='textarea' name='max' placeholder='Maximum')
+    //- Form for number question
+    label(id='number' class='hidden') (enter range if required)
+        br
+        input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
+        span  to 
+        input(id='max' type='textarea' name='max' placeholder='Maximum')
+
+    //- Form for company question
+    label(id='company' class='hidden') This question type asks the participant for: company, job title and salary.
+
+    //- Form for patent question
+    label(id='patent' class='hidden') This question type asks the participant to identify their patents.
+
+    //- Form for publication question
+    label(id='publication' class='hidden') This question type asks the participant to identify their publications.
 
     input(id='survey-id' type='hidden' name='id' value=survey._id)
     input(type='submit' value='Add Question')

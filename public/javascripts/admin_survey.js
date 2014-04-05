@@ -2,7 +2,7 @@ $(function() {
   $("#question-form").submit(postQuestion);
 
   $("#question-type").change(function() {
-    if (($(this).val() === "Checkbox") || ($(this).val() === "Radio Button") || ($(this).val() === "Dropdown")) {
+    if (($(this).val() === "Checkbox") || ($(this).val() === "Multiple Choice") || ($(this).val() === "Dropdown")) {
       // Remove option boxes previously and add one
       $('#options input').remove();
       $('#options br').remove();
@@ -11,14 +11,53 @@ $(function() {
       $('<br>').insertBefore('#add-option');
       $('#options').hide();
       $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
       $("#options").slideDown("slow");
     } else if ($(this).val() === "Number") {
       $('#options').hide();
       $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
       $("#number").slideDown("slow");
+    } else if ($(this).val() === "Company") {
+      $('#options').hide();
+      $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
+      $("#company").slideDown("slow");
+      $('#query').val('Where are you working now?');
+    } else if ($(this).val() === "Patent") {
+      $('#options').hide();
+      $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
+      $("#patent").slideDown("slow");
+      $('#query').val('Are these your patents?');
+    } else if ($(this).val() === "Publication") {
+      $('#options').hide();
+      $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
+      $("#publication").slideDown("slow");
+      $('#query').val('Are these your publications?');
     } else {
       $('#options').hide();
       $('#number').hide();
+      $('#company').hide();
+      $('#patent').hide();
+      $('#publication').hide();
+      $('#query').val('');
     }
   });
 });
@@ -48,9 +87,15 @@ function postQuestion() {
   var query = $('#query').val();
   var type = $('#question-type').val();
   var options = [];
-  $('#options input').each( function(i,elem) {
-    options.push(elem.value);
-  });
+  // Options change depending on question type
+  if (type === "Number") {
+    options.push($('#min').value);
+    options.push($('#max').value);
+  } else {
+    $('#options input').each( function(i,elem) {
+      options.push(elem.value);
+    });
+  }
   var id = $("#survey-id").val();
   $.ajax({
       url: '/api/questions/new', 
