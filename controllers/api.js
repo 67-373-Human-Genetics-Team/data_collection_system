@@ -1,5 +1,6 @@
 var Survey = require('../models/survey');
 var Question = require('../models/question');
+var Response = require('../models/response');
 
 /* Survey API */
 // Retrieve survey by ID
@@ -28,21 +29,7 @@ exports.postSurvey = function(req,res) {
 	});
 };
 
-// Add question to survey
-exports.postQuestion = function(req,res) {
-    var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
-    Survey.findById(req.body.id, 
-        function (err,survey) {
-            if (err) {
-                res.send(err);
-            } else {
-                survey.questions.push(question);
-                survey.save();
-                res.redirect("/admin/surveys/"+survey._id);
-                console.log(survey);
-            }
-        });
-};
+
 
 // Publish survey
 exports.publishSurvey = function(req,res) {
@@ -79,6 +66,39 @@ exports.closeSurvey = function(req,res) {
         });
 };
 
+// Delete survey by ID
+exports.deleteSurvey = function(req,res) {
+    Survey.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send('Deleted survey.');
+        }
+    });
+};
+
+
+
+
+
+/* Question API */
+// Add question to survey
+exports.postQuestion = function(req,res) {
+    var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
+    Survey.findById(req.body.id, 
+        function (err,survey) {
+            if (err) {
+                res.send(err);
+            } else {
+                survey.questions.push(question);
+                survey.save();
+                res.redirect("/admin/surveys/"+survey._id);
+                console.log(survey);
+            }
+        });
+};
+
+
 // Delete question in survey by ID
 exports.deleteQuestion = function(req,res) {
     var question_id = req.params.question_id;
@@ -98,13 +118,22 @@ exports.deleteQuestion = function(req,res) {
         });
 };
 
-// Delete survey by ID
-exports.deleteSurvey = function(req,res) {
-    Survey.findByIdAndRemove(req.params.id, function(err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send('Deleted survey.');
-        }
+
+
+
+/* Response API */
+// Add response to survey
+exports.postResponse = function(req,res) {
+    new Response({ survey_id: req.body.survey_id, answers: req.body.answers, completed: req.body.completed }).save(
+        function (err,reponse) {
+            if (err) { 
+                res.send(err);
+            } else {
+                res.writeHead(302, {
+                    'Location': '/surveys'
+                });
+                res.end();
+                console.log("Response posted");
+            }
     });
-};
+}

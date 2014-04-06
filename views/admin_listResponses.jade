@@ -1,0 +1,31 @@
+mixin prettyDate(date)
+  -var d = new Date(date)
+  span= dateFormat(d, "dd mmm yyyy h:MM TT")
+
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+  body
+    include includes/nav
+    #content-area
+      h1= header
+      
+      if (responses.length < 1)
+        p There are no responses right now.
+      else
+        h3 Responses
+        table(class='table-theme' id='unpublished-surveys')
+          thead
+            tr
+              th Survey
+              th Date
+              th
+              th
+          tbody
+            each response in responses
+                tr(id='survey-'+response.survey_id)
+                  td= response.survey_id
+                  td
+                    +prettyDate(response.date)
