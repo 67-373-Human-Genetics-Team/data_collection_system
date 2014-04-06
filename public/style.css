@@ -130,7 +130,7 @@ label {
 
 
 /* Submit survey button */
-#submit-survey {
+#submit-response {
     margin-top: 20px;
     margin-bottom: 100px;
     padding: 5px 15px;
@@ -141,7 +141,7 @@ label {
     font-size: 110%
 }
 
-#submit-survey:hover {
+#submit-response:hover {
     background: #008d95;
 }
 /* End submit survey button */
