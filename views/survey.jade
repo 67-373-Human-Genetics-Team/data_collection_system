@@ -9,12 +9,12 @@ html(lang="en")
         #content-area
             h1= survey.name
                 span  Survey
-            form(class= 'participant-survey' id='survey-'+survey._id)
+            form(class='participant-survey' id='participant-survey-form')
                 each question in survey.questions
-                    div(class='question-area' id='question-'+question._id)
+                    div(class=question.type+' question-area' id='question-'+question._id)
                         h3= question.query
 
-                        if (question.type === "Short Text" || question.type === "Long Text" || question.type === "Text")
+                        if (question.type === "Short Text" || question.type === "Long Text")
                             input(type='text')
 
                         if (question.type === "Company")
@@ -56,5 +56,6 @@ html(lang="en")
                                 option(value='publication') Pick a Publication
                             span  because
                             input(id='publication-textarea' type='textarea')
-            input(id='survey-id' type='hidden' name='id' value=survey._id)
-            input(id='submit-survey' type='submit' value='Submit')
+                input(id='survey_id' type='hidden' name='survey_id' value=survey._id)
+                input(id='status' type='hidden' name='completed' value='true')
+                input(id='submit-response' type='submit' value='Submit')

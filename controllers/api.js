@@ -29,8 +29,6 @@ exports.postSurvey = function(req,res) {
 	});
 };
 
-
-
 // Publish survey
 exports.publishSurvey = function(req,res) {
     Survey.findById(req.params.id, 
@@ -124,16 +122,14 @@ exports.deleteQuestion = function(req,res) {
 /* Response API */
 // Add response to survey
 exports.postResponse = function(req,res) {
-    new Response({ survey_id: req.body.survey_id, answers: req.body.answers, completed: req.body.completed }).save(
-        function (err,reponse) {
+    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), completed: req.body.completed }).save(
+        function (err,response) {
             if (err) { 
                 res.send(err);
             } else {
-                res.writeHead(302, {
-                    'Location': '/surveys'
-                });
-                res.end();
-                console.log("Response posted");
+                res.redirect("/surveys");
+                console.log("Response posted:");
+                console.log(response);
             }
     });
 }
