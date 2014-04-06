@@ -3,6 +3,7 @@ html(lang="en")
     head
         title SurveyApp
         include includes/head
+        script(type='text/javascript' src='/javascripts/public_survey.js')
     body
         include includes/nav_public
         #content-area
@@ -26,8 +27,8 @@ html(lang="en")
 
                         if (question.type === "Dropdown")
                             select
-                                option(value=question.query_options)= question.query_options
-
+                                each opt in question.query_options
+                                    option(value=opt)= opt
                         if (question.type === "Number")
                             input(type='text')
 

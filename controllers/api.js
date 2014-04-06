@@ -30,7 +30,7 @@ exports.postSurvey = function(req,res) {
 
 // Add question to survey
 exports.postQuestion = function(req,res) {
-    var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options});
+    var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
     Survey.findById(req.body.id, 
         function (err,survey) {
             if (err) {
