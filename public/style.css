@@ -52,7 +52,7 @@ ul {
 }
 
 #nav a:hover {
-    color: #ff581a;
+    color: #00757b;
     font-weight: 400;
     font-size: 105%;
 }
@@ -113,7 +113,7 @@ label {
 }
 
 /* Start survey button */
-#get-survey {
+#start-survey {
     color: white;
     background-color: #6ca562;
     padding-right: 10px;
@@ -122,7 +122,65 @@ label {
     padding-bottom: 3px;
 }
 
-#get-survey:hover {
+#start-survey:hover {
     background-color: #7bae72;
 }
 /* End start survey button */
+
+
+
+/* Submit survey button */
+#submit-survey {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    padding: 5px 15px;
+    background: #00757b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    font-size: 110%
+}
+
+#submit-survey:hover {
+    background: #008d95;
+}
+/* End submit survey button */
+
+#patent-textarea,
+#publication-textarea {
+    margin-left: 5px;
+    border: 0px;
+    border-bottom: 1px solid #ccc !important;
+    width: 50%;
+}
+
+.question-area {
+    padding: 15px 0px;
+}
+
+.participant-survey {
+   /* width: 60%;*/
+}
+
+input[type=text] {
+    border: 0px;
+    border-bottom: 1px solid #ccc !important;
+    width: 20%;
+    height: 20px;
+}
+
+::-webkit-input-placeholder {
+   text-align:center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align:center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align:center;  
+}
+
+:-ms-input-placeholder {  
+   text-align:center; 
+}
