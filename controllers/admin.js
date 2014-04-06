@@ -1,5 +1,6 @@
 var Survey = require('../models/survey');
 var Question = require('../models/question');
+var Response = require('../models/response');
 var dateFormat = require('dateformat');
 
 /* Survey Controller */
@@ -23,6 +24,16 @@ exports.showSurvey = function(req,res) {
 			res.send("Survey doesn't exist.");
 		} else {
 			res.render('admin_survey',{header: survey.name+' Survey', survey: survey});
+		}
+	});
+};
+
+exports.listResponses = function(req,res) {
+	Response.find(function(err,responses) {
+		if (err) {
+			res.send("You've encountered an error.");
+		} else {
+			res.render('admin_listResponses', {header: 'Responses', responses: responses, dateFormat: dateFormat});
 		}
 	});
 };
