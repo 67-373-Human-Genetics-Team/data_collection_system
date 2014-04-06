@@ -13,7 +13,7 @@ html(lang="en")
                 each question in survey.questions
                     div(class='question-area' id='question-'+question._id)
                         h3= question.query
-                        //- div= question.type
+
                         if (question.type === "Short Text" || question.type === "Long Text" || question.type === "Text")
                             input(type='text')
 
@@ -29,6 +29,17 @@ html(lang="en")
                             select
                                 each opt in question.query_options
                                     option(value=opt)= opt
+
+                        if (question.type === "Checkbox")
+                            each opt in question.query_options
+                                input(type='checkbox' value=opt)
+                                span= opt
+
+                        if (question.type === "Multiple Choice")
+                            each opt in question.query_options
+                                input(type='radio' value=opt)
+                                span= opt
+
                         if (question.type === "Number")
                             input(type='text')
 
@@ -38,6 +49,7 @@ html(lang="en")
                                 option(value='patent') Pick a Patent
                             span  because
                             input(id='patent-textarea' type='textarea')
+
                         if (question.type === "Publication")
                             span I am most proud of my publication on   
                             select
