@@ -139,14 +139,15 @@ exports.postResponse = function(req,res) {
 /* Participant API */
 // Create new participant
 exports.postParticipant = function(req,res) {
-    new Participant({ first_name: req.body.fname, last_name: req.body.lname, email: req.body.email, available_surveys: req.body.available_surveys }).save(
+    var survey_id = req.body.survey_id;
+    new Participant({ first_name: req.body.fname, last_name: req.body.lname, email: req.body.email, available_surveys: req.body.survey_id }).save(
         function (err,participant) {
             if (err) {
                 res.send(err);
             } else {
                 console.log("Participant saved:");
                 console.log(participant);
-                res.redirect("/surveys");
+                res.redirect("/surveys/"+survey_id);
             }
     });
 };
