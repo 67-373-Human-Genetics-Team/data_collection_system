@@ -4,7 +4,15 @@ html(lang="en")
     title SurveyApp
     include includes/head
   body
-    include includes/nav
+    include includes/nav_public
     #content-area
-      h1 Home Page
+        h1 Welcome
+        form(id='participant-form' action='/api/participants/new', method='post')
+            h3 Name
+            input(id='fname' type='text' name='fname' placeholder='First name')
+            input(id='lname' type='text' name='lname' placeholder='Last name')
+            h3 Email Address
+            input(id='email' type='text' name='email' placeholder='johnsmith@example.com')
+            br
+            input(id='submit-response' type='submit' value='Submit')
     

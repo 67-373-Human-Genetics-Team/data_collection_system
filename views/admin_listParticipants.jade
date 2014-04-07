@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+  body
+    include includes/nav
+    #content-area
+      h1= header
+      
+      if (participants.length < 1)
+        p There are no participants right now.
+      else
+        table(class='table-theme' id='participants')
+          thead
+            tr
+              th Name
+              th Email
+              th
+              th
+          tbody
+            each participant in participants
+                tr(id='participant-'+participant._id)
+                  td= participant.first_name+' '+participant.last_name
+                  td= participant.email
