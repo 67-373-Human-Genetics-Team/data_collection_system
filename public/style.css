@@ -184,6 +184,9 @@ input[type=text] {
 :-ms-input-placeholder {  
    text-align:center; 
 }
+#url-instructions {
+    padding-bottom: 10px;
+}
 
 #url_large {
     border: 1px solid #ccc !important;
@@ -192,7 +195,7 @@ input[type=text] {
     padding-left: 10px;
     padding-right: 10px;
     color: #4a9998;
-    width: 60%;
+    width: 65%;
     font-size: 120%;
 }
 
@@ -218,5 +221,37 @@ input[type=text] {
 }
 
 .survey-buttons:hover {
+    background: #008d95;
+}
+
+#participant-info-popup {
+    display: hidden;
+    background-color: #ccc;
+    width: 45%; 
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 100px 60px;
+}
+
+#participant-info-form input {
+    width: 60%;
+    margin-right: 30px;
+    float: right;
+}
+
+#participant-submit-button {
+    width: 20% !important;
+    margin-top: 50px;
+    padding: 5px 15px;
+    background: #4fa46b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    font-size: 110%
+}
+
+#participant-submit-button:hover {
     background: #008d95;
 }
