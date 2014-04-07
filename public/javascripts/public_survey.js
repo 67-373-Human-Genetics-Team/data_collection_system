@@ -6,7 +6,6 @@ $(function() {
 function postResponse() {
     // Retrieve values from question form
     var survey_id = $('#survey_id').val();
-    var status = $('#status').val();
     var answers = [];
     $(".question-area").each( function (i) {
         if ($(this).attr('class') === "Short Text question-area") {
@@ -54,7 +53,6 @@ function postResponse() {
         type: 'POST',
         data: {
             survey_id: survey_id,
-            completed: status,
             answers: answers.join("::")
         },
         success: function(data) {

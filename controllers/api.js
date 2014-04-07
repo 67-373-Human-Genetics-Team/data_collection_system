@@ -123,7 +123,7 @@ exports.deleteQuestion = function(req,res) {
 /* Response API */
 // Add response to survey
 exports.postResponse = function(req,res) {
-    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), completed: req.body.completed }).save(
+    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::") }).save(
         function (err,response) {
             if (err) { 
                 res.send(err);
