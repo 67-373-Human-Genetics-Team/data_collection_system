@@ -6,8 +6,7 @@ var ResponseSchema = new Schema({
 	survey_id: ObjectId,
 	participant_id: ObjectId,
 	date: {type: Date, default: Date.now},
-	answers: [String],
-    completed: {type: Boolean, default: false}
+	answers: [String]
 });
 
 module.exports = mongoose.model('Response', ResponseSchema);
