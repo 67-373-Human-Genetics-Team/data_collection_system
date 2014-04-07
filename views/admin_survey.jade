@@ -11,24 +11,26 @@ html(lang="en")
         h1= header 
           span
             //- Control buttons for survey depend on status
-            a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
-            
-            if (survey.status === "Published" || survey.status === "Closed")
-              a(class='survey-buttons' id='metrics-button') Metrics
-
-            if (survey.status === "Published")
-              a(class='survey-buttons' id='unpublish-button') Unpublish
-            
-            else
+            if (survey.status === "Unpublished")
+              a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
               a(class='survey-buttons' id='publish-button' onclick='publishSurvey("'+survey._id+'")') Publish
-            a(class='survey-buttons' id='edit-button') Edit
+              a(class='survey-buttons' id='edit-button') Edit
+            
+            if (survey.status === "Published")
+              a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
+              a(class='survey-buttons' id='metrics-button') Metrics
+              a(class='survey-buttons' id='unpublish-button') Unpublish
+
+            if (survey.status === "Closed")
+              a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
+              a(class='survey-buttons' id='metrics-button') Metrics
         
         //- Published survey's URL
         if survey.status === "Published"
-          span Share this published survey URL with your participants:
-          input(type="text" id="url_large" name="url_large" value='http://localhost:3000/surveys/'+survey._id readonly="")
+          div(id='url-instructions') Share this published survey URL with your participants:
+          input(type="text" id="url_large" name="url_large" value='http://localhost:3000/surveys/'+survey._id+'/begin' readonly="")
       
-      //- Unpublished survey's add question form
+      //- Question form for unpublished survey
       if survey.status === "Unpublished"
         div.question-box
           include includes/question_form

@@ -6,9 +6,12 @@ html(lang="en")
         script(type='text/javascript' src='/javascripts/public_survey.js')
     body
         include includes/nav_public
+
         #content-area
+            
             h1= survey.name
                 span  Survey
+
             form(class='participant-survey' id='participant-survey-form')
                 each question in survey.questions
                     div(class=question.type+' question-area' id='question-'+question._id)
