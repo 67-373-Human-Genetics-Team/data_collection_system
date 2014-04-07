@@ -12,12 +12,12 @@ exports.logout = function(req,res) {
     res.render('logout', {name: 'Logout'});
 }
 
-exports.surveys = function(req,res) {
+exports.listSurveys = function(req,res) {
     Survey.find(function(err,surveys) {
         if (err) {
             res.send("You've encountered an error.");
         } else {
-            res.render('surveys', {header: 'Surveys', surveys: surveys});
+            res.render('listSurveys', {header: 'Surveys', surveys: surveys});
         }
     });
 };
@@ -32,3 +32,17 @@ exports.getSurvey = function(req,res){
         }
     });
 };
+
+exports.begin = function(req,res) {
+    Survey.findById(req.params.id, function(err,survey) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.render('begin', { survey: survey });
+        }
+    });
+}
+
+exports.thankyou = function(req,res) {
+    res.render('thankyou');
+}
