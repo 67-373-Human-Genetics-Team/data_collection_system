@@ -184,3 +184,39 @@ input[type=text] {
 :-ms-input-placeholder {  
    text-align:center; 
 }
+
+#url_large {
+    border: 1px solid #ccc !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #4a9998;
+    width: 60%;
+    font-size: 120%;
+}
+
+#survey-info-box {
+    background-color: #f2f2f2;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.survey-buttons {
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 100px;
+    padding: 5px 15px;
+    background: #00757b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    font-size: 50%
+}
+
+.survey-buttons:hover {
+    background: #008d95;
+}

@@ -7,11 +7,16 @@ html(lang="en")
   body
     include includes/nav
     #content-area
-      h1= header 
-        span
-          a(id='delete-button' onclick='removeSurvey("'+survey._id+'")')  x
-      p This survey is 
-        span=survey.status.toLowerCase()
+      div(id='survey-info-box')
+        h1= header 
+          span
+            a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
+            a(class='survey-buttons' id='metrics-button') Metrics
+            a(class='survey-buttons' id='edit-button') Edit
+        if survey.status == "Published"
+          span Share this published survey URL with your participants:
+          input(type="text" id="url_large" name="url_large" value='http://localhost:3000/surveys/'+survey._id readonly="")
+
 
       if survey.questions.length < 1
         p There are no questions in this survey yet. Let's add some.
