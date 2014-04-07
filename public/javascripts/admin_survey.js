@@ -117,3 +117,13 @@ function addOption() {
   $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
   $('<br>').insertBefore('#add-option');
 }
+
+function publishSurvey(id) {
+  $.ajax('/api/surveys/'+id+'/publish', {
+    cache: false,
+    type: 'PUT',
+    success: function(data) {
+      window.location.replace('/admin/surveys/'+id);
+    }
+  });
+}

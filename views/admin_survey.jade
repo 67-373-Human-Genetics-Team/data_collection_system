@@ -10,24 +10,39 @@ html(lang="en")
       div(id='survey-info-box')
         h1= header 
           span
+            //- Control buttons for survey depend on status
             a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
-            a(class='survey-buttons' id='metrics-button') Metrics
+            
+            if (survey.status === "Published" || survey.status === "Closed")
+              a(class='survey-buttons' id='metrics-button') Metrics
+
+            if (survey.status === "Published")
+              a(class='survey-buttons' id='unpublish-button') Unpublish
+            
+            else
+              a(class='survey-buttons' id='publish-button' onclick='publishSurvey("'+survey._id+'")') Publish
             a(class='survey-buttons' id='edit-button') Edit
-        if survey.status == "Published"
+        
+        //- Published survey's URL
+        if survey.status === "Published"
           span Share this published survey URL with your participants:
           input(type="text" id="url_large" name="url_large" value='http://localhost:3000/surveys/'+survey._id readonly="")
-
-
-      if survey.questions.length < 1
-        p There are no questions in this survey yet. Let's add some.
-      else
+      
+      //- Unpublished survey's add question form
+      if survey.status === "Unpublished"
+        div.question-box
+          include includes/question_form
+      
+      //- Table for survey's questions
+      if survey.questions.length > 0
         table(class='table-theme')
           thead
             tr
               th Question
               th Type
               th Options
-              th
+              if survey.status === "Unpublished"
+                th
           tbody
             each question in survey.questions
               tr(id='question-'+question._id)
@@ -35,12 +50,7 @@ html(lang="en")
                 td= question.type
                 td= question.query_options.toString()
                 td
-                  a(id='delete-button' onclick='removeQuestion("'+survey._id+'","'+question._id+'")') x 
+                  if survey.status === "Unpublished"
+                    a(id='delete-button' onclick='removeQuestion("'+survey._id+'","'+question._id+'")') x
 
-      div.question-box
-        include includes/question_form
 
-      if survey.status === "Unpublished"
-        p
-      else
-        p= survey.responses

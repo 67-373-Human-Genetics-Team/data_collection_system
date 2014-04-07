@@ -11,6 +11,7 @@ body {
 #content-area {
     margin: auto;
     width: 70%;
+    margin-bottom: 100px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -89,8 +90,7 @@ ul {
 }
 
 .question-box {
-    background-color: #ededed;
-    width: 50%;
+    background-color: #f2f2f2;
     padding: 20px;
     margin-top: 10px;
 }
