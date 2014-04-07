@@ -1,6 +1,7 @@
 var Survey = require('../models/survey');
 var Question = require('../models/question');
 var Response = require('../models/response');
+var Participant = require('../models/participant');
 var dateFormat = require('dateformat');
 
 /* Survey Controller */
@@ -34,6 +35,16 @@ exports.listResponses = function(req,res) {
 			res.send("You've encountered an error.");
 		} else {
 			res.render('admin_listResponses', {header: 'Responses', responses: responses, dateFormat: dateFormat});
+		}
+	});
+};
+
+exports.listParticipants = function(req,res) {
+	Participant.find(function(err,participants) {
+		if (err) {
+			res.send("You've encountered an error.");
+		} else {
+			res.render('admin_listParticipants', {header: 'Participants', participants: participants});
 		}
 	});
 };

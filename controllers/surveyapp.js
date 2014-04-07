@@ -17,11 +17,6 @@ exports.surveys = function(req,res) {
         if (err) {
             res.send("You've encountered an error.");
         } else {
-            var names = [];
-            for (var i=0; i<surveys.length; i++) {
-                names.push(surveys[i].name);
-            }
-            console.log(names);
             res.render('surveys', {header: 'Surveys', surveys: surveys});
         }
     });

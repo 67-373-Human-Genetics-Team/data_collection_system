@@ -1,6 +1,7 @@
 var Survey = require('../models/survey');
 var Question = require('../models/question');
 var Response = require('../models/response');
+var Participant = require('../models/participant');
 
 /* Survey API */
 // Retrieve survey by ID
@@ -128,8 +129,24 @@ exports.postResponse = function(req,res) {
                 res.send(err);
             } else {
                 res.redirect("/surveys");
-                console.log("Response posted:");
-                console.log(response);
             }
     });
-}
+};
+
+
+
+
+/* Participant API */
+// Create new participant
+exports.postParticipant = function(req,res) {
+    new Participant({ first_name: req.body.fname, last_name: req.body.lname, email: req.body.email, available_surveys: req.body.available_surveys }).save(
+        function (err,participant) {
+            if (err) {
+                res.send(err);
+            } else {
+                console.log("Participant saved:");
+                console.log(participant);
+                res.redirect("/surveys");
+            }
+    });
+};
