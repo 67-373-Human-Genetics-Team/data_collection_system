@@ -140,14 +140,14 @@ exports.postResponse = function(req,res) {
 // Create new participant
 exports.postParticipant = function(req,res) {
     var survey_id = req.body.survey_id;
-    new Participant({ first_name: req.body.fname, last_name: req.body.lname, email: req.body.email, available_surveys: req.body.survey_id }).save(
+    new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
         function (err,participant) {
             if (err) {
                 res.send(err);
             } else {
+                res.redirect('/surveys/'+survey_id);
                 console.log("Participant saved:");
                 console.log(participant);
-                res.redirect("/surveys/"+survey_id);
             }
     });
 };
