@@ -1,4 +1,4 @@
-$(function() { 
+$(function() {
     $("#participant-survey-form").submit(postResponse);
 });
 
@@ -56,9 +56,8 @@ function postResponse() {
             answers: answers.join("::")
         },
         success: function(data) {
-            // location.reload();
             console.log('response POST success');
         }
     });
     return false;    
-}
+};
