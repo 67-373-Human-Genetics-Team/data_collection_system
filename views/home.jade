@@ -4,43 +4,8 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
-
-        $(function() {
-            var survey_id = document.referrer.split('/').pop();
-            $("#participant-info-form").submit(postParticipant);
-        });
-
-        function postParticipant() {
-            var first_name = $("#fname").val();
-            var last_name = $("#lname").val();
-            var email = $("#email").val();
-            var survey_id = $("survey_id").val();
-            $.ajax({
-                url: '/api/participants/new',
-                type: 'POST',
-                data: {
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    available_surveys: survey_id
-                },
-                success: function(data) {
-                    $("#participant-info-form").hide();
-                    console.log('participant added');
-                }
-            });
-        }
   body
     include includes/nav_public
     #content-area
-        div(id='participant-info-popup')
-            form(id='participant-info-form')
-                label First Name
-                    input(id='fname' type='text' name='fname' placeholder='John')
-                label Last Name
-                    input(id='lname' type='text' name='lname' placeholder='Smith')
-                label Email
-                    input(id='email' type='text' name='email' placeholder='johnsmith@example.com')
-                input(id='survey_id' type='hidden' name='survey_id' value=survey_id)
-                input(id='participant-submit-button' type='submit' value='Begin')
+        h1 Home Page
     

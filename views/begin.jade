@@ -4,8 +4,28 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
-      
+      $(function() {
+          // Get survey id from URL pathname and update value
+          var survey_id = window.location.pathname.split( '/' ).pop();
+          $("#survey_id").val(survey_id);
+      });     
   body
     include includes/nav_public
     #content-area
-      h1 Begin Page
+      div(id='participant-info-popup')
+        form(id='participant-info-form' action='/api/participants/new', method='post')
+            label First Name
+              input(id='first_name' type='text' name='first_name' placeholder='John')
+            label Last Name
+              input(id='last_name' type='text' name='last_name' placeholder='Smith') 
+            label Email
+              input(id='email' type='text' name='email' placeholder='johnsmith@example.com')
+            input(id='survey_id' type='hidden' name='survey_id' value="")
+            input(id='participant-submit-button' type='submit' value='Begin')
+
+
+
+
+
+
+
