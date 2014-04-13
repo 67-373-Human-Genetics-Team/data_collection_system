@@ -30,11 +30,17 @@ app.get('/surveys/:id/u/:participant_id', controllers.surveyapp.getSurvey);
 app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
 app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 
+/* Admin */
+// Survey Routes
 app.get('/admin/surveys', controllers.admin.listSurveys);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
 app.get('/admin/surveys/:id', controllers.admin.showSurvey);
 
+// Response Routes
 app.get('/admin/responses', controllers.admin.listResponses);
+app.get('/admin/responses/:id', controllers.admin.showResponse);
+
+// Participant Routes
 app.get('/admin/participants', controllers.admin.listParticipants);
 
 // API Survey Routes
@@ -48,6 +54,7 @@ app.delete('/api/surveys/:survey_id/questions/:question_id', controllers.api.del
 
 // API Response Routes
 app.post('/api/responses/new', controllers.api.postResponse);
+app.get('/api/responses/:id', controllers.api.getResponse);
 
 // API Participant Routes
 app.post('/api/participants/new', controllers.api.postParticipant);
