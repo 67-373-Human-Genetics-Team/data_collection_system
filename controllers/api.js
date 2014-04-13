@@ -120,10 +120,11 @@ exports.deleteQuestion = function(req,res) {
 
 
 
+
 /* Response API */
 // Add response to survey
 exports.postResponse = function(req,res) {
-    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), responses: req.body.participant_id }).save(
+    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), participant_id: req.body.participant_id }).save(
         function (err,response) {
             if (err) { 
                 res.send(err);
@@ -134,6 +135,30 @@ exports.postResponse = function(req,res) {
             }
     });
 };
+
+// Get response to survey
+exports.getResponse = function(req,res) {
+    Response.findById(req.params.id, function(err,response) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(response);
+        }
+    });
+};
+
+// Delete response
+// - remove response id from survey responses list
+exports.deleteResponse = function(req,res) {
+    Response.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send('Deleted response.');
+        }
+    });
+};
+
 
 
 
@@ -151,5 +176,30 @@ exports.postParticipant = function(req,res) {
                 console.log("Participant saved:");
                 console.log(participant);
             }
+    });
+};
+
+// Get participant
+exports.getParticipant = function(req,res) {
+    Participant.findById(req.params.id, function(err,participant) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(participant);
+        }
+    });
+};
+
+// Update participant's survey completion status
+// if survey id in available has a response 
+
+// Delete participant
+exports.deleteParticipant = function(req,res) {
+    Participant.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send('Deleted participant.');
+        }
     });
 };
