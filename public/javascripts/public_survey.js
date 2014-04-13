@@ -1,4 +1,7 @@
 $(function() {
+    // Get participant id from URL pathname and update value
+    var participant_id = window.location.pathname.split( '/' ).pop();
+    $("#participant_id").val(participant_id);
     $("#participant-survey-form").submit(postResponse);
 });
 
@@ -6,6 +9,7 @@ $(function() {
 function postResponse() {
     // Retrieve values from question form
     var survey_id = $('#survey_id').val();
+    var participant_id = $('#participant_id').val();
     var answers = [];
     $(".question-area").each( function (i) {
         if ($(this).attr('class') === "Short Text question-area") {
@@ -53,10 +57,12 @@ function postResponse() {
         type: 'POST',
         data: {
             survey_id: survey_id,
-            answers: answers.join("::")
+            answers: answers.join("::"),
+            responses: participant_id
         },
         success: function(data) {
             console.log('response POST success');
+            window.location.replace("/surveys/thankyou");
         }
     });
     return false;    

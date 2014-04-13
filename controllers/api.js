@@ -123,12 +123,14 @@ exports.deleteQuestion = function(req,res) {
 /* Response API */
 // Add response to survey
 exports.postResponse = function(req,res) {
-    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::") }).save(
+    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), responses: req.body.participant_id }).save(
         function (err,response) {
             if (err) { 
                 res.send(err);
             } else {
-                res.redirect("/surveys");
+                res.redirect("/surveys/thankyou");
+                console.log('Response saved:');
+                console.log(response);
             }
     });
 };
@@ -145,7 +147,7 @@ exports.postParticipant = function(req,res) {
             if (err) {
                 res.send(err);
             } else {
-                res.redirect('/surveys/'+survey_id);
+                res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
                 console.log("Participant saved:");
                 console.log(participant);
             }

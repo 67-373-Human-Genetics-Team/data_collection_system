@@ -26,7 +26,8 @@ app.get('/surveys', controllers.surveyapp.listSurveys);
 
 // Participant creation page
 app.get('/surveys/to/:id', controllers.surveyapp.begin);
-app.get('/surveys/:id/thankyou', controllers.surveyapp.thankyou);
+app.get('/surveys/:id/u/:participant_id', controllers.surveyapp.getSurvey);
+app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
 app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 
 app.get('/admin/surveys', controllers.admin.listSurveys);
