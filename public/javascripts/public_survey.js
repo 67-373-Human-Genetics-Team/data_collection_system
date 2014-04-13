@@ -58,7 +58,7 @@ function postResponse() {
         data: {
             survey_id: survey_id,
             answers: answers.join("::"),
-            responses: participant_id
+            participant_id: participant_id
         },
         success: function(data) {
             console.log('response POST success');
