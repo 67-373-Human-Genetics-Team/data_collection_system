@@ -7,6 +7,16 @@ html(lang="en")
   head
     title SurveyApp
     include includes/head
+    script(type='text/javascript').
+      function getResponse(id) {
+        $.ajax('/api/responses/'+id, {
+          cache: false,
+          type: 'GET',
+          success: function(data) {
+            window.location.replace("/admin/responses/"+id);
+          }
+        });
+      }
   body
     include includes/nav
     #content-area
@@ -21,11 +31,13 @@ html(lang="en")
             tr
               th Survey
               th Date
-              th
+              th Participant
               th
           tbody
             each response in responses
                 tr(id='survey-'+response.survey_id)
-                  td= response.survey_id
+                  td= response.survey_id.name
                   td
                     +prettyDate(response.date)
+                  td
+                    a(onclick='getResponse("'+response._id+'")')= response.participant_id

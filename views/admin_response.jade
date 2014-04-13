@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+  body
+    include includes/nav
+    #content-area
+        p Response ID
+        span= response._id
+
+        p Survey ID
+        span= response.survey_id
+
+        p Participant ID
+        span= response.participant_id
+        
+        p= response.date
+        p= response.answers
