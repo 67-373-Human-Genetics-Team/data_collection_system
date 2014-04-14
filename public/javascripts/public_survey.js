@@ -62,8 +62,33 @@ function postResponse() {
         },
         success: function(data) {
             console.log('response POST success');
-            window.location.replace("/surveys/thankyou");
+            updateParticipantSurveys(participant_id,survey_id);
         }
     });
     return false;    
 };
+
+
+function updateParticipantSurveys(participant_id, survey_id) {
+    $.ajax({
+        url: '/api/participants/'+participant_id,
+        type: 'PUT',
+        data: {
+            survey_id: survey_id
+        },
+        success: function(data) {
+            console.log('participant surveys updated');
+            window.location.replace("/surveys/thankyou");
+        }
+    });
+    return false;
+};
+
+
+
+
+
+
+
+
+

@@ -60,6 +60,7 @@ app.delete('/api/responses/:id', controllers.api.deleteResponse);
 
 // API Participant Routes
 app.post('/api/participants/new', controllers.api.postParticipant);
+app.put('/api/participants/:id', controllers.api.updateCompletedSurveys);
 app.get('/api/participants/:id', controllers.api.getParticipant);
 app.delete('/api/participants/:id', controllers.api.deleteParticipant);
 

@@ -191,7 +191,34 @@ exports.getParticipant = function(req,res) {
 };
 
 // Update participant's survey completion status
-// if survey id in available has a response 
+exports.updateCompletedSurveys = function(req,res) {
+    var survey_id = req.body.survey_id;
+    Participant.findById(req.params.id, function (err,participant) {
+        if (err) {
+            res.send(err);
+        } else {
+            // Remove the completed survey id from array
+            console.log('Updating Participant\'s completed surveys:');
+            console.log('The survey id: '+survey_id);
+            console.log('Available Surveys: '+participant.available_surveys);
+            console.log('Completed Surveys: '+participant.completed_surveys);
+
+            for (var i=0; i<participant.available_surveys.length; i++) {
+                if (participant.available_surveys[i] == survey_id) {
+                    participant.available_surveys.splice(i,1);
+                    console.log('Available Surveys: '+participant.available_surveys);
+
+                    // Add completed survey id to array of completed surveys
+                    participant.completed_surveys.push(survey_id);
+                    participant.save();
+                    console.log('Completed Surveys: '+participant.completed_surveys);
+                }
+            }
+
+            res.send('Updated participant\'s list of completed surveys.');
+        }
+    });
+};
 
 // Delete participant
 exports.deleteParticipant = function(req,res) {
@@ -203,3 +230,13 @@ exports.deleteParticipant = function(req,res) {
         }
     });
 };
+
+
+
+
+
+
+
+
+
+
