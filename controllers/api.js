@@ -129,6 +129,15 @@ exports.postResponse = function(req,res) {
             if (err) { 
                 res.send(err);
             } else {
+                Survey.findById(req.body.survey_id, function (err,survey) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        survey.responses.push(response._id);
+                        survey.save();
+                        console.log('Added response ID %s to survey', survey._id);
+                    }
+                });
                 res.redirect("/surveys/thankyou");
                 console.log('Response saved:');
                 console.log(response);
@@ -166,7 +175,22 @@ exports.deleteResponse = function(req,res) {
 /* Participant API */
 // Create new participant
 exports.postParticipant = function(req,res) {
+
     var survey_id = req.body.survey_id;
+
+    // Check if participant already exists in the system
+    // Participant.find({ email: req.body.email, first_name: req.body.first_name, last_name: req.body.last_name }, function (err, participant) {
+    //     if (err) {
+    //         res.send(err);
+    //     } else {
+    //         for (var i=0; i<participant.completed_surveys.length; i++) {
+    //             if (participant.completed_surveys[i] === survey_id) {
+    //                 res.send('You\'ve completed all surveys.');
+    //             }
+    //         }
+    //     }
+    // });
+
     new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
         function (err,participant) {
             if (err) {
@@ -204,7 +228,7 @@ exports.updateCompletedSurveys = function(req,res) {
             console.log('Completed Surveys: '+participant.completed_surveys);
 
             for (var i=0; i<participant.available_surveys.length; i++) {
-                if (participant.available_surveys[i] == survey_id) {
+                if (participant.available_surveys[i] === survey_id) {
                     participant.available_surveys.splice(i,1);
                     console.log('Available Surveys: '+participant.available_surveys);
 
