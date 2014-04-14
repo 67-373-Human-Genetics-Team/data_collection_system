@@ -9,5 +9,11 @@ html(lang="en")
     #content-area
         p= participant.first_name+' '+participant.last_name
         p= participant.email
-        p= 'Available Surveys: '+participant.available_surveys[0].name
-        p= 'Completed Surveys: '+participant.completed_surveys
+        if participant.available_surveys.length > 0
+            p= 'Available Surveys: '+participant.available_surveys[0].name
+        else
+            p= 'Available Surveys: none'
+        if participant.completed_surveys.length > 0
+            p= 'Completed Surveys: '+participant.completed_surveys[0].name
+        else
+            p= 'Completed Surveys: none'

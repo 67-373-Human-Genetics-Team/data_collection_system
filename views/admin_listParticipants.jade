@@ -45,7 +45,9 @@ html(lang="en")
                   td
                     a(onclick='getParticipant("'+participant._id+'")')= participant.first_name+' '+participant.last_name
                   td= participant.email
-                  td= participant.available_surveys[0].name
-                  //- td= participant.completed_surveys
+                  if participant.available_surveys.length > 0
+                    td= participant.available_surveys[0].name
+                  if participant.completed_surveys.length > 0
+                    td= participant.completed_surveys[0].name
                   td
                     a(id='delete-button' onclick='removeParticipant("'+participant._id+'")') x
