@@ -42,6 +42,7 @@ app.get('/admin/responses/:id', controllers.admin.showResponse);
 
 // Participant Routes
 app.get('/admin/participants', controllers.admin.listParticipants);
+app.get('/admin/participants/:id', controllers.admin.showParticipant);
 
 // API Survey Routes
 app.post('/api/surveys/new', controllers.api.postSurvey);

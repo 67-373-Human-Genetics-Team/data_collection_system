@@ -30,13 +30,33 @@ exports.showSurvey = function(req,res) {
 };
 
 exports.listParticipants = function(req,res) {
-	Participant.find(function(err,participants) {
-		if (err) {
-			res.send("You've encountered an error.");
-		} else {
-			res.render('admin_listParticipants', { header: 'Participants', participants: participants });
-		}
-	});
+	Participant
+		.find()
+		.populate('available_surveys')
+		.populate('completed_surveys')
+		.exec(function (err, participants) {
+			if (err) {
+				res.send("You've encountered an error.");
+			} else {
+				res.render('admin_listParticipants', { header: 'Participants', participants: participants });
+			}
+		});
+};
+
+exports.showParticipant = function(req,res) {
+	Participant
+		.findById(req.params.id)
+		.populate('available_surveys')
+		.populate('completed_surveys')
+		.exec(function (err, participant) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.render('admin_participant', { participant: participant, dateFormat: dateFormat });
+				console.log(participant.available_surveys);
+				console.log(participant.completed_surveys);
+			}
+		});
 };
 
 exports.listResponses = function(req,res) {

@@ -3,6 +3,26 @@ html(lang="en")
   head
     title SurveyApp
     include includes/head
+    script(type='text/javascript').
+      function getParticipant(id) {
+        $.ajax('/api/participants/'+id, {
+          cache: false,
+          type: 'GET',
+          success: function(data) {
+            window.location.replace("/admin/participants/"+id);
+          }
+        });
+      }
+
+      function removeParticipant(id) {
+        $.ajax('/api/participants/'+id, {
+          cache: false,
+          type: 'DELETE',
+          success: function(data) {
+            $('#participant-'+id).remove();
+          }
+        });
+      }
   body
     include includes/nav
     #content-area
@@ -16,10 +36,16 @@ html(lang="en")
             tr
               th Name
               th Email
+              th Survey
               th
               th
           tbody
             each participant in participants
                 tr(id='participant-'+participant._id)
-                  td= participant.first_name+' '+participant.last_name
+                  td
+                    a(onclick='getParticipant("'+participant._id+'")')= participant.first_name+' '+participant.last_name
                   td= participant.email
+                  td= participant.available_surveys[0].name
+                  //- td= participant.completed_surveys
+                  td
+                    a(id='delete-button' onclick='removeParticipant("'+participant._id+'")') x

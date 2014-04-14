@@ -138,7 +138,7 @@ exports.postResponse = function(req,res) {
 
 // Get response to survey
 exports.getResponse = function(req,res) {
-    Response.findById(req.params.id, function(err,response) {
+    Response.findById(req.params.id, function (err,response) {
         if (err) {
             res.send(err);
         } else {
@@ -150,7 +150,7 @@ exports.getResponse = function(req,res) {
 // Delete response
 // - remove response id from survey responses list
 exports.deleteResponse = function(req,res) {
-    Response.findByIdAndRemove(req.params.id, function(err) {
+    Response.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -181,7 +181,7 @@ exports.postParticipant = function(req,res) {
 
 // Get participant
 exports.getParticipant = function(req,res) {
-    Participant.findById(req.params.id, function(err,participant) {
+    Participant.findById(req.params.id, function (err,participant) {
         if (err) {
             res.send(err);
         } else {
@@ -195,7 +195,7 @@ exports.getParticipant = function(req,res) {
 
 // Delete participant
 exports.deleteParticipant = function(req,res) {
-    Participant.findByIdAndRemove(req.params.id, function(err) {
+    Participant.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             res.send(err);
         } else {
