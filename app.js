@@ -55,9 +55,12 @@ app.delete('/api/surveys/:survey_id/questions/:question_id', controllers.api.del
 // API Response Routes
 app.post('/api/responses/new', controllers.api.postResponse);
 app.get('/api/responses/:id', controllers.api.getResponse);
+app.delete('/api/responses/:id', controllers.api.deleteResponse);
 
 // API Participant Routes
 app.post('/api/participants/new', controllers.api.postParticipant);
+app.get('/api/participants/:id', controllers.api.getParticipant);
+app.delete('/api/participants/:id', controllers.api.deleteParticipant);
 
 app.listen(3000);
 console.log("Express server listening on port 3000");
