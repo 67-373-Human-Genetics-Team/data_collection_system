@@ -12,67 +12,25 @@ html(lang="en")
     include includes/nav
     #content-area
       h1= header
-      a(class='button', href='/admin/surveys/new') New Survey
+      
+      div(class='new-survey-box' onclick="location.href='/admin/surveys/new'")
+        p(class='survey-box-name' id='new-survey-plus') + Add Survey
+        p(class='survey-box-responses' id='new-survey-instructions') Build a new survey
+
       if (surveys.length < 1)
         p There are no surveys. Time to make one.
       else
-        h3 Unpublished Surveys
-        table(class='table-theme' id='unpublished-surveys')
-          thead
-            tr
-              th Name
-              th Questions
-              th
-              th
-          tbody
-            each survey in surveys
-              if survey.status == "Unpublished"
-                tr(id='survey-'+survey._id)
-                  td
-                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                  td= survey.questions.length
-                  td(id='publish-survey-'+survey._id)
-                    a(onclick='publishSurvey("'+survey._id+'")') Publish
-                  td
-                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
+        each survey in surveys
+          if (survey.status == "Published" || survey.status == "Closed")
+            div(class='survey-box' onclick='getSurvey("'+survey._id+'")')
+              p(class='survey-box-name' id='survey-'+survey._id)= survey.name
+              if survey.responses.length === 1
+                p(class='survey-box-responses')= survey.responses.length+' Response'
+              else
+                p(class='survey-box-responses')= survey.responses.length+' Responses'
 
-        h3 Published Surveys
-        table(class='table-theme' id='published-surveys')
-          thead
-            tr
-              th Name
-              th Start
-              th End
-              th Questions
-              th Responses
-              th
-              th
-          tbody
-            each survey in surveys
-              if survey.status == "Published"
-                tr(id='survey-'+survey._id)
-                  td
-                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                  td 
-                    +prettyDate(survey.start_date)
-                  td --
-                  td= survey.questions.length
-                  td= survey.responses.length
-                  td(id='close-survey-'+survey._id)
-                    a(onclick='closeSurvey("'+survey._id+'")') Close Survey
-                  td
-                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
-              if survey.status == "Closed"
-                tr(id='survey-'+survey._id)
-                  td
-                    a(id='get-survey' onclick='getSurvey("'+survey._id+'")')= survey.name
-                  td
-                    +prettyDate(survey.start_date)
-                  td
-                    +prettyDate(survey.end_date)
-                  td= survey.questions.length
-                  td= survey.responses.length
-                  td(id='close-survey-'+survey._id)
-                    a(href='#') See Results
-                  td
-                    a(id='delete-button' onclick='removeSurvey("'+survey._id+'")') x
+          if survey.status == "Unpublished"
+            div(class='survey-box' onclick='getSurvey("'+survey._id+'")')
+              p(class='survey-box-name' id='survey-'+survey._id)= survey.name
+              p(class='survey-box-unpublished')= survey.status
+

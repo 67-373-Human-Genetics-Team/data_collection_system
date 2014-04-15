@@ -255,3 +255,73 @@ input[type=text] {
 #participant-submit-button:hover {
     background: #008d95;
 }
+
+.button {
+    /*float: right;*/
+    /*margin-left: 5px;*/
+    /*margin-bottom: 100px;*/
+    padding: 5px 15px;
+    background: #00757b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    text-decoration: none;
+    /*font-size: 50%*/
+}
+
+.button:hover {
+    background: #008d95;
+}
+
+.new-survey-box {
+    float: left;
+    background-color: #00757b;
+    text-align: center;
+    width: 20%;
+    padding: 55px 5px;
+    margin: 10px;
+    display: block;
+    border: 1px solid;
+    border-color: #008d95;
+    box-shadow: 0px 2px 2px #adadad;
+    cursor: pointer;
+}
+
+.survey-box {
+    float: left;
+    background-color: #ffffff;
+    text-align: center;
+    width: 20%;
+    padding: 55px 5px;
+    margin: 10px;
+    display: block;
+    border: 1px solid;
+    border-color: #ededed;
+    box-shadow: 0px 2px 2px #adadad;
+    cursor: pointer;
+}
+
+.survey-box-name {
+    font-weight: 400;
+    font-size: 120%;
+}
+
+.survey-box-responses {
+    background-color: #ededed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 10px 2px;
+}
+
+.survey-box-unpublished {
+    background-color: #ededed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 10px 2px;  
+}
+
+#new-survey-plus {
+    color: #ffffff;
+}
