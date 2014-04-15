@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+  body
+    include includes/nav
+    #content-area
+        h1= response.participant_id.first_name+' '+response.participant_id.last_name+"'s Response"
+        table(class='table-theme' id='survey-responses')
+            thead
+                tr
+                    th Question
+                    th Answer
+                tbody
+            each question in response.survey_id.questions
+                tr
+                    td= question.query
+                    td

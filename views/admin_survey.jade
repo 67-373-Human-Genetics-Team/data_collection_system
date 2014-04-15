@@ -51,7 +51,7 @@ html(lang="en")
               tr(id='question-'+question._id)
                 td= question.query
                 td= question.type
-                td= question.query_options.toString()
+                td= question.query_options.toString().replace(/,/g, ' - ')
                 if survey.status === "Unpublished"
                   td
                     a(id='delete-button' onclick='removeQuestion("'+survey._id+'","'+question._id+'")') x

@@ -74,6 +74,36 @@ exports.listSurveyMetrics = function(req,res) {
 		});
 };
 
+exports.listSurveyParticipants = function(req,res) {
+	Response
+		.find({ survey_id: req.params.id })
+		.populate('participant_id')
+		.exec(function (err,responses) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.render('admin_surveyParticipants', { responses: responses });
+				console.log(responses);
+			}
+		});
+};
+
+// listSurveyResponses
+exports.showSurveyResponse = function(req,res) {
+	Response
+		.findById(req.params.response_id)
+		.populate('survey_id')
+		.populate('participant_id')
+		.exec(function (err, response) {
+			if (err) {
+				res.send(err)
+			} else {
+				res.render('admin_surveyResponse', { response: response });
+				console.log(response);
+			}
+		});
+}
+
 exports.listResponses = function(req,res) {
 	Response
 		.find()

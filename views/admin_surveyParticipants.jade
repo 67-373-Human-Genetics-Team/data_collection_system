@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+        function getResponse(response_id, survey_id) {
+            window.location.replace("/admin/surveys/"+survey_id+"/responses/"+response_id);
+        }
+  body
+    include includes/nav
+    #content-area
+        h1 Responses
+        table(class='table-theme' id='survey-responses')
+            thead
+                tr
+                    th Participant
+                    th 
+                    th 
+                    th
+                tbody
+            each response in responses
+                tr(id='response-'+response._id)
+                    td
+                        a(onclick='getResponse("'+response._id+'","'+response.survey_id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
+                    td= response._id
+                    td
+                    td
+                        a(id='delete-button' onclick='removeResponse("'+response._id+'")') x
