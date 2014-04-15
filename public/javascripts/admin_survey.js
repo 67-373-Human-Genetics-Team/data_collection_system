@@ -62,6 +62,17 @@ $(function() {
   });
 });
 
+function getSurveyMetrics(id) {
+  // $.ajax('/api/surveys/'+id, {
+  //   cache: false,
+  //   type: 'GET',
+  //   success: function(data) {
+  //     window.location.replace('/admin/surveys/'+id+'/metrics');
+  //   }
+  // });
+  window.location.replace('/admin/surveys/'+id+'/metrics');
+}
+
 function removeSurvey(id) {
   $.ajax('/api/surveys/'+id, {
     cache: false,

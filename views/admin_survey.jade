@@ -13,17 +13,18 @@ html(lang="en")
             //- Control buttons for survey depend on status
             if (survey.status === "Unpublished")
               a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
-              a(class='survey-buttons' id='publish-button' onclick='publishSurvey("'+survey._id+'")') Publish
+              if survey.questions.length > 0
+                a(class='survey-buttons' id='publish-button' onclick='publishSurvey("'+survey._id+'")') Publish
               a(class='survey-buttons' id='edit-button') Edit
             
             if (survey.status === "Published")
               a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
-              a(class='survey-buttons' id='metrics-button') Metrics
+              a(class='survey-buttons' id='metrics-button' onclick='getSurveyMetrics("'+survey._id+'")') Metrics
               a(class='survey-buttons' id='unpublish-button') Unpublish
 
             if (survey.status === "Closed")
               a(class='survey-buttons' id='remove-button' onclick='removeSurvey("'+survey._id+'")') Delete
-              a(class='survey-buttons' id='metrics-button') Metrics
+              a(class='survey-buttons' id='metrics-button' onclick='getSurveyMetrics("'+survey._id+'")') Metrics
         
         //- Published survey's URL
         if survey.status === "Published"

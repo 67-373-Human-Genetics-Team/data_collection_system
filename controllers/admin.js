@@ -59,6 +59,21 @@ exports.showParticipant = function(req,res) {
 		});
 };
 
+exports.listSurveyMetrics = function(req,res) {
+	Survey
+		.findById(req.params.id)
+		.populate('responses')
+		.exec(function (err, survey) {
+			if (err) {
+				res.send(err);
+			} else {
+				res.render('admin_surveyMetrics', { survey: survey });
+				console.log('Listing Survey Responses:');
+				console.log('	'+survey.responses);
+			}
+		});
+};
+
 exports.listResponses = function(req,res) {
 	Response
 		.find()

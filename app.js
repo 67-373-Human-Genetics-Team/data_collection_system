@@ -34,6 +34,7 @@ app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 // Survey Routes
 app.get('/admin/surveys', controllers.admin.listSurveys);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
+app.get('/admin/surveys/:id/metrics', controllers.admin.listSurveyMetrics);
 app.get('/admin/surveys/:id', controllers.admin.showSurvey);
 
 // Response Routes

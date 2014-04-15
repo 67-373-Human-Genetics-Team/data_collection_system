@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head
+    title SurveyApp
+    include includes/head
+    script(type='text/javascript').
+  body
+    include includes/nav
+    #content-area
+        h1 Survey Responses
+        if survey.responses.length < 1
+            p There are no responses yet.
+        else
+            p= survey.responses
