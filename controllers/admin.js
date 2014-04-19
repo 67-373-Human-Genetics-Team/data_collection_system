@@ -69,7 +69,7 @@ exports.listSurveyMetrics = function(req,res) {
 			} else {
 				res.render('admin_surveyMetrics', { survey: survey });
 				console.log('Listing Survey Responses:');
-				console.log('	'+survey.responses);
+				console.log(survey.responses);
 			}
 		});
 };
@@ -78,6 +78,7 @@ exports.listSurveyParticipants = function(req,res) {
 	Response
 		.find({ survey_id: req.params.id })
 		.populate('participant_id')
+		.populate('survey_id')
 		.exec(function (err,responses) {
 			if (err) {
 				res.send(err);
