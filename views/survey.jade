@@ -9,11 +9,16 @@ html(lang="en")
 
         #content-area
             
-            h1= survey.name
+            h1(id='survey-title')= survey.name
                 span  Survey
+
             div(id='publications-box' class='hidden')
                 h3 Are these your publications?
                 h5 Check the ones that are yours.
+
+            //- div(id='patents-box' class='hidden')
+            //-     h3 Are these your patents?
+            //-     h5 Check the ones that are yours.
 
             form(class='participant-survey' id='participant-survey-form')
                 each question in survey.questions

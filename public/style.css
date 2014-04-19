@@ -160,7 +160,9 @@ label {
 }
 
 .participant-survey {
-   /* width: 60%;*/
+   width: 70%;
+   margin-right: auto;
+   margin-left: auto;
 }
 
 input[type=text] {
@@ -170,9 +172,9 @@ input[type=text] {
     height: 20px;
 }
 
-::-webkit-input-placeholder {
+/*::-webkit-input-placeholder {
    text-align:center;
-}
+}*/
 
 :-moz-placeholder { /* Firefox 18- */
    text-align:center;  
@@ -182,9 +184,10 @@ input[type=text] {
    text-align:center;  
 }
 
-:-ms-input-placeholder {  
+/*:-ms-input-placeholder {  
    text-align:center; 
-}
+}*/
+
 #url-instructions {
     padding-bottom: 10px;
 }
@@ -226,14 +229,16 @@ input[type=text] {
 }
 
 #participant-info-popup {
+    font-size: 120%;
     display: hidden;
-    background-color: #ccc;
     width: 45%; 
-    height: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
-    padding: 100px 60px;
+    padding-top: 100px;
+}
+
+#instructions {
+    padding-bottom: 50px;
 }
 
 #participant-info-form input {
@@ -243,7 +248,10 @@ input[type=text] {
 }
 
 #participant-submit-button {
+    text-align: center;
     width: 20% !important;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 50px;
     padding: 5px 15px;
     background: #4fa46b;
@@ -258,16 +266,12 @@ input[type=text] {
 }
 
 .button {
-    /*float: right;*/
-    /*margin-left: 5px;*/
-    /*margin-bottom: 100px;*/
     padding: 5px 15px;
     background: #00757b;
     color: white;
     border: 0 none;
     cursor: pointer;
     text-decoration: none;
-    /*font-size: 50%*/
 }
 
 .button:hover {
@@ -325,4 +329,86 @@ input[type=text] {
 
 #new-survey-plus {
     color: #ffffff;
+}
+
+
+
+
+
+/* Welcome letter */
+#welcome-letter {
+    font-size: 120%;
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+.right-align {
+    text-align: right;
+}
+
+#begin{
+    padding-top: 70px;
+    text-align: center;
+}
+
+#begin button {
+    padding: 10px 20px;
+    background: #00757b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 120%;
+}
+
+#begin button:hover {
+    background: #008d95;
+}
+/* end */
+
+
+
+
+
+
+#publications-box {
+    padding-top: 50px;
+    font-size: 120%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#publications-form button {
+    margin-top: 50px;
+    padding: 10px 20px;
+    background: #00757b;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 120%;
+}
+
+#publications-form button:hover {
+    background: #008d95;
+}
+
+#publications-form div {
+    padding: 5px;
+}
+
+#patents-box {
+    font-size: 120%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#survey-title {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }

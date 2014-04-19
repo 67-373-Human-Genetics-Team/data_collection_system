@@ -8,20 +8,37 @@ html(lang="en")
           // Get survey id from URL pathname and update value
           var survey_id = window.location.pathname.split( '/' ).pop();
           $("#survey_id").val(survey_id);
-      });     
+      });
+
+      function showParticipantForm () {
+        $('#welcome-letter').slideUp('slow');
+        $('#participant-info-popup').fadeIn('slow');
+      }     
   body
     include includes/nav_public
     #content-area
-      div(id='participant-info-popup')
+      div(id='welcome-letter')
+        h1 Hello,
+        div Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id fringilla orci. Nam ullamcorper mi vitae erat elementum, vel placerat risus laoreet. Morbi ut sem interdum, mattis lorem ut, laoreet felis. Ut gravida a massa sed tempus. Etiam dictum nisl ut augue imperdiet, ut convallis sapien varius. Praesent dictum dolor sit amet enim viverra sollicitudin pretium gravida justo. Vivamus consequat rutrum congue. Sed vitae urna a dui tincidunt placerat. Praesent non augue in eros vehicula convallis et bibendum tellus. Nulla tellus sapien, consectetur ut auctor sit amet, euismod id purus. Donec at imperdiet odio.
+        h1(class='right-align') Thanks,
+        h3(class='right-align') Dr. Dietrich A Stephan, PhD
+        div(class='right-align') Chairman of Human Genetics
+        div(id='begin')
+          button(type='button' onclick='showParticipantForm()') Start
+          p let's start the survey
+
+
+      div(id='participant-info-popup' class='hidden')
+        div(id='instructions') We want to make this survey easy for you to fill out by searching for your publications and patents so you don't have to. But we're going to need your help with your full name and email address.
         form(id='participant-info-form' action='/api/participants/new', method='post')
             label First Name
-              input(id='first_name' type='text' name='first_name' placeholder='John')
+              input(id='first_name' type='text' name='first_name' placeholder='John A (middle initial optional)')
             label Last Name
               input(id='last_name' type='text' name='last_name' placeholder='Smith') 
             label Email
-              input(id='email' type='text' name='email' placeholder='johnsmith@example.com')
+              input(id='email' type='text' name='email' placeholder='jasmith@example.com')
             input(id='survey_id' type='hidden' name='survey_id' value="")
-            input(id='participant-submit-button' type='submit' value='Begin')
+            input(id='participant-submit-button' type='submit' value='Search')
 
 
 

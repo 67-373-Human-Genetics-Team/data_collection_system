@@ -1,5 +1,8 @@
 $(function() {
 
+    $("#survey-title").hide();
+    $("#participant-survey-form").hide();
+
     // Get participant id from URL pathname and update value
     var participant_id = window.location.pathname.split( '/' ).pop();
     $("#participant_id").val(participant_id);
@@ -75,9 +78,9 @@ function getParticipant(id) {
 // Gets publications from name and displays list
 function getPublications(name) {
     console.log('Function getPublications: '+name);
-
-    $("#participant-survey-form").hide();
+    
     $("#publications-box").fadeIn('slow');
+    $("#patents-box").fadeIn('slow');
 
     $('#publications-box').append("<form id='publications-form'></form>");
 
@@ -111,6 +114,7 @@ function toggle() {
 // Populates the publications dropdown list based on checked boxes
 function populatePublicationDropdown() {
     $("#publications-box").slideUp('slow');
+    $("#survey-title").fadeIn('slow');
     $("#participant-survey-form").fadeIn('slow');
     $('#publications-form input:checkbox:checked').each(function() {
         $("#publication-dropdown").append("<option value='"+$(this).val()+"'>"+$(this).val()+"</option>")
