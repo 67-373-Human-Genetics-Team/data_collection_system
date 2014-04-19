@@ -78,7 +78,7 @@ function getParticipant(id) {
 // Gets publications from name and displays list
 function getPublications(name) {
     console.log('Function getPublications: '+name);
-    
+
     $("#publications-box").fadeIn('slow');
     $("#patents-box").fadeIn('slow');
 
@@ -132,7 +132,7 @@ function postResponse() {
             answers.push($(this).children("input:text").val());
 
         } else if ($(this).attr('class') === "Long Text question-area") {
-            answers.push($(this).children("input:text").val());
+            answers.push($(this).children("textarea").val());
 
         } else if ($(this).attr('class') === "Checkbox question-area") {
             var checked = $(this).children("input:checkbox:checked").map(function(){ return $(this).val();}).get();

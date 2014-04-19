@@ -93,7 +93,36 @@ ul {
 .question-box {
     background-color: #f2f2f2;
     padding: 20px;
+    margin-top: 20px;
+    font-size: 120%;
+}
+
+.text {
+    font-size: 120%;
+    outline: none;
+    text-align: center;
+}
+
+.radio {
+    display: block;
+    padding: 5px;
+}
+
+.checkbox {
+    display: block;
+    padding: 5px;
+}
+
+.dropdown {
+    font-size: 120%;
+}
+
+.textarea {
     margin-top: 10px;
+    resize: none;
+    outline: none;
+    width: 90%;
+    font-size: 110%;
 }
 
 label {
@@ -147,16 +176,19 @@ label {
 }
 /* End submit survey button */
 
-#patent-textarea,
-#publication-textarea {
-    margin-left: 5px;
-    border: 0px;
-    border-bottom: 1px solid #ccc !important;
-    width: 50%;
-}
+
 
 .question-area {
     padding: 15px 0px;
+    font-size: 120%;
+}
+
+.question-area h3 {
+    color: #008d95;
+}
+
+.Company input[type='text'] {
+    width: 35%;
 }
 
 .participant-survey {
@@ -171,22 +203,6 @@ input[type=text] {
     width: 20%;
     height: 20px;
 }
-
-/*::-webkit-input-placeholder {
-   text-align:center;
-}*/
-
-:-moz-placeholder { /* Firefox 18- */
-   text-align:center;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   text-align:center;  
-}
-
-/*:-ms-input-placeholder {  
-   text-align:center; 
-}*/
 
 #url-instructions {
     padding-bottom: 10px;

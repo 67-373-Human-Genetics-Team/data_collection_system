@@ -23,49 +23,62 @@ html(lang="en")
             form(class='participant-survey' id='participant-survey-form')
                 each question in survey.questions
                     div(class=question.type+' question-area' id='question-'+question._id)
+                        
                         h3= question.query
 
-                        if (question.type === "Short Text" || question.type === "Long Text")
-                            input(type='text')
+                        if (question.type === "Short Text")
+                            input(type='text' class='text')
 
-                        if (question.type === "Company")
-                            span Right now I work at 
-                            input(type='text' placeholder='company')
-                            span  as a 
-                            input(type='text' placeholder='job position')
-                            span  and my yearly salary is 
-                            input(type='text' placeholder='50,000')
+                        if (question.type === "Long Text")
+                            textarea(class='textarea' rows='5' placeholder='Publications, patents, started a new company, raised two successful kids, anything.')
+
 
                         if (question.type === "Dropdown")
-                            select
+                            select(class='dropdown')
                                 each opt in question.query_options
                                     option(value=opt)= opt
 
                         if (question.type === "Checkbox")
                             each opt in question.query_options
-                                input(type='checkbox' value=opt)
-                                span= opt
+                                div(class='checkbox')
+                                    input(type='checkbox' value=opt)
+                                    span= opt
 
                         if (question.type === "Multiple Choice")
                             each opt in question.query_options
-                                input(type='radio' value=opt)
-                                span= opt
+                                div(class='radio')
+                                    input(type='radio' value=opt)
+                                    span= opt
 
                         if (question.type === "Number")
                             input(type='text')
 
+                        //- Special Question Types
+                        if (question.type === "Company")
+                            span Right now I work at 
+                            input(class='text' type='text' placeholder='company')
+                            span  as a/an  
+                            input(class='text' type='text' placeholder='job position')
+                            span  and my yearly salary is 
+                            input(class='text' type='text' placeholder='50,000 (optional)')
+
                         if (question.type === "Patent")
-                            span I am most proud of my patent on  
-                            select
-                                option(value='patent') Pick a Patent
-                            span  because
-                            input(id='patent-textarea' type='textarea')
+                            div
+                                span I am most proud of my patent on  
+                                select(class='dropdown')
+                                    option(value='patent') Pick a Patent
+                                span  because
+                            div
+                                textarea(id='patent-textarea' class='textarea' rows='5')
 
                         if (question.type === "Publication")
-                            span I am most proud of my publication on   
-                            select(id='publication-dropdown')
-                            span  because
-                            input(id='publication-textarea' type='textarea')
+                            div
+                                span I am most proud of my publication on   
+                                select(class='dropdown' id='publication-dropdown')
+                                span  because
+                            div
+                                textarea(id='publication-textarea' class='textarea' rows='5')
+
                 input(id='survey_id' type='hidden' name='survey_id' value=survey._id)
                 input(id='participant_id' type='hidden' name='participant_id' value="")
                 input(id='submit-response' type='submit' value='Submit')
