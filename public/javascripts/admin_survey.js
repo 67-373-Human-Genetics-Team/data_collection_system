@@ -70,7 +70,7 @@ function getSurveyMetrics(id) {
   //     window.location.replace('/admin/surveys/'+id+'/metrics');
   //   }
   // });
-  window.location.replace('/admin/surveys/'+id+'/metrics');
+  window.location.replace('/admin/surveys/'+id+'/responses');
 }
 
 function removeSurvey(id) {
