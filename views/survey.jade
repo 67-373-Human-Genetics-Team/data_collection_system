@@ -24,7 +24,9 @@ html(lang="en")
                 each question in survey.questions
                     div(class=question.type+' question-area' id='question-'+question._id)
                         
-                        h3= question.query
+                        h3
+                            &#8594;
+                            = ' ' + question.query
 
                         if (question.type === "Short Text")
                             input(type='text' class='text')
