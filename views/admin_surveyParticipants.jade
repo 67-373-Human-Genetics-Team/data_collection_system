@@ -11,19 +11,40 @@ html(lang="en")
     include includes/nav
     #content-area
         h1 Responses
-        table(class='table-theme' id='survey-responses')
-            thead
-                tr
-                    th Participant
-                    th 
-                    th 
-                    th
-                tbody
-            each response in responses
-                tr(id='response-'+response._id)
-                    td
-                        a(onclick='getResponse("'+response._id+'","'+response.survey_id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
-                    td= response._id
-                    td
-                    td
-                        a(id='delete-button' onclick='removeResponse("'+response._id+'")') x
+        //- table(class='table-theme' id='survey-responses')
+        //-     thead
+        //-         tr
+        //-             th Participant
+        //-             th 
+        //-             th 
+        //-             th
+        //-         tbody
+        //-         each response in responses
+        //-             tr(id='response-'+response._id)
+        //-                 td
+        //-                     a(onclick='getResponse("'+response._id+'","'+response.survey_id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
+        //-                 td= response._id
+        //-                 td
+        //-                 td
+        //-                     a(id='delete-button' onclick='removeResponse("'+response._id+'")') x
+
+
+
+        div(id='survey-responses')
+            table(class='table-theme')
+                thead
+                    tr
+                        th
+                        th Participant
+                        each question in responses[0].survey_id.questions
+                            th= question.query
+
+                    tbody
+                    each response in responses
+                        tr(id='response-'+response._id)
+                            td(id='delete-box')
+                                a(id='delete-button' onclick='removeResponse("'+response._id+'")') x
+                            td= response.participant_id.first_name+' '+response.participant_id.last_name
+                            each answer in response.answers
+                                td= answer
+

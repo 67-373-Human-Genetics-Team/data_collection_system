@@ -11,4 +11,17 @@ html(lang="en")
         if survey.responses.length < 1
             p There are no responses yet.
         else
-            p= survey.responses
+            table(class='table-theme' id='participants')
+              thead
+                tr
+                    th Response
+                    th Participant ID
+              tbody
+                each response in survey.responses
+                    tr(id='response-'+response._id)
+                        td= response
+                        td= response.participant_id
+
+
+
+

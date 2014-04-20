@@ -75,11 +75,21 @@ ul {
     border-bottom: 2px solid black;
 }
 
-.table-theme tr:hover {
+.table-theme tbody tr:hover {
     color: #00757b;
     background-color: #f2f2f2;
 }
 /* End Table Styling */
+
+
+#survey-responses {
+    overflow: auto;
+    width: 100%;
+}
+
+#delete-box:hover {
+    background-color: white;
+}
 
 #delete-button {
     color: red;
