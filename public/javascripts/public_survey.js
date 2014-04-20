@@ -142,7 +142,7 @@ function postResponse() {
             answers.push($(this).children("select").children("option").filter(":selected").val());
 
         } else if ($(this).attr('class') === "Multiple Choice question-area") {
-            answers.push($(this).children("input:radio:checked").val());
+            answers.push($(".Multiple input:radio:checked").val());
 
         } else if ($(this).attr('class') === "Number question-area") {
             // what about if number has min/max?
@@ -154,13 +154,13 @@ function postResponse() {
 
         } else if ($(this).attr('class') === "Patent question-area") {
             var patent = [];
-            patent.push($(this).children("select").children("option").filter(":selected").val());
+            patent.push($("#patent-dropdown option:selected").val());
             patent.push($("#patent-textarea").val());
             answers.push(patent);
 
         } else if ($(this).attr('class') === "Publication question-area") {
             var publication = [];
-            publication.push($(this).children("select").children("option").filter(":selected").val());
+            publication.push($("#publication-dropdown option:selected").val());
             publication.push($("#publication-textarea").val());
             answers.push(publication);
 
