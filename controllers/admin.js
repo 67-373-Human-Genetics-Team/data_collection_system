@@ -99,8 +99,7 @@ exports.showSurveyResponse = function(req,res) {
 			if (err) {
 				res.send(err)
 			} else {
-				res.render('admin_surveyResponse', { response: response });
-				console.log(response);
+				res.render('admin_surveyResponse', { response: response, questions: response.survey_id.questions, answers: response.answers });
 			}
 		});
 }

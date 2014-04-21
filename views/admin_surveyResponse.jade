@@ -4,17 +4,26 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
+        //- $(function() {
+        //- });
   body
     include includes/nav
     #content-area
         h1= response.participant_id.first_name+' '+response.participant_id.last_name+"'s Response"
-        table(class='table-theme' id='survey-responses')
+        table(class='table-theme' id='survey-response')
             thead
                 tr
                     th Question
-                    th Answer
-                tbody
-            each question in response.survey_id.questions
+            tbody
+                each question in questions
+                    tr
+                        td= question.query
+
+            thead
                 tr
-                    td= question.query
-                    td
+                    th Answer
+            tbody
+                each answer in answers
+                    tr
+                        td= answer
+
