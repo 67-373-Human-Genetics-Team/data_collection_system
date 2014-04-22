@@ -4,9 +4,20 @@ var Response = require('../models/response');
 var Participant = require('../models/participant');
 var dateFormat = require('dateformat');
 
+
+/* Authentication */
+exports.login = function(req,res) {
+    res.render('login');
+}
+
+exports.logout = function(req,res) {
+    res.render('logout', {name: 'Logout'});
+}
+
+
 /* Survey Controller */
 exports.newSurvey = function(req,res) {
-	res.render('survey_form', {header: 'New Survey'});
+	res.render('survey_form', { header: 'New Survey' });
 };
 
 exports.listSurveys = function(req,res) {

@@ -54,8 +54,11 @@ ul {
 
 #nav a:hover {
     color: #00757b;
-    font-weight: 400;
-    font-size: 105%;
+    font-weight: 700;
+}
+
+#nav-login{
+    float: right;
 }
 /* End Navigation Bar */
 
@@ -471,4 +474,13 @@ input[type=text] {
 
 #emphasis {
     font-weight: 400;
+}
+
+
+
+/* login.jade */
+#login-form {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }

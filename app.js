@@ -20,8 +20,8 @@ app.configure(function(){
 
 // Routes
 app.get('/', controllers.surveyapp.home);
-app.get('/login', controllers.surveyapp.login);
-app.get('/logout', controllers.surveyapp.logout);
+app.get('/admin/login', controllers.admin.login);
+app.get('/admin/logout', controllers.admin.logout);
 app.get('/surveys', controllers.surveyapp.listSurveys);
 
 // Participant creation page
