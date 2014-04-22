@@ -17,17 +17,21 @@ exports.getSurvey = function(req,res) {
 
 // Create new survey
 exports.postSurvey = function(req,res) {
-	new Survey({name: req.body.name, status: req.body.status}).save(
-		function (err,survey) {
-			if (err) { 
-				res.send(err);
-			} else {
+    if (req.body.name === "") {
+        res.send('Please provide a name for the survey.');
+    } else {
+        new Survey({name: req.body.name, status: req.body.status}).save(
+        function (err,survey) {
+            if (err) { 
+                res.send(err);
+            } else {
                 res.writeHead(302, {
                     'Location': '/admin/surveys/'+survey._id
                 });
                 res.end();
-			}
-	});
+            }
+        });
+    }
 };
 
 // Publish survey
@@ -83,18 +87,22 @@ exports.deleteSurvey = function(req,res) {
 /* Question API */
 // Add question to survey
 exports.postQuestion = function(req,res) {
-    var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
-    Survey.findById(req.body.id, 
-        function (err,survey) {
-            if (err) {
-                res.send(err);
-            } else {
-                survey.questions.push(question);
-                survey.save();
-                res.redirect("/admin/surveys/"+survey._id);
-                console.log(survey);
-            }
-        });
+    if (req.body.query === "" || req.body.type === "") {
+        res.send("You've forgotten the question");
+    } else {
+        var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
+        Survey.findById(req.body.id, 
+            function (err,survey) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    survey.questions.push(question);
+                    survey.save();
+                    res.redirect("/admin/surveys/"+survey._id);
+                    console.log(survey);
+                }
+            });
+    }
 };
 
 
@@ -190,17 +198,20 @@ exports.postParticipant = function(req,res) {
     //         }
     //     }
     // });
-
-    new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
-        function (err,participant) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
-                console.log("Participant saved:");
-                console.log(participant);
-            }
-    });
+    if (req.body.first_name === "" || req.body.last_name === "" || req.body.email === "") {
+        res.redirect('/surveys/to/'+survey_id);
+    } else {
+        new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
+            function (err,participant) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
+                    console.log("Participant saved:");
+                    console.log(participant);
+                }
+        });
+    }
 };
 
 // Get participant
