@@ -6,31 +6,15 @@ html(lang="en")
     script(type='text/javascript').
       $(function() {
           // Get survey id from URL pathname and update value
-          var survey_id = window.location.pathname.split( '/' ).pop();
+          var pathname = window.location.pathname.split( '/' );
+          var survey_id = window.location.pathname.split('/')[ pathname.length - 2 ];
           $("#survey_id").val(survey_id);
-      });
-
-      function showParticipantForm () {
-        $('#welcome-letter').slideUp('slow');
-        $('#participant-info-popup').fadeIn('slow');
-      }     
+      });   
   body
     include includes/nav_public
     #content-area
-      div(id='welcome-letter')
-        h1 Hello,
-        div Welcome to our alumni survey. This is a very exciting time to be involved in human genetics and we want to learn more about what our remarkable alumni have done to change the world in this field. So give us the opportunity to brag about all the great things our alumni are doing. Each and every response is greatly appreciated so thank you for taking the time to do this. We’re looking forward to hearing your story.
-        div(class='right-align')
-          h1 Thanks,
-          div Dr. Dietrich A Stephan, PhD
-          div Chairman of Human Genetics
-        div(style='clear: both')
-        div(id='begin')
-          button(type='button' onclick='showParticipantForm()') Start
-          p let's start the survey
 
-
-      div(id='participant-info-popup' class='hidden')
+      div(id='participant-info-popup')
         div(id='instructions') We want to make this survey easy for you to fill out by searching for your publications and patents so you don't have to. But we're going to need your help with your full name and email address.
         form(id='participant-info-form' action='/api/participants/new', method='post')
             label First Name
@@ -41,7 +25,6 @@ html(lang="en")
               input(id='email' type='text' name='email' placeholder='jasmith@example.com')
             input(id='survey_id' type='hidden' name='survey_id' value="")
             input(id='participant-submit-button' type='submit' value='Search')
-
 
 
 

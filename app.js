@@ -25,12 +25,13 @@ app.get('/logout', controllers.surveyapp.logout);
 app.get('/surveys', controllers.surveyapp.listSurveys);
 
 // Participant creation page
-app.get('/surveys/to/:id', controllers.surveyapp.begin);
+app.get('/surveys/to/:id', controllers.surveyapp.welcome);
+app.get('/surveys/to/:id/begin', controllers.surveyapp.begin);
 app.get('/surveys/:id/u/:participant_id', controllers.surveyapp.getSurvey);
 app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
 app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 
-/* Admin */
+/* Admin Controller*/
 // Survey Routes
 app.get('/admin/surveys', controllers.admin.listSurveys);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
@@ -47,6 +48,9 @@ app.get('/admin/responses/:id', controllers.admin.showResponse);
 app.get('/admin/participants', controllers.admin.listParticipants);
 app.get('/admin/participants/:id', controllers.admin.showParticipant);
 
+
+
+/* API Controller */
 // API Survey Routes
 app.post('/api/surveys/new', controllers.api.postSurvey);
 app.post('/api/questions/new', controllers.api.postQuestion);
@@ -69,3 +73,8 @@ app.delete('/api/participants/:id', controllers.api.deleteParticipant);
 
 app.listen(3000);
 console.log("Express server listening on port 3000");
+
+
+
+
+

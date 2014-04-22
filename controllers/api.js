@@ -186,20 +186,8 @@ exports.postParticipant = function(req,res) {
 
     var survey_id = req.body.survey_id;
 
-    // Check if participant already exists in the system
-    // Participant.find({ email: req.body.email, first_name: req.body.first_name, last_name: req.body.last_name }, function (err, participant) {
-    //     if (err) {
-    //         res.send(err);
-    //     } else {
-    //         for (var i=0; i<participant.completed_surveys.length; i++) {
-    //             if (participant.completed_surveys[i] === survey_id) {
-    //                 res.send('You\'ve completed all surveys.');
-    //             }
-    //         }
-    //     }
-    // });
     if (req.body.first_name === "" || req.body.last_name === "" || req.body.email === "") {
-        res.redirect('/surveys/to/'+survey_id);
+        res.redirect('/surveys/to/'+survey_id+'/begin');
     } else {
         new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
             function (err,participant) {

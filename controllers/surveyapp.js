@@ -33,6 +33,16 @@ exports.getSurvey = function(req,res){
     });
 };
 
+exports.welcome = function(req,res) {
+    Survey.findById(req.params.id, function(err,survey) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.render('welcome', { survey: survey });
+        }
+    });
+}
+
 exports.begin = function(req,res) {
     Survey.findById(req.params.id, function(err,survey) {
         if (err) {
