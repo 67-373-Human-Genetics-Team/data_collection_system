@@ -99,7 +99,15 @@ exports.showSurveyResponse = function(req,res) {
 			if (err) {
 				res.send(err)
 			} else {
-				res.render('admin_surveyResponse', { response: response, questions: response.survey_id.questions, answers: response.answers });
+				var questions_answers = [];
+				for (var i=0; i<response.answers.length; i++) {
+					var group = [];
+					group.push(response.survey_id.questions[i]);
+					group.push(response.answers[i]);
+					questions_answers.push(group);
+				}
+				console.log(questions_answers);
+				res.render('admin_surveyResponse', { response: response, questions: response.survey_id.questions, answers: response.answers, questions_answers: questions_answers });
 			}
 		});
 }

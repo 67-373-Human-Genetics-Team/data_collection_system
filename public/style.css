@@ -459,3 +459,16 @@ input[type=text] {
 #social-icons-bar a {
     padding: 20px;
 }
+
+
+
+/* admin_surveyResponse.jade */
+#participant-name {
+    padding-top: 50px;
+    font-weight: 400;
+    font-size: 200%;
+}
+
+#emphasis {
+    font-weight: 400;
+}
