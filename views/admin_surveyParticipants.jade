@@ -9,6 +9,19 @@ html(lang="en")
             window.location.replace("/admin/surveys/"+survey_id+"/responses/"+response_id);
         }
 
+        $(function(){
+                
+            $("#response-left-arrow").click(function(){
+                var offset = $("#survey-responses").scrollLeft();
+                $("#survey-responses").scrollLeft(offset-100);
+            });
+
+            $("#response-right-arrow").click(function(){
+                var offset = $("#survey-responses").scrollLeft();
+                $("#survey-responses").scrollLeft(100+offset);
+            });
+        });
+
         //- function removeResponse(response_id, survey_id) {
 
         //- }
@@ -18,22 +31,28 @@ html(lang="en")
     #content-area
         h1 Responses
 
+        div(id='horizontal-click-scroll')
+            button(id='response-left-arrow')
+                &#8592;
+            button(id='response-right-arrow')
+                &#8594;
+
         div(id='survey-responses')
             table(class='table-theme')
                 thead
                     tr
                         th
-                        th Participant
+                        th(class='survey-response-column') Participant
                         each question in responses[0].survey_id.questions
-                            th= question.query
+                            th(class='survey-response-column')= question.query
 
-                    tbody
-                    each response in responses
-                        tr(id='response-'+response._id)
-                            td(id='delete-box')
-                                a(id='delete-button' onclick='removeResponse("'+response._id+'","'+response.survey_id._id+'")') x
-                            td
-                                a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
-                            each answer in response.answers
-                                td= answer
+                tbody
+                each response in responses
+                    tr(id='response-'+response._id)
+                        td(id='delete-box')
+                            a(id='delete-button' onclick='removeResponse("'+response._id+'","'+response.survey_id._id+'")') x
+                        td
+                            a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
+                        each answer in response.answers
+                            td= answer
 
