@@ -104,6 +104,13 @@ ul {
     background-color: #f2f2f2;
 }
 
+#response {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #dff0d8;
+    color: black;
+}
+
 
 /* admin_surveyParticipants.jade */
 #survey-responses {

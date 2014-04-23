@@ -1,4 +1,5 @@
 $(function() {
+
   $("#question-form").submit(postQuestion);
 
   $("#question-type").change(function() {
@@ -60,16 +61,10 @@ $(function() {
       $('#query').val('');
     }
   });
+
 });
 
 function getSurveyMetrics(id) {
-  // $.ajax('/api/surveys/'+id, {
-  //   cache: false,
-  //   type: 'GET',
-  //   success: function(data) {
-  //     window.location.replace('/admin/surveys/'+id+'/metrics');
-  //   }
-  // });
   window.location.replace('/admin/surveys/'+id+'/responses');
 }
 
@@ -94,10 +89,12 @@ function removeQuestion(survey_id,question_id) {
 }
 
 function postQuestion() {
+
   // Retrieve values from question form
   var query = $('#query').val();
   var type = $('#question-type').val();
   var options = [];
+
   // Options change depending on question type
   if (type === "Number") {
     options.push($('#min').value);
@@ -107,7 +104,10 @@ function postQuestion() {
       options.push(elem.value);
     });
   }
+
+  // Get Survey ID
   var id = $("#survey-id").val();
+
   $.ajax({
       url: '/api/questions/new', 
       type: 'POST',
@@ -118,7 +118,28 @@ function postQuestion() {
         id: id
       },
       success: function(data) {
-        location.reload();
+
+        var question = data;
+        var q_id = question._id;
+        var query = question.query;
+        var type = question.type;
+        var options = question.query_options.toString().replace(/,/g, ' - ');
+
+        // Reset question form
+        $('#options').hide();
+        $('#number').hide();
+        $('#company').hide();
+        $('#patent').hide();
+        $('#publication').hide();
+        $("#query").val("");
+        $('#question-type').val("Short Text");
+
+        // Append new questions to table of questions
+        $("#questions-table").fadeIn("slow");
+        $("#questions-table tbody")
+          .append("<tr id=question-"+q_id+"><td>"+query+"</td><td>"+type+"</td><td>"+options+"</td></tr>")
+          .slideDown("slow");
+        // $("#question-"+q_id).append("<td><a id='delete-button' onclick='removeQuestion('"+id+"','"+q_id+"')'>&#10006;</a></td>");
       }
   });
   return false;    
@@ -134,7 +155,51 @@ function publishSurvey(id) {
     cache: false,
     type: 'PUT',
     success: function(data) {
-      window.location.replace('/admin/surveys/'+id);
+
+      // Hide publish button and question box
+      $("#publish-button").hide();
+      $(".question-box").hide();
+
+      // Show metrics button, close button and url
+      $("#metrics-button").slideDown('slow');
+      $("#close-button").slideDown('slow');
+      $("#url-instructions").slideDown('slow');
+
+      // Show success response to user
+      $("#response").html(data).fadeIn(function() {
+        setTimeout(function() {
+          $("#response").fadeOut("slow");
+        }, 2000);
+      });
+
     }
   });
 }
+
+function closeSurvey(id) {
+  $.ajax('/api/surveys/'+id+'/close', {
+    cache: false,
+    type: 'PUT',
+    success: function(data) {
+
+      // Hide close button and question box
+      $("#close-button").hide();
+      $(".question-box").hide();
+      $("#url-instructions").hide();
+      
+      // Show success response to user
+      $("#response").html(data).fadeIn(function() {
+        setTimeout(function() {
+          $("#response").fadeOut("slow");
+        }, 2000);
+      });
+
+    }
+  });
+}
+
+
+
+
+
+

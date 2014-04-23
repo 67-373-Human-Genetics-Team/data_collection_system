@@ -44,8 +44,7 @@ exports.publishSurvey = function(req,res) {
                 survey.status = "Published";
                 survey.start_date = Date.now();
                 survey.save();
-                res.send('Published survey.');
-                console.log(survey);
+                res.send('You\'ve successfully published this survey. Participants can now submit their responses.');
             }
         });
 };
@@ -63,8 +62,7 @@ exports.closeSurvey = function(req,res) {
                 survey.status = "Closed";
                 survey.end_date = Date.now();
                 survey.save();
-                res.send('Closed survey.');
-                console.log(survey);
+                res.send('You\'ve successfully closed this survey. There will be no more responses added.');
             }
         });
 };
@@ -98,7 +96,8 @@ exports.postQuestion = function(req,res) {
                 } else {
                     survey.questions.push(question);
                     survey.save();
-                    res.redirect("/admin/surveys/"+survey._id);
+                    res.send(question);
+                    // res.redirect("/admin/surveys/"+survey._id);
                     console.log(survey);
                 }
             });
@@ -120,7 +119,7 @@ exports.deleteQuestion = function(req,res) {
                     }
                 }
                 survey.save();
-                res.send('Deleted question.');
+                res.send('Deleted question successfully.');
             }
         });
 };
