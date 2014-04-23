@@ -63,11 +63,14 @@ ul {
 /* End Navigation Bar */
 
 
+
+
 /* Table Styling */
 .table-theme th {
     padding: 12px 20px;
     text-align: left;
     width: 100%;
+    border-bottom: 2px solid black;
 }
 
 .table-theme td {
@@ -75,28 +78,44 @@ ul {
     font-size: 14px;
 }
 
-.table-theme th {
-    border-bottom: 2px solid black;
-}
-
 .table-theme tbody tr:hover {
     color: #00757b;
     background-color: #f2f2f2;
 }
 
-.survey-response-column {
-    min-width: 150px;
-}
 /* End Table Styling */
 
 
+/* admin_survey.jade */
+.table-theme-questions th {
+    padding: 12px 20px;
+    text-align: left;
+    min-width: 150px;
+    border-bottom: 2px solid black;
+}
+
+.table-theme-questions td {
+    padding: 11px 20px 11px 20px;
+    font-size: 14px;
+}
+
+.table-theme-questions tbody tr:hover {
+    color: #00757b;
+    background-color: #f2f2f2;
+}
+
+
+/* admin_surveyParticipants.jade */
 #survey-responses {
     overflow: auto;
     width: 100%;
 }
 
-/* admin_surveyParticipants.jade */
-/* Horizon Scroll */
+.survey-response-column {
+    min-width: 150px;
+}
+
+/* Horizontal Scroll */
 #horizontal-click-scroll {
     padding-top: 20px;
 }
@@ -118,6 +137,10 @@ ul {
 #response-right-arrow {
     float: right !important;
 }
+
+
+
+
 
 #delete-box:hover {
     background-color: white;
