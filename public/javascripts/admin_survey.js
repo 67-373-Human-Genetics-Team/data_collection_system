@@ -95,7 +95,7 @@ function postQuestion() {
   var type = $('#question-type').val();
   var options = [];
 
-  // Options change depending on question type
+  // Add options to array
   if (type === "Number") {
     options.push($('#min').value);
     options.push($('#max').value);
@@ -144,6 +144,11 @@ function postQuestion() {
 
           // Reset question form
           $('#options').hide();
+          $('#options input').remove();
+          $('#options br').remove();
+          $('<br>').insertBefore('#add-option');
+          $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
+          $('<br>').insertBefore('#add-option');
           $('#number').hide();
           $('#company').hide();
           $('#patent').hide();
