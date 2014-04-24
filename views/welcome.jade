@@ -4,6 +4,28 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
+      $(function() {
+
+        // Check survey status and display corresponding message
+        var survey_id = window.location.pathname.split( '/' ).pop();
+        $.ajax('/api/surveys/'+survey_id, {
+          cache: false,
+          type: 'GET',
+          success: function(data) {
+            var survey = data;
+            var status = survey.status;
+            if (status === "Closed" || status === "Unpublished") {
+              $("#welcome-letter").hide();
+              $("#sorry-message").fadeIn("slow");
+            } else {
+              $("#welcome-letter").fadeIn("slow");
+              $("#sorry-message").hide();
+            }
+          }
+        });
+        
+      });
+
       function showParticipantForm () {
         var survey_id = window.location.pathname.split( '/' ).pop();
         window.location.replace('/surveys/to/'+survey_id+'/begin');
@@ -27,6 +49,18 @@ html(lang="en")
         div(id='begin')
           button(type='button' onclick='showParticipantForm()') Start
           p let's start the survey
+
+      div(id='sorry-message')
+        div Sorry, we're not taking any more responses at this time. But please reach out to us!
+        div(id='social-icons-bar')
+                a(href='http://facebook.com/PittPublicHealth' title='Facebook' target="_blank")
+                    img(src="https://www.publichealth.pitt.edu/portals/0/Main/fb_icon.png" alt="Facebook")
+                a(href='https://twitter.com/PittPubHlth' title='Twitter' target="_blank")
+                    img(src="https://www.publichealth.pitt.edu/portals/0/Main/twitter_icon.png" alt="Twitter")
+                a(href='http://www.youtube.com/pittpublichealth' title='YouTube' target="_blank")
+                    img(src="https://www.publichealth.pitt.edu/portals/0/Main/youtube_icon.png" alt="YouTube")
+                a(href='http://www.linkedin.com/groups?home=&gid=3295709&trk=anet_ug_hm' title='LinkedIn' target="_blank")
+                    img(src="https://www.publichealth.pitt.edu/portals/0/Main/linkedin_icon.png" alt="LinkedIn")
 
 
 
