@@ -86,7 +86,9 @@ exports.deleteSurvey = function(req,res) {
 // Add question to survey
 exports.postQuestion = function(req,res) {
     if (req.body.query === "" || req.body.type === "") {
-        res.send("You've forgotten the question");
+        res.send("Error no question");
+    } else if ((req.body.type === "Checkbox" || req.body.type === "Multiple Choice" || req.body.type === "Dropdown") && (req.body.options.length < 1)) {
+        res.send("Error no options");
     } else {
         var question = new Question({query: req.body.query, type: req.body.type, query_options: req.body.options.split("::")});
         Survey.findById(req.body.id, 
@@ -97,7 +99,6 @@ exports.postQuestion = function(req,res) {
                     survey.questions.push(question);
                     survey.save();
                     res.send(question);
-                    // res.redirect("/admin/surveys/"+survey._id);
                     console.log(survey);
                 }
             });

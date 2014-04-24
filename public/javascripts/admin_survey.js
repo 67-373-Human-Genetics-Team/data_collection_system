@@ -118,28 +118,46 @@ function postQuestion() {
         id: id
       },
       success: function(data) {
+        // Display error message for missing question input
+        if (data === "Error no question") {
+          $("#response").html("Please enter a question.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
 
-        var question = data;
-        var q_id = question._id;
-        var query = question.query;
-        var type = question.type;
-        var options = question.query_options.toString().replace(/,/g, ' - ');
+        // Display error message for missing options if question type requires it
+        } else if (data === "Error no options") {
+          $("#response").html("Please add options to your question.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
 
-        // Reset question form
-        $('#options').hide();
-        $('#number').hide();
-        $('#company').hide();
-        $('#patent').hide();
-        $('#publication').hide();
-        $("#query").val("");
-        $('#question-type').val("Short Text");
+        // Display new question in table
+        } else {
+          var question = data;
+          var q_id = question._id;
+          var query = question.query;
+          var type = question.type;
+          var options = question.query_options.toString().replace(/,/g, ' - ');
 
-        // Append new questions to table of questions
-        $("#questions-table").fadeIn("slow");
-        $("#questions-table tbody")
-          .append("<tr id=question-"+q_id+"><td>"+query+"</td><td>"+type+"</td><td>"+options+"</td></tr>")
-          .slideDown("slow");
-        // $("#question-"+q_id).append("<td><a id='delete-button' onclick='removeQuestion('"+id+"','"+q_id+"')'>&#10006;</a></td>");
+          // Reset question form
+          $('#options').hide();
+          $('#number').hide();
+          $('#company').hide();
+          $('#patent').hide();
+          $('#publication').hide();
+          $("#query").val("");
+          $('#question-type').val("Short Text");
+
+          // Append new questions to table of questions
+          $("#questions-table").fadeIn("slow");
+          $("#questions-table tbody")
+            .append("<tr id=question-"+q_id+"><td>"+query+"</td><td>"+type+"</td><td>"+options+"</td></tr>")
+            .slideDown("slow");
+          // $("#question-"+q_id).append("<td><a id='delete-button' onclick='removeQuestion('"+id+"','"+q_id+"')'>&#10006;</a></td>");
+        }
       }
   });
   return false;    
