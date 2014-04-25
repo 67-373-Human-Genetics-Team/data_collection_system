@@ -209,14 +209,16 @@ exports.postParticipant = function(req,res) {
     var survey_id = req.body.survey_id;
 
     if (req.body.first_name === "" || req.body.last_name === "" || req.body.email === "") {
-        res.redirect('/surveys/to/'+survey_id+'/begin');
+        res.send('Error missing input');
+        // res.redirect('/surveys/to/'+survey_id+'/begin');
     } else {
         new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
             function (err,participant) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
+                    res.send(participant);
+                    // res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
                     console.log("Participant saved:");
                     console.log(participant);
                 }

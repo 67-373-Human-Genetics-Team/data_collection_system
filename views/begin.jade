@@ -4,19 +4,52 @@ html(lang="en")
     title SurveyApp
     include includes/head
     script(type='text/javascript').
+
       $(function() {
           // Get survey id from URL pathname and update value
           var pathname = window.location.pathname.split( '/' );
           var survey_id = window.location.pathname.split('/')[ pathname.length - 2 ];
           $("#survey_id").val(survey_id);
-      });   
+          console.log(survey_id);
+
+          $("#participant-info-form").submit(postParticipant);
+      });
+
+      function postParticipant() {
+        var survey_id = $("#survey_id").val();
+        $.ajax('/api/participants/new', {
+          type: 'POST',
+          data: {
+            first_name: $("#first_name").val(),
+            last_name: $("#last_name").val(),
+            email: $("#email").val(),
+            survey_id: survey_id
+          },
+          success: function(data) {
+            if (data === "Error missing input") {
+              $("#response").html("Oops, you're missing something.").css("background-color","#f2dede").fadeIn(function() {
+                setTimeout(function() {
+                  $("#response").fadeOut("slow");
+                }, 4000);
+              });
+            } else {
+              var participant = data;
+              window.location.replace("/surveys/"+survey_id+"/u/"+participant._id);
+            }
+          }
+        });
+        return false;
+      } 
+
   body
     include includes/nav_public
     #content-area
+      div(id='response' class='hidden')
 
       div(id='participant-info-popup')
         div(id='instructions') We want to make this survey easy for you to fill out by searching for your publications and patents so you don't have to. But we're going to need your help with your full name and email address.
-        form(id='participant-info-form' action='/api/participants/new', method='post')
+        //- form(id='participant-info-form' action='/api/participants/new', method='post')
+        form(id='participant-info-form')
             label First Name
               input(id='first_name' type='text' name='first_name' placeholder='John A (middle initial optional)')
             label Last Name
