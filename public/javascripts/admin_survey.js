@@ -83,15 +83,10 @@ function postQuestion() {
   var options = [];
 
   // Add options to array
-  if (type === "Number") {
-    options.push($('#min').value);
-    options.push($('#max').value);
-  } else {
-    $('#options input').each( function(i,elem) {
+  $('#options input').each( function(i,elem) {
       options.push(elem.value);
-    });
-  }
-
+  });
+  
   // Get Survey ID
   var id = $("#survey-id").val();
 
