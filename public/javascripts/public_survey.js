@@ -199,6 +199,8 @@ function postResponse() {
               }, 4000);
             });
           } else {
+            // strip salary of all non-numeric characters
+            company[2] = company[2].replace(/\W+/g,"");
             answers.push(company);
           }
 
