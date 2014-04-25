@@ -129,43 +129,107 @@ function postResponse() {
     var answers = [];
     $(".question-area").each( function (i) {
         if ($(this).attr('class') === "Short Text question-area") {
+          if ($(this).children("input:text").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             answers.push($(this).children("input:text").val());
+          }
 
         } else if ($(this).attr('class') === "Long Text question-area") {
+          if ($(this).children("textarea").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             answers.push($(this).children("textarea").val());
+          }
 
         } else if ($(this).attr('class') === "Checkbox question-area") {
-            var checked = $(this).children("input:checkbox:checked").map(function(){ return $(this).val();}).get();
+          var checked = $(".Checkbox input:checkbox:checked").map(function(){ return $(this).val();}).get();
+          if (checked.length < 1) {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             answers.push(checked);
+          }
 
         } else if ($(this).attr('class') === "Dropdown question-area") {
+          if ($(this).children("select").children("option").filter(":selected").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             answers.push($(this).children("select").children("option").filter(":selected").val());
+          }
 
         } else if ($(this).attr('class') === "Multiple Choice question-area") {
-            answers.push($(".Multiple input:radio:checked").val());
+          if ($(".Multiple input:radio:checked").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
+             answers.push($(".Multiple input:radio:checked").val());
+          }
 
         } else if ($(this).attr('class') === "Number question-area") {
-            // what about if number has min/max?
-            answers.push($(this).children("input:text").val());
+          // what about if number has min/max?
+          answers.push($(this).children("input:text").val());
 
         } else if ($(this).attr('class') === "Company question-area") {
-            var company = $(this).children("input:text").map(function(){ return $(this).val();}).get();
+          // Company Name and Title Position are required but Salary is optional
+          // Company Name is company[0], Title Position is company[1]
+          var company = $(this).children("input:text").map(function(){ return $(this).val();}).get();
+          if (company[0] === "" || company[1] === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             answers.push(company);
+          }
 
         } else if ($(this).attr('class') === "Patent question-area") {
+          if ($("#patent-textarea").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else {
             var patent = [];
             patent.push($("#patent-dropdown option:selected").val());
             patent.push($("#patent-textarea").val());
             answers.push(patent);
+          }
 
         } else if ($(this).attr('class') === "Publication question-area") {
+          if ($("#publication-textarea").val() === "") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+                setTimeout(function() {
+                  $("#response").fadeOut("slow");
+                }, 4000);
+              });
+          } else {
             var publication = [];
             publication.push($("#publication-dropdown option:selected").val());
             publication.push($("#publication-textarea").val());
             answers.push(publication);
+          }
 
-        } else {
-            console.log(answers);
         }
     });
     $.ajax({
@@ -177,8 +241,15 @@ function postResponse() {
             participant_id: participant_id
         },
         success: function(data) {
-            console.log('response POST success');
+          if (data === "Error missing answers") {
+            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+              setTimeout(function() {
+                $("#response").fadeOut("slow");
+              }, 4000);
+            });
+          } else if (data === "Submitted") {
             updateParticipantSurveys(participant_id,survey_id);
+          }
         }
     });
     return false;    

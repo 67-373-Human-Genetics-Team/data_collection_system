@@ -132,24 +132,46 @@ exports.deleteQuestion = function(req,res) {
 /* Response API */
 // Add response to survey
 exports.postResponse = function(req,res) {
-    new Response({ survey_id: req.body.survey_id, answers: req.body.answers.split("::"), participant_id: req.body.participant_id }).save(
-        function (err,response) {
-            if (err) { 
-                res.send(err);
+    var response;
+    var answers = req.body.answers.split("::");
+    var questions;
+
+    console.log("POST Response: ");
+    console.log("There are "+answers.length+" answers");
+
+    response = new Response({
+        survey_id: req.body.survey_id,
+        answers: req.body.answers.split("::"),
+        participant_id: req.body.participant_id
+    });
+
+    Survey.findById(req.body.survey_id, function (err,survey) {
+        if (err) {
+            res.send(err);
+        } else {
+            questions = survey.questions;
+            console.log("There are "+questions.length+" questions");
+            if (answers.length != questions.length) {
+                res.send("Error missing answers");
             } else {
-                Survey.findById(req.body.survey_id, function (err,survey) {
+                response.save(function (err,response) {
                     if (err) {
                         res.send(err);
                     } else {
-                        survey.responses.push(response._id);
-                        survey.save();
-                        console.log('Added response ID %s to survey', survey._id);
+                        Survey.findById(req.body.survey_id, function (err,survey) {
+                            if (err) {
+                                res.send(err);
+                            } else {
+                                survey.responses.push(response._id);
+                                survey.save();
+                                console.log('Added response ID %s to survey', survey._id);
+                            }
+                        });
+                        res.send("Submitted");
                     }
                 });
-                res.redirect("/surveys/thankyou");
-                console.log('Response saved:');
-                console.log(response);
             }
+        }
     });
 };
 

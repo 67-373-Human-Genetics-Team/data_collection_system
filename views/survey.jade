@@ -9,6 +9,8 @@ html(lang="en")
 
         #content-area
             
+            //- div(id='response' class='hidden')
+
             h1(id='survey-title')= survey.name
                 span  Survey
 
@@ -80,7 +82,9 @@ html(lang="en")
                                 span  because
                             div
                                 textarea(id='publication-textarea' class='textarea' rows='5')
-
+                
                 input(id='survey_id' type='hidden' name='survey_id' value=survey._id)
                 input(id='participant_id' type='hidden' name='participant_id' value="")
                 input(id='submit-response' type='submit' value='Submit')
+
+            div(id='response' class='hidden')
