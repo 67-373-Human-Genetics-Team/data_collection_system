@@ -11,23 +11,13 @@ $(function() {
       $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
       $('<br>').insertBefore('#add-option');
       $('#options').hide();
-      $('#number').hide();
       $('#company').hide();
       $('#patent').hide();
       $('#publication').hide();
       $('#query').val('');
       $("#options").slideDown("slow");
-    } else if ($(this).val() === "Number") {
-      $('#options').hide();
-      $('#number').hide();
-      $('#company').hide();
-      $('#patent').hide();
-      $('#publication').hide();
-      $('#query').val('');
-      $("#number").slideDown("slow");
     } else if ($(this).val() === "Company") {
       $('#options').hide();
-      $('#number').hide();
       $('#company').hide();
       $('#patent').hide();
       $('#publication').hide();
@@ -36,7 +26,6 @@ $(function() {
       $('#query').val('Where are you working now?');
     } else if ($(this).val() === "Patent") {
       $('#options').hide();
-      $('#number').hide();
       $('#company').hide();
       $('#patent').hide();
       $('#publication').hide();
@@ -45,7 +34,6 @@ $(function() {
       $('#query').val('Are these your patents?');
     } else if ($(this).val() === "Publication") {
       $('#options').hide();
-      $('#number').hide();
       $('#company').hide();
       $('#patent').hide();
       $('#publication').hide();
@@ -54,7 +42,6 @@ $(function() {
       $('#query').val('Are these your publications?');
     } else {
       $('#options').hide();
-      $('#number').hide();
       $('#company').hide();
       $('#patent').hide();
       $('#publication').hide();
@@ -149,7 +136,6 @@ function postQuestion() {
           $('<br>').insertBefore('#add-option');
           $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
           $('<br>').insertBefore('#add-option');
-          $('#number').hide();
           $('#company').hide();
           $('#patent').hide();
           $('#publication').hide();

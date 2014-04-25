@@ -7,7 +7,6 @@ form(id='question-form')
             option(value='Checkbox') Checkbox
             option(value='Multiple Choice') Multiple Choice
             option(value='Dropdown') Dropdown
-            option(value='Number') Number
             option(value='Patent') Patent
             option(value='Publication') Publication
             option(value='Company') Company
@@ -21,13 +20,6 @@ form(id='question-form')
         input(type='textarea' name='options')
         br
         a(id='add-option' onclick='addOption()') + Add Option
-
-    //- Form for number question
-    label(id='number' class='hidden') (enter range if required)
-        br
-        input(id='min' type='textarea' name='min' placeholder='Minimum, Ex: 1')
-        span  to 
-        input(id='max' type='textarea' name='max' placeholder='Maximum')
 
     //- Form for company question
     label(id='company' class='hidden') This question type asks the participant for: company, job title and salary.

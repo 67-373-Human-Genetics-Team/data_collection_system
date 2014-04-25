@@ -242,12 +242,8 @@ exports.updateCompletedSurveys = function(req,res) {
         if (err) {
             res.send(err);
         } else {
+            
             // Remove the completed survey id from array
-            console.log('Updating Participant\'s completed surveys:');
-            console.log('The survey id: '+survey_id);
-            console.log('Available Surveys: '+participant.available_surveys);
-            console.log('Completed Surveys: '+participant.completed_surveys);
-
             for (var i=0; i<participant.available_surveys.length; i++) {
                 if (participant.available_surveys[i] === survey_id) {
                     participant.available_surveys.splice(i,1);

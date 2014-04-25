@@ -184,10 +184,6 @@ function postResponse() {
              answers.push($(".Multiple input:radio:checked").val());
           }
 
-        } else if ($(this).attr('class') === "Number question-area") {
-          // what about if number has min/max?
-          answers.push($(this).children("input:text").val());
-
         } else if ($(this).attr('class') === "Company question-area") {
           // Company Name and Title Position are required but Salary is optional
           // Company Name is company[0], Title Position is company[1]
