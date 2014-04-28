@@ -22,38 +22,38 @@ html(lang="en")
             });
         });
 
-        function removeResponse(response_id, survey_id) {
-            console.log("Response ID: "+response_id);
-            console.log("  Survey ID: "+survey_id);
-            $.ajax('/api/responses/'+response_id, {
-                type: 'DELETE',
-                data: {
-                    survey_id: survey_id
-                },
-                success: function(data) {
-                    console.log(data);
-                    var survey_id = data.survey_id;
-                    var participant_id = data.participant_id;
-                    var response_id = data._id;
-                    console.log("     Survey ID: "+survey_id);
-                    console.log("Participant ID: "+participant_id);
-                    console.log("   Response ID: "+response_id);
-                    console.log("removeResponseFromSurvey()");
-                    removeResponseFromSurvey(survey_id, response_id);
-                }
-            });
-            return false;
-        }
+        //- function removeResponse(response_id, survey_id) {
+        //-     console.log("Response ID: "+response_id);
+        //-     console.log("  Survey ID: "+survey_id);
+        //-     $.ajax('/api/responses/'+response_id, {
+        //-         type: 'DELETE',
+        //-         data: {
+        //-             survey_id: survey_id
+        //-         },
+        //-         success: function(data) {
+        //-             console.log(data);
+        //-             var survey_id = data.survey_id;
+        //-             var participant_id = data.participant_id;
+        //-             var response_id = data._id;
+        //-             console.log("     Survey ID: "+survey_id);
+        //-             console.log("Participant ID: "+participant_id);
+        //-             console.log("   Response ID: "+response_id);
+        //-             console.log("removeResponseFromSurvey()");
+        //-             removeResponseFromSurvey(survey_id, response_id);
+        //-         }
+        //-     });
+        //-     return false;
+        //- }
 
-        function removeResponseFromSurvey(survey_id,response_id) {
-            console.log("removeResponseFromSurvey()");
-            $.ajax('/api/surveys/'+survey_id+'/responses/'+response_id, {
-                type: 'DELETE',
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-        }
+        //- function removeResponseFromSurvey(survey_id,response_id) {
+        //-     console.log("removeResponseFromSurvey()");
+        //-     $.ajax('/api/surveys/'+survey_id+'/responses/'+response_id, {
+        //-         type: 'DELETE',
+        //-         success: function(data) {
+        //-             console.log(data);
+        //-         }
+        //-     });
+        //- }
 
   body
     include includes/nav
@@ -67,26 +67,29 @@ html(lang="en")
                 &#8594;
 
         div(id='survey-responses')
-            if responses[0].survey_id != null
-                table(class='table-theme')
-                    thead
-                        tr
-                            //- th
-                            th(class='survey-response-column') Participant
-                                each question in responses[0].survey_id.questions
-                                    th(class='survey-response-column')= question.query
-                    
-                    tbody
-                    each response in responses
-                        tr(id='response-'+response._id)
-                            //- td(id='delete-box')
-                                //- a(id='delete-button' onclick='removeResponse("'+response._id+'","'+response.survey_id._id+'")')
-                                //-     &#10006;
-                            td
-                                if response.participant_id != null
-                                    a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
-                                else
-                                    a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")') N/A
-                            each answer in response.answers
-                                td= answer
+            if responses.length == 0
+                h3 There are no responses yet
+            else
+                if responses[0].survey_id != null
+                    table(class='table-theme')
+                        thead
+                            tr
+                                //- th
+                                th(class='survey-response-column') Participant
+                                    each question in responses[0].survey_id.questions
+                                        th(class='survey-response-column')= question.query
+                        
+                        tbody
+                        each response in responses
+                            tr(id='response-'+response._id)
+                                //- td(id='delete-box')
+                                    //- a(id='delete-button' onclick='removeResponse("'+response._id+'","'+response.survey_id._id+'")')
+                                    //-     &#10006;
+                                td
+                                    if response.participant_id != null
+                                        a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
+                                    else
+                                        a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")') N/A
+                                each answer in response.answers
+                                    td= answer
 
