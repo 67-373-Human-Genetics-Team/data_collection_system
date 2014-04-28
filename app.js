@@ -40,25 +40,16 @@ app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
 
 // Admin Routes ===========================================
 // Survey Routes
+app.get('/', auth, controllers.admin.listSurveys);
 app.get('/admin/surveys', auth, controllers.admin.listSurveys);
 app.get('/admin/surveys/new', auth, controllers.admin.newSurvey);
-app.get('/admin/surveys/:id/metrics', auth, controllers.admin.listSurveyMetrics);
-app.get('/admin/surveys/:id/responses', auth, controllers.admin.listSurveyParticipants);
+app.get('/admin/surveys/:id/responses', auth, controllers.admin.listSurveyResponses);
 app.get('/admin/surveys/:id/responses/:response_id', auth, controllers.admin.showSurveyResponse);
 app.get('/admin/surveys/:id', auth, controllers.admin.showSurvey);
 
 // Participant Routes
 app.get('/admin/participants', auth, controllers.admin.listParticipants);
 app.get('/admin/participants/:id', auth, controllers.admin.showParticipant);
-
-// Response Routes
-// app.get('/admin/responses', auth, controllers.admin.listResponses);
-// app.get('/admin/responses/:id', auth, controllers.admin.showResponse);
-
-// Home, Login, Logout Routes
-// app.get('/', controllers.admin.home);
-// app.get('/admin/login', controllers.admin.login);
-// app.get('/admin/logout', controllers.admin.logout);
 
 
 // API Routes =============================================

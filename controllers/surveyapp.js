@@ -1,14 +1,5 @@
 var Survey = require('../models/survey');
 
-exports.listSurveys = function(req,res) {
-    Survey.find(function(err,surveys) {
-        if (err) {
-            res.send("You've encountered an error.");
-        } else {
-            res.render('listSurveys', {header: 'Surveys', surveys: surveys});
-        }
-    });
-};
 
 exports.getSurvey = function(req,res){
     Survey.findById(req.params.id, function(err,survey) {

@@ -5,21 +5,9 @@ var Participant = require('../models/participant');
 var dateFormat = require('dateformat');
 
 
-// exports.home = function(req,res) {
-// 	res.render('home');
-// };
-
-// exports.login = function(req,res) {
-//     res.render('login');
-// };
-
-// exports.logout = function(req,res) {
-//     res.render('logout', { name: 'Logout' });
-// };
-
 /* Survey Controller */
 exports.newSurvey = function(req,res) {
-	res.render('survey_form', { header: 'New Survey' });
+	res.render('admin_surveyForm', { header: 'New Survey' });
 };
 
 exports.listSurveys = function(req,res) {
@@ -72,22 +60,7 @@ exports.showParticipant = function(req,res) {
 		});
 };
 
-exports.listSurveyMetrics = function(req,res) {
-	Survey
-		.findById(req.params.id)
-		.populate('responses')
-		.exec(function (err, survey) {
-			if (err) {
-				res.send(err);
-			} else {
-				res.render('admin_surveyMetrics', { survey: survey });
-				console.log('Listing Survey Responses:');
-				console.log(survey.responses);
-			}
-		});
-};
-
-exports.listSurveyParticipants = function(req,res) {
+exports.listSurveyResponses = function(req,res) {
 	Response
 		.find({ survey_id: req.params.id })
 		.populate('participant_id')
@@ -96,7 +69,7 @@ exports.listSurveyParticipants = function(req,res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.render('admin_surveyParticipants', { responses: responses });
+				res.render('admin_surveyResponses', { responses: responses });
 			}
 		});
 };
@@ -122,41 +95,4 @@ exports.showSurveyResponse = function(req,res) {
 				res.render('admin_surveyResponse', { response: response, questions: response.survey_id.questions, answers: response.answers, questions_answers: questions_answers });
 			}
 		});
-}
-
-exports.listResponses = function(req,res) {
-	Response
-		.find()
-		.populate('survey_id')
-		.populate('participant_id')
-		.exec(function (err, responses) {
-			if (err) {
-				res.send(err);
-			} else {
-				res.render('admin_listResponses', { header: 'Responses', responses: responses, dateFormat: dateFormat });
-			}
-		});
-};
-
-exports.showResponse = function(req,res) {
-    Response
-        .findById(req.params.id)
-        .populate('survey_id')
-        .populate('participant_id')
-        .exec(function (err, response) {
-        	if (err) {
-        		res.send(err);
-        	} else {
-	          	res.render('admin_response', { response: response, dateFormat: dateFormat });
-	            
-	            console.log('The response belongs to %s', response.survey_id.name);
-	            // prints "The response belongs to 2014 Graduation"
-
-	            console.log('The survey status is %s', response.survey_id.status);
-	            // prints "The survey status is Published'
-
-	            console.log('The participant\'s email is %s', response.participant_id.email);
-	            // prints "The participant's email is gw@example.com"
-        	}
-    	});
 };
