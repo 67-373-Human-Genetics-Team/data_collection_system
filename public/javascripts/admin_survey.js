@@ -1,7 +1,12 @@
+// public/javascripts/admin_survey.js
+
+
+// Document Ready
 $(function() {
 
   $("#question-form").submit(postQuestion);
 
+  // Form changes depending on question type in dropdown
   $("#question-type").change(function() {
     if (($(this).val() === "Checkbox") || ($(this).val() === "Multiple Choice") || ($(this).val() === "Dropdown")) {
       // Remove option boxes previously and add one
@@ -51,20 +56,23 @@ $(function() {
 
 });
 
+// Redirects to responses by survey ID
 function getSurveyResponses(id) {
-  window.location.replace('/admin/surveys/'+id+'/responses');
+  window.location.href('/admin/surveys/'+id+'/responses');
 }
 
+// Remove survey by survey ID
 function removeSurvey(id) {
   $.ajax('/api/surveys/'+id, {
     cache: false,
     type: 'DELETE',
     success: function(data) {
-      window.location.replace("/admin/surveys");
+      window.location.href("/admin/surveys");
     }
   });
 }
 
+// Remove question by survey ID and question ID
 function removeQuestion(survey_id,question_id) {
   $.ajax('/api/surveys/'+survey_id+'/questions/'+question_id, {
     cache: false,
@@ -75,6 +83,7 @@ function removeQuestion(survey_id,question_id) {
   });
 }
 
+// Adds question to survey
 function postQuestion() {
 
   // Retrieve values from question form
@@ -149,11 +158,16 @@ function postQuestion() {
   return false;    
 }
 
+// Add additional option to question types that require multiple options
+// -- Dropdown
+// -- Multiple Choice
+// -- Checkbox
 function addOption() {
   $('<input type="textarea" name="options"</input>').insertBefore('#add-option');
   $('<br>').insertBefore('#add-option');
 }
 
+// Publishes survey - available for participants to submit responses
 function publishSurvey(id) {
   $.ajax('/api/surveys/'+id+'/publish', {
     cache: false,
@@ -180,6 +194,7 @@ function publishSurvey(id) {
   });
 }
 
+// Closes survey - unavailable for participants to submit responses
 function closeSurvey(id) {
   $.ajax('/api/surveys/'+id+'/close', {
     cache: false,

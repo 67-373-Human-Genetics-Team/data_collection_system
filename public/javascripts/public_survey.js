@@ -1,16 +1,21 @@
+// public/javascripts/public_survey.js
+
+
+// Document Ready
 $(function() {
 
-    $("#survey-title").hide();
-    $("#participant-survey-form").hide();
+  // Hide elements
+  $("#survey-title").hide();
+  $("#participant-survey-form").hide();
 
-    // Get participant id from URL pathname and update value
-    var participant_id = window.location.pathname.split( '/' ).pop();
-    $("#participant_id").val(participant_id);
+  // Get participant id from URL pathname and update value
+  var participant_id = window.location.pathname.split( '/' ).pop();
+  $("#participant_id").val(participant_id);
 
-    // Get participant firstname lastname and call publications api
-    getParticipant(participant_id);
+  // Get participant firstname lastname and call publications api
+  getParticipant(participant_id);
 
-    $("#participant-survey-form").submit(postResponse);
+  $("#participant-survey-form").submit(postResponse);
     
 });
 
@@ -127,6 +132,8 @@ function postResponse() {
     var survey_id = $('#survey_id').val();
     var participant_id = $('#participant_id').val();
     var answers = [];
+
+    // Check if form inputs are complete
     $(".question-area").each( function (i) {
         if ($(this).attr('class') === "Short Text question-area") {
           if ($(this).children("input:text").val() === "") {
@@ -253,7 +260,7 @@ function postResponse() {
     return false;    
 };
 
-
+// Update participant's completed surveys
 function updateParticipantSurveys(participant_id, survey_id) {
     $.ajax({
         url: '/api/participants/'+participant_id,
@@ -263,7 +270,7 @@ function updateParticipantSurveys(participant_id, survey_id) {
         },
         success: function(data) {
             console.log('participant surveys updated');
-            window.location.replace("/surveys/thankyou");
+            window.location.href("/surveys/thankyou");
         }
     });
     return false;
