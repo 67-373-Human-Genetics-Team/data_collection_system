@@ -1,3 +1,7 @@
+// app.js
+
+
+// Set up =================================================
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
@@ -7,49 +11,57 @@ var controllers = {
 	api : require('./controllers/api')
 };
 
+
+// Configuration ==========================================
 mongoose.connect('mongodb://localhost/surveyapp');
  
 app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.static(__dirname + '/public'));
+
+    // Set up express application
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(app.router);
+    app.set('views', __dirname + '/views');
+    app.set('view engine', 'jade');
+    app.use(express.static(__dirname + '/public'));
 });
 
-// Routes
-// ========================================================
-app.get('/', controllers.surveyapp.home);
-app.get('/admin/login', controllers.admin.login);
-app.get('/admin/logout', controllers.admin.logout);
 
-// Participant creation page
+// Authenticator
+auth = express.basicAuth('bob', 'password');
+
+
+// Public Routes ==========================================
 app.get('/surveys/to/:id', controllers.surveyapp.welcome);
 app.get('/surveys/to/:id/begin', controllers.surveyapp.begin);
 app.get('/surveys/:id/u/:participant_id', controllers.surveyapp.getSurvey);
 app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
-app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 
-/* Admin */
+
+// Admin Routes ===========================================
 // Survey Routes
-app.get('/admin/surveys', controllers.admin.listSurveys);
-app.get('/admin/surveys/new', controllers.admin.newSurvey);
-app.get('/admin/surveys/:id/metrics', controllers.admin.listSurveyMetrics);
-app.get('/admin/surveys/:id/responses', controllers.admin.listSurveyParticipants);
-app.get('/admin/surveys/:id/responses/:response_id', controllers.admin.showSurveyResponse);
-app.get('/admin/surveys/:id', controllers.admin.showSurvey);
-
-// Response Routes
-app.get('/admin/responses', controllers.admin.listResponses);
-app.get('/admin/responses/:id', controllers.admin.showResponse);
+app.get('/admin/surveys', auth, controllers.admin.listSurveys);
+app.get('/admin/surveys/new', auth, controllers.admin.newSurvey);
+app.get('/admin/surveys/:id/metrics', auth, controllers.admin.listSurveyMetrics);
+app.get('/admin/surveys/:id/responses', auth, controllers.admin.listSurveyParticipants);
+app.get('/admin/surveys/:id/responses/:response_id', auth, controllers.admin.showSurveyResponse);
+app.get('/admin/surveys/:id', auth, controllers.admin.showSurvey);
 
 // Participant Routes
-app.get('/admin/participants', controllers.admin.listParticipants);
-app.get('/admin/participants/:id', controllers.admin.showParticipant);
+app.get('/admin/participants', auth, controllers.admin.listParticipants);
+app.get('/admin/participants/:id', auth, controllers.admin.showParticipant);
+
+// Response Routes
+// app.get('/admin/responses', auth, controllers.admin.listResponses);
+// app.get('/admin/responses/:id', auth, controllers.admin.showResponse);
+
+// Home, Login, Logout Routes
+// app.get('/', controllers.admin.home);
+// app.get('/admin/login', controllers.admin.login);
+// app.get('/admin/logout', controllers.admin.logout);
 
 
-/* API */
+// API Routes =============================================
 // API Survey Routes
 app.post('/api/surveys/new', controllers.api.postSurvey);
 app.post('/api/questions/new', controllers.api.postQuestion);
@@ -71,6 +83,8 @@ app.put('/api/participants/:id', controllers.api.updateCompletedSurveys);
 app.get('/api/participants/:id', controllers.api.getParticipant);
 app.delete('/api/participants/:id', controllers.api.deleteParticipant);
 
+
+// Launch =================================================
 app.listen(3000);
 console.log("Express server listening on port 3000");
 

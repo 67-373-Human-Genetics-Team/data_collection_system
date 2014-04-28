@@ -5,15 +5,17 @@ var Participant = require('../models/participant');
 var dateFormat = require('dateformat');
 
 
-/* Authentication */
-exports.login = function(req,res) {
-    res.render('login');
-}
+// exports.home = function(req,res) {
+// 	res.render('home');
+// };
 
-exports.logout = function(req,res) {
-    res.render('logout', {name: 'Logout'});
-}
+// exports.login = function(req,res) {
+//     res.render('login');
+// };
 
+// exports.logout = function(req,res) {
+//     res.render('logout', { name: 'Logout' });
+// };
 
 /* Survey Controller */
 exports.newSurvey = function(req,res) {

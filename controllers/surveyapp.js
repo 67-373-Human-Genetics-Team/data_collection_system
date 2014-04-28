@@ -1,9 +1,5 @@
 var Survey = require('../models/survey');
 
-exports.home = function(req,res) {
-	res.render('home');
-};
-
 exports.listSurveys = function(req,res) {
     Survey.find(function(err,surveys) {
         if (err) {
