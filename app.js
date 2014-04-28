@@ -58,6 +58,7 @@ app.put('/api/surveys/:id/publish', controllers.api.publishSurvey);
 app.put('/api/surveys/:id/close', controllers.api.closeSurvey);
 app.get('/api/surveys/:id', controllers.api.getSurvey);
 app.delete('/api/surveys/:id', controllers.api.deleteSurvey);
+app.delete('/api/surveys/:survey_id/responses/:response_id', controllers.api.deleteResponseFromSurvey);
 app.delete('/api/surveys/:survey_id/questions/:question_id', controllers.api.deleteQuestion);
 
 // API Response Routes

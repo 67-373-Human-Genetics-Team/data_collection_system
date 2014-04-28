@@ -188,16 +188,30 @@ exports.getResponse = function(req,res) {
 
 // Delete response
 // - remove response id from survey responses list
+// - remove participant
 exports.deleteResponse = function(req,res) {
-    Response.findByIdAndRemove(req.params.id, function (err) {
+    console.log("Delete Response: ");
+    console.log(req.body);
+    Response.findById(req.params.id, function (err,response) {
         if (err) {
             res.send(err);
         } else {
-            res.send('Deleted response.');
+            res.send(response);
+            // res.send('Deleted response.');
         }
     });
 };
 
+exports.deleteResponseFromSurvey = function(req,res) {
+    console.log("Delete Response from Survey: ");
+    Survey.findById(req.params.survey_id, function (err,survey) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(survey);
+        }
+    });
+};
 
 
 
@@ -210,7 +224,6 @@ exports.postParticipant = function(req,res) {
 
     if (req.body.first_name === "" || req.body.last_name === "" || req.body.email === "") {
         res.send('Error missing input');
-        // res.redirect('/surveys/to/'+survey_id+'/begin');
     } else {
         new Participant({ first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, available_surveys: req.body.survey_id }).save(
             function (err,participant) {
@@ -218,7 +231,6 @@ exports.postParticipant = function(req,res) {
                     res.send(err);
                 } else {
                     res.send(participant);
-                    // res.redirect('/surveys/'+survey_id+'/u/'+participant._id);
                     console.log("Participant saved:");
                     console.log(participant);
                 }

@@ -95,7 +95,6 @@ exports.listSurveyParticipants = function(req,res) {
 				res.send(err);
 			} else {
 				res.render('admin_surveyParticipants', { responses: responses });
-				console.log(responses);
 			}
 		});
 };
