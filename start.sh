@@ -3,7 +3,10 @@
 # This starts the application with logging to mongo.log and node.log
 
 # Handles hangup, ctrl+c, terminate, and ctrl+\
-trap 'mongo --eval "use admin; db.shutdownServer();"' 1 2 3 15
+trap 'mongo <<EOF
+use admin
+db.shutdownServer()
+EOF' 1 2 3 15
 
 # Start database server
 mkdir -p db
