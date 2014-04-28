@@ -58,7 +58,7 @@ $(function() {
 
 // Redirects to responses by survey ID
 function getSurveyResponses(id) {
-  window.location.href('/admin/surveys/'+id+'/responses');
+  window.location.replace('/admin/surveys/'+id+'/responses');
 }
 
 // Remove survey by survey ID
@@ -67,7 +67,7 @@ function removeSurvey(id) {
     cache: false,
     type: 'DELETE',
     success: function(data) {
-      window.location.href("/admin/surveys");
+      window.location.replace("/admin/surveys");
     }
   });
 }

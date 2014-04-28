@@ -270,7 +270,7 @@ function updateParticipantSurveys(participant_id, survey_id) {
         },
         success: function(data) {
             console.log('participant surveys updated');
-            window.location.href("/surveys/thankyou");
+            window.location.replace("/surveys/thankyou");
         }
     });
     return false;

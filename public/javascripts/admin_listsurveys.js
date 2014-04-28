@@ -23,7 +23,40 @@ $(function() {
 
 });
 
+// Remove survey by survey ID
+function removeSurvey(id) {
+  $.ajax('/api/surveys/'+id, {
+    cache: false,
+    type: 'DELETE',
+    success: function(data) {
+      $('#survey-'+id).remove();
+    }
+  });
+}
+
 // Redirects to  survey by survey ID
 function getSurvey(id) {
-  window.location.href("/admin/surveys/"+id);
+  window.location.replace("/admin/surveys/"+id);
+}
+
+// Publishes survey - available for participants to submit responses
+function publishSurvey(id) {
+  $.ajax('/api/surveys/'+id+'/publish', {
+    cache: false,
+    type: 'PUT',
+    success: function(data) {
+      window.location.replace('/admin/surveys');
+    }
+  });
+}
+
+// Closes survey - unavailable for participants to submit responses
+function closeSurvey(id) {
+  $.ajax('/api/surveys/'+id+'/close', {
+    cache: false,
+    type: 'PUT',
+    success: function(data) {
+      window.location.replace('/admin/surveys');
+    }
+  });
 }
