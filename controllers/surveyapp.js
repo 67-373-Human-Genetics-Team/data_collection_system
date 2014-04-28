@@ -1,6 +1,15 @@
+// surveyapp.js
+// Public functionality for participants
+
+
+
+// Models =================================================
 var Survey = require('../models/survey');
 
 
+
+// Controller =============================================
+// Get survey by survey ID
 exports.getSurvey = function(req,res){
     Survey.findById(req.params.id, function(err,survey) {
         if (err) {
@@ -12,6 +21,7 @@ exports.getSurvey = function(req,res){
     });
 };
 
+// Display welcome screen
 exports.welcome = function(req,res) {
     Survey.findById(req.params.id, function(err,survey) {
         if (err) {
@@ -22,6 +32,7 @@ exports.welcome = function(req,res) {
     });
 }
 
+// Display begin screen for participant form
 exports.begin = function(req,res) {
     Survey.findById(req.params.id, function(err,survey) {
         if (err) {
@@ -32,6 +43,7 @@ exports.begin = function(req,res) {
     });
 }
 
+// Display thank you page after survey completed
 exports.thankyou = function(req,res) {
     res.render('thankyou');
 }

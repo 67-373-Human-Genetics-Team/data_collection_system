@@ -1,9 +1,17 @@
+// api.js
+// API controller for models' CRUD functionality
+
+
+
+// Models =================================================
 var Survey = require('../models/survey');
 var Question = require('../models/question');
 var Response = require('../models/response');
 var Participant = require('../models/participant');
 
-/* Survey API */
+
+
+// Survey API =============================================
 // Retrieve survey by ID
 exports.getSurvey = function(req,res) {
     Survey.findById(req.params.id, function(err,survey) {
@@ -34,7 +42,7 @@ exports.postSurvey = function(req,res) {
     }
 };
 
-// Publish survey
+// Publish survey makes survey available to public
 exports.publishSurvey = function(req,res) {
     Survey.findById(req.params.id, 
         function (err,survey){
@@ -49,10 +57,7 @@ exports.publishSurvey = function(req,res) {
         });
 };
 
-// Unpublish survey
-
-
-// Close survey
+// Close survey makes survey unavailable
 exports.closeSurvey = function(req,res) {
     Survey.findById(req.params.id,
         function (err,survey) {
@@ -80,9 +85,7 @@ exports.deleteSurvey = function(req,res) {
 
 
 
-
-
-/* Question API */
+// Question API ===========================================
 // Add question to survey
 exports.postQuestion = function(req,res) {
     if (req.body.query === "" || req.body.type === "") {
@@ -127,9 +130,7 @@ exports.deleteQuestion = function(req,res) {
 
 
 
-
-
-/* Response API */
+// Response API ===========================================
 // Add response to survey
 exports.postResponse = function(req,res) {
     var response;
@@ -187,8 +188,6 @@ exports.getResponse = function(req,res) {
 };
 
 // Delete response
-// - remove response id from survey responses list
-// - remove participant
 exports.deleteResponse = function(req,res) {
     console.log("Delete Response: ");
     console.log(req.body);
@@ -202,6 +201,7 @@ exports.deleteResponse = function(req,res) {
     });
 };
 
+// Delete response from survey by survey ID
 exports.deleteResponseFromSurvey = function(req,res) {
     console.log("Delete Response from Survey: ");
     Survey.findById(req.params.survey_id, function (err,survey) {
@@ -215,8 +215,7 @@ exports.deleteResponseFromSurvey = function(req,res) {
 
 
 
-
-/* Participant API */
+// Participant API ========================================
 // Create new participant
 exports.postParticipant = function(req,res) {
 
