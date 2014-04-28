@@ -1,6 +1,6 @@
-# Survey Application for UPitt Human Genetics
+# Survey Application
 
-Collects survey responses from alumni.
+Provides the Human Genetics department the ability to collect survey responses from alumni and view them.
 
 ## How to Use
 
