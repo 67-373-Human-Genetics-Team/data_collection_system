@@ -23,11 +23,11 @@ html(lang="en")
             if (survey.status === "Unpublished")
                 a(class='survey-buttons' id='publish-button' onclick='publishSurvey("'+survey._id+'")') Publish
             if (survey.status === "Published" || survey.status === "Closed")
-              a(class='survey-buttons' id='metrics-button' onclick='getSurveyMetrics("'+survey._id+'")') Metrics
+              a(class='survey-buttons' id='metrics-button' onclick='getSurveyResponses("'+survey._id+'")') Responses
             if (survey.status === "Published")
               a(class='survey-buttons' id='close-button' onclick='closeSurvey("'+survey._id+'")') Close
             else
-              a(class='survey-buttons hidden' id='metrics-button' onclick='getSurveyMetrics("'+survey._id+'")') Metrics
+              a(class='survey-buttons hidden' id='metrics-button' onclick='getSurveyResponses("'+survey._id+'")') Responses
               a(class='survey-buttons hidden' id='close-button' onclick='closeSurvey("'+survey._id+'")') Close
         
         //- Published survey's URL

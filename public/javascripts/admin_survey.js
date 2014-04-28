@@ -51,7 +51,7 @@ $(function() {
 
 });
 
-function getSurveyMetrics(id) {
+function getSurveyResponses(id) {
   window.location.replace('/admin/surveys/'+id+'/responses');
 }
 
