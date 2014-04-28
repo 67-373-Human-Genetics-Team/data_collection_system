@@ -19,10 +19,10 @@ app.configure(function(){
 });
 
 // Routes
+// ========================================================
 app.get('/', controllers.surveyapp.home);
 app.get('/admin/login', controllers.admin.login);
 app.get('/admin/logout', controllers.admin.logout);
-app.get('/surveys', controllers.surveyapp.listSurveys);
 
 // Participant creation page
 app.get('/surveys/to/:id', controllers.surveyapp.welcome);
@@ -31,7 +31,7 @@ app.get('/surveys/:id/u/:participant_id', controllers.surveyapp.getSurvey);
 app.get('/surveys/thankyou', controllers.surveyapp.thankyou);
 app.get('/surveys/:id', controllers.surveyapp.getSurvey);
 
-/* Admin Controller*/
+/* Admin */
 // Survey Routes
 app.get('/admin/surveys', controllers.admin.listSurveys);
 app.get('/admin/surveys/new', controllers.admin.newSurvey);
@@ -49,8 +49,7 @@ app.get('/admin/participants', controllers.admin.listParticipants);
 app.get('/admin/participants/:id', controllers.admin.showParticipant);
 
 
-
-/* API Controller */
+/* API */
 // API Survey Routes
 app.post('/api/surveys/new', controllers.api.postSurvey);
 app.post('/api/questions/new', controllers.api.postQuestion);
