@@ -1,4 +1,4 @@
-// admin.js
+// controllers/admin.js
 // Admin controller for surveys, participants and responses
 
 

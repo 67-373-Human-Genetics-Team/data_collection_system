@@ -1,4 +1,4 @@
-// api.js
+// controllers/api.js
 // API controller for models' CRUD functionality
 
 

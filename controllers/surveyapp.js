@@ -1,4 +1,4 @@
-// surveyapp.js
+// controller/surveyapp.js
 // Public functionality for participants
 
 
