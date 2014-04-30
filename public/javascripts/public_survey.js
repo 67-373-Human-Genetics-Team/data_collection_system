@@ -135,127 +135,139 @@ function postResponse() {
 
     // Check if form inputs are complete
     $(".question-area").each( function (i) {
-        if ($(this).attr('class') === "Short Text question-area") {
-          if ($(this).children("input:text").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            answers.push($(this).children("input:text").val());
-          }
+      if ($(this).attr('class') === "Short Text question-area") {
+        if ($(this).children("input:text").val() === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          answers.push($(this).children("input:text").val());
+        }
 
-        } else if ($(this).attr('class') === "Long Text question-area") {
-          if ($(this).children("textarea").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            answers.push($(this).children("textarea").val());
-          }
+      } else if ($(this).attr('class') === "Long Text question-area") {
+        if ($(this).children("textarea").val() === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          answers.push($(this).children("textarea").val());
+        }
 
-        } else if ($(this).attr('class') === "Checkbox question-area") {
-          var checked = $(".Checkbox input:checkbox:checked").map(function(){ return $(this).val();}).get();
-          if (checked.length < 1) {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            answers.push(checked);
-          }
+      } else if ($(this).attr('class') === "Checkbox question-area") {
+        var checked = $(this).children("div").children("input").filter(":checked").map(function(){ return $(this).val();}).get();
+        if (checked.length == 0) {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          answers.push(checked);
+        }
 
-        } else if ($(this).attr('class') === "Dropdown question-area") {
-          if ($(this).children("select").children("option").filter(":selected").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            answers.push($(this).children("select").children("option").filter(":selected").val());
-          }
+      } else if ($(this).attr('class') === "Dropdown question-area") {
+        if ($(this).children("select").children("option").filter(":selected").val() === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          answers.push($(this).children("select").children("option").filter(":selected").val());
+        }
 
-        } else if ($(this).attr('class') === "Multiple Choice question-area") {
-          if ($(".Multiple input:radio:checked").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-             answers.push($(".Multiple input:radio:checked").val());
-          }
+      } else if ($(this).attr('class') === "Multiple Choice question-area") {
+        if ($(this).children("div").children("input").filter(":checked").length == 0) {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          answers.push($(this).children("div").children("input").filter(":checked").val());
+        }
 
-        } else if ($(this).attr('class') === "Company question-area") {
-          // Company Name and Title Position are required but Salary is optional
-          // Company Name is company[0], Title Position is company[1]
+      } else if ($(this).attr('class') === "Company question-area") {
+        // Company Name and Title Position are required but Salary is optional
+        // Company Name is company[0], Title Position is company[1]
+        var company = $(this).children("input:text").map(function(){ return $(this).val();}).get();
+        if (company[0] === "" || company[1] === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
           var company = $(this).children("input:text").map(function(){ return $(this).val();}).get();
-          if (company[0] === "" || company[1] === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            // strip salary of all non-numeric characters
-            company[2] = company[2].replace(/\W+/g,"");
-            answers.push(company);
-          }
-
-        } else if ($(this).attr('class') === "Patent question-area") {
-          if ($("#patent-textarea").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else {
-            var patent = [];
-            patent.push($("#patent-dropdown option:selected").val());
-            patent.push($("#patent-textarea").val());
-            answers.push(patent);
-          }
-
-        } else if ($(this).attr('class') === "Publication question-area") {
-          if ($("#publication-textarea").val() === "") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-                setTimeout(function() {
-                  $("#response").fadeOut("slow");
-                }, 4000);
-              });
-          } else {
-            var publication = [];
-            publication.push($("#publication-dropdown option:selected").val());
-            publication.push($("#publication-textarea").val());
-            answers.push(publication);
-          }
-
+          company[2] = company[2].replace(/\W+/g,""); // strip salary of all non-numeric characters
+          answers.push(company);
         }
+
+      } else if ($(this).attr('class') === "Patent question-area") {
+        if ($(this).find("textarea").val() === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          var patent = [];
+          patent.push($("#patent-dropdown option:selected").val());
+          patent.push($("#patent-textarea").val());
+          answers.push(patent);
+        }
+
+      } else if ($(this).attr('class') === "Publication question-area") {
+        if ($(this).find("textarea").val() === "") {
+          $(this).find("h3").css("background-color","#f2dede");
+          $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
+            setTimeout(function() {
+              $("#response").fadeOut("slow");
+            }, 4000);
+          });
+          return false;
+        } else {
+          var publication = [];
+          publication.push($("#publication-dropdown option:selected").val());
+          publication.push($("#publication-textarea").val());
+          answers.push(publication);
+        }
+      }
     });
+    // console.log(answers.join(" "));
     $.ajax({
-        url: '/api/responses/new', 
-        type: 'POST',
-        data: {
-            survey_id: survey_id,
-            answers: answers.join("::"),
-            participant_id: participant_id
-        },
-        success: function(data) {
-          if (data === "Error missing answers") {
-            $("#response").html("Please answer the questions you've missed.").css("background-color","#f2dede").fadeIn(function() {
-              setTimeout(function() {
-                $("#response").fadeOut("slow");
-              }, 4000);
-            });
-          } else if (data === "Submitted") {
-            updateParticipantSurveys(participant_id,survey_id);
-          }
+      url: '/api/responses/new', 
+      type: 'POST',
+      data: {
+          survey_id: survey_id,
+          answers: answers.join("::"),
+          participant_id: participant_id
+      },
+      success: function(data) {
+        if (data === "Submitted") {
+          updateParticipantSurveys(participant_id,survey_id);
+        } else {
+          console.log(data);
         }
+      }
     });
     return false;    
 };

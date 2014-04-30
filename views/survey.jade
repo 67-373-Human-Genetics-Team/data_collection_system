@@ -51,7 +51,7 @@ html(lang="en")
                         if (question.type === "Multiple Choice")
                             each opt in question.query_options
                                 div(class='radio')
-                                    input(type='radio' name='opt' value=opt)
+                                    input(type='radio' name=question._id value=opt)
                                     span= opt
 
                         //- Special Question Types

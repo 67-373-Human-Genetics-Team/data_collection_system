@@ -153,7 +153,7 @@ exports.postResponse = function(req,res) {
             questions = survey.questions;
             console.log("There are "+questions.length+" questions");
             if (answers.length != questions.length) {
-                res.send("Error missing answers");
+                res.send("Error missing "+(questions.length-answers.length)+" answers");
             } else {
                 response.save(function (err,response) {
                     if (err) {
