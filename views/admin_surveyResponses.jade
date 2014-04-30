@@ -76,6 +76,7 @@ html(lang="en")
                             tr
                                 //- th
                                 th(class='survey-response-column') Participant
+                                th(class='survey-response-column') Email
                                     each question in responses[0].survey_id.questions
                                         th(class='survey-response-column')= question.query
                         
@@ -90,6 +91,11 @@ html(lang="en")
                                         a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")')= response.participant_id.first_name+' '+response.participant_id.last_name
                                     else
                                         a(onclick='getResponse("'+response._id+'","'+response.survey_id._id+'")') N/A
+                                td
+                                    if response.participant_id != null
+                                        a(href="mailto:"+response.participant_id.email+"?Subject=Hello%20from%20UPitt%20Human%20Genetics" target="_top")= response.participant_id.email
+                                    else
+                                        "N/A"
                                 each answer in response.answers
                                     td= answer
 
