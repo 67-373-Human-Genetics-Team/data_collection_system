@@ -40,7 +40,8 @@ function getPublications(name) {
 
     var limit = 10;
     pubmedSearch(name, limit, function(err, publications) {
-
+      if(err) { console.log(err.toString()); return;}
+      
       $("#publications-box").fadeIn('slow');
       $("#patents-box").fadeIn('slow');
 
