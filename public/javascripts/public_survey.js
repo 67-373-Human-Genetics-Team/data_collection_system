@@ -19,52 +19,6 @@ $(function() {
     
 });
 
-// Demo publication data, will remove after server setup
-var publications = [
-    {
-      "title": "The implications of ENCODE for diagnostics.",
-      "journal": "Some Journal",
-      "pub-date": "mm/dd/yyyy",
-      "authors": [
-        {"name": "Firstname Lastname1",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname2",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname3",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname4",
-         "organization": "division name, organization name, address"
-        },
-      ],
-      "data-source": "pmc",
-      "id": "123456789"
-    },
-    {
-      "title": "Why life science needs its own Silicon Valley.",
-      "journal": "Harvard Business Review",
-      "pub-date": "mm/dd/yyyy",
-      "authors": [
-        {"name": "Firstname Lastname1",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname2",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname3",
-         "organization": "division name, organization name, address"
-        },
-        {"name": "Firstname Lastname4",
-         "organization": "division name, organization name, address"
-        },
-      ],
-      "data-source": "pmc",
-      "id": "123456789"
-    },
-]
-
 // Gets participant's name and calls getPublications(name)
 function getParticipant(id) {
     $.ajax('/api/participants/'+id, {
@@ -82,29 +36,23 @@ function getParticipant(id) {
 
 // Gets publications from name and displays list
 function getPublications(name) {
-    console.log('Function getPublications: '+name);
+    // console.log('Function getPublications: '+name);
 
-    $("#publications-box").fadeIn('slow');
-    $("#patents-box").fadeIn('slow');
+    var limit = 10;
+    pubmedSearch(name, limit, function(err, publications) {
 
-    $('#publications-box').append("<form id='publications-form'></form>");
+      $("#publications-box").fadeIn('slow');
+      $("#patents-box").fadeIn('slow');
 
-    for (var i=0; i<publications.length; i++) {
-        $('#publications-form').append("<div><input class='publication' type='checkbox' onclick='toggle();' value='"+publications[i].title+"'>"+publications[i].title+" ("+publications[i]['pub-date']+")"+"</input></div>")
-    }
+      $('#publications-box').append("<form id='publications-form'></form>");
 
-    $('#publications-form').append("<button type='button' onclick='populatePublicationDropdown();'>Confirm</button>");
-   // $.ajax('/publications', {
-   //      cache: false,
-   //      type: 'POST',
-   //      data: {
-   //          name: name
-   //      },
-   //      success: function(data) {
-   //          var publications = data;
-   //          // update divs with publication titles
-   //      }
-   //  }); 
+      for (var i=0; i<publications.length; i++) {
+          $('#publications-form').append("<div><input class='publication' type='checkbox' onclick='toggle();' value='"+publications[i].title+"'>"+publications[i].title+" ("+publications[i]['pub-date']+")"+"</input></div>")
+      }
+
+      $('#publications-form').append("<button type='button' onclick='populatePublicationDropdown();'>Confirm</button>");
+
+    });
 };
 
 // Remove this eventually. Using it to see what is checked.
@@ -288,7 +236,7 @@ function updateParticipantSurveys(participant_id, survey_id) {
     return false;
 };
 
-
+"<eSearchResult><Count>110</Count><RetMax>110</RetMax><RetStart>0</RetStart><IdList> <Id>23138302</Id> <Id>22852449</Id> <Id>22830016</Id> <Id>22827596</Id> <Id>22406228</Id> <Id>21379579</Id> <Id>21255762</Id> <Id>21250555</Id> <Id>21217814</Id> <Id>21046548</Id> <Id>20832112</Id> <Id>20404173</Id> <Id>20197096</Id> <Id>20138404</Id> <Id>20068591</Id> <Id>20067632</Id> <Id>21537449</Id> <Id>19935831</Id> <Id>19732867</Id> <Id>19525223</Id> <Id>19450457</Id> <Id>19361613</Id> <Id>19352374</Id> <Id>19274735</Id> <Id>19270676</Id> <Id>19215054</Id> <Id>19193627</Id> <Id>19170447</Id> <Id>19047183</Id> <Id>19013281</Id> <Id>18839057</Id> <Id>18836535</Id> <Id>18794863</Id> <Id>18789830</Id> <Id>18769715</Id> <Id>18752025</Id> <Id>18649390</Id> <Id>18617537</Id> <Id>18606304</Id> <Id>18602390</Id> <Id>18572275</Id> <Id>18488026</Id> <Id>18452155</Id> <Id>18332434</Id> <Id>18280754</Id> <Id>18270320</Id> <Id>18252217</Id> <Id>18179879</Id> <Id>17982457</Id> <Id>17977095</Id> <Id>17975299</Id> <Id>17671248</Id> <Id>17661425</Id> <Id>17553421</Id> <Id>17522105</Id> <Id>17512701</Id> <Id>17474819</Id> <Id>17470457</Id> <Id>17357082</Id> <Id>17286446</Id> <Id>17269488</Id> <Id>17160900</Id> <Id>17156488</Id> <Id>17103432</Id> <Id>17077275</Id> <Id>17062589</Id> <Id>17053149</Id> <Id>16933213</Id> <Id>16920408</Id> <Id>16914832</Id> <Id>16773128</Id> <Id>16669732</Id> <Id>16601881</Id> <Id>16571880</Id> <Id>16539205</Id> <Id>16524466</Id> <Id>16446702</Id> <Id>16283527</Id> <Id>16262895</Id> <Id>16242812</Id> <Id>16197552</Id> <Id>16158439</Id> <Id>16098236</Id> <Id>16078860</Id> <Id>15922682</Id> <Id>15906096</Id> <Id>15833046</Id> <Id>15780141</Id> <Id>15753370</Id> <Id>15749281</Id> <Id>15558749</Id> <Id>15505052</Id> <Id>15387886</Id> <Id>15273283</Id> <Id>15137903</Id> <Id>15037594</Id> <Id>15035510</Id> <Id>12928814</Id> <Id>12817998</Id> <Id>12811539</Id> <Id>12779011</Id> <Id>12714628</Id> <Id>12702575</Id> <Id>12673792</Id> <Id>12593803</Id> <Id>12209015</Id> <Id>12036489</Id> <Id>11937576</Id> <Id>11935316</Id> <Id>11827456</Id> </IdList> <TranslationSet><Translation>     <From>dietrich stephan</From>     <To>Stephan, Dietrich[Full Investigator Name]</To>    </Translation></TranslationSet><TranslationStack>   <TermSet>    <Term>Stephan, Dietrich[Full Author Name]</Term>    <Field>Full Author Name</Field>    <Count>109</Count>    <Explode>N</Explode>   </TermSet>   <TermSet>    <Term>Stephan, Dietrich[Full Investigator Name]</Term>    <Field>Full Investigator Name</Field>    <Count>1</Count>    <Explode>N</Explode>   </TermSet>   <OP>OR</OP>   <OP>GROUP</OP>  </TranslationStack><QueryTranslation>Stephan, Dietrich[Full Author Name] OR Stephan, Dietrich[Full Investigator Name]</QueryTranslation> </eSearchResult>"
 
 
 
