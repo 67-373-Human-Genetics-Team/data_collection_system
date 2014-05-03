@@ -3,6 +3,7 @@ html(lang="en")
     head
         title SurveyApp
         include includes/head
+        script(type='text/javascript' src='/javascripts/spinner.js')
         script(type='text/javascript' src='/javascripts/x2js.js')
         script(type='text/javascript' src='/javascripts/async.js')
         script(type='text/javascript' src='/javascripts/papers_sorted.js')
@@ -17,9 +18,17 @@ html(lang="en")
             h1(id='survey-title')= survey.name
                 span  Survey
 
+            div(id='spinner-container')
+                div(id='spinner')
+                h3 Searching for your publications
+
             div(id='publications-box' class='hidden')
                 h3 Are these your publications?
                 h5 Check the ones that are yours.
+                p#checkall-pubs-container
+                    input(id="checkall-pubs", type="checkbox", name="checkall", checked=undefined)
+                    |check all
+                    br
 
             //- div(id='patents-box' class='hidden')
             //-     h3 Are these your patents?

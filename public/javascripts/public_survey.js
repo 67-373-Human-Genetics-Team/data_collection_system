@@ -8,6 +8,12 @@ $(function() {
   $("#survey-title").hide();
   $("#participant-survey-form").hide();
 
+  startSpinner();
+
+  $('#checkall-pubs').on('change', function() {
+    checkAllPublication(this.checked);
+  })
+
   // Get participant id from URL pathname and update value
   var participant_id = window.location.pathname.split( '/' ).pop();
   $("#participant_id").val(participant_id);
@@ -18,6 +24,29 @@ $(function() {
   $("#participant-survey-form").submit(postResponse);
     
 });
+
+function startSpinner() {
+  var opts = {
+    lines: 15, // The number of lines to draw
+    length: 0, // The length of each line
+    width: 12, // The line thickness
+    radius: 45, // The radius of the inner circle
+    corners: 1, // Corner roundness (0..1)
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#000', // #rgb or #rrggbb or array of colors
+    speed: 1.3, // Rounds per second
+    trail: 97, // Afterglow percentage
+    shadow: false, // Whether to render a shadow
+    hwaccel: true, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: '50%', // Top position relative to parent
+    left: '50%' // Left position relative to parent
+  };
+  var target = document.getElementById('spinner');
+  var spinner = new Spinner(opts).spin(target);
+}
 
 // Gets participant's name and calls getPublications(name)
 function getParticipant(id) {
@@ -42,6 +71,7 @@ function getPublications(name) {
     pubmedSearch(name, limit, function(err, publications) {
       if(err) { console.log(err.toString()); return;}
       
+      $("#spinner-container").hide();
       $("#publications-box").fadeIn('slow');
       $("#patents-box").fadeIn('slow');
 
@@ -74,6 +104,12 @@ function populatePublicationDropdown() {
         $("#publication-dropdown").append("<option value='"+$(this).val()+"'>"+$(this).val()+"</option>")
     });
 };
+
+function checkAllPublication(check) {
+  $('#publications-form>div>input').each(function(i,el) {
+    $(el).prop('checked', check);
+  });
+}
 
 // Submitting response to survey
 function postResponse() {

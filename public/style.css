@@ -497,6 +497,16 @@ input[type=text] {
     padding: 5px;
 }
 
+#spinner-container>h3 {
+    position: absolute;
+    top: 68%; left: 42%;
+}
+
+#checkall-pubs {
+    margin: 0px 8px 10px 8px;
+}
+
+
 #patents-box {
     font-size: 120%;
     width: 70%;
