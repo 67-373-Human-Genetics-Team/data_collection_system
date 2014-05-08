@@ -3,7 +3,7 @@
 
   window.pubmedSearch = function search(query, arg1, arg2) {
     var cb;
-    var limit = 5000; // limit unless otherwise specified
+    var limit = 999; // limit unless otherwise specified
     
     // handle args
     if ( typeof arg1 === 'function' ) {

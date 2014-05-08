@@ -54,6 +54,8 @@ $(function() {
     }
   });
 
+  setSurveyURL();
+
 });
 
 // Redirects to responses by survey ID
@@ -215,10 +217,21 @@ function closeSurvey(id) {
 
     }
   });
+
+
 }
 
-
-
-
+// sets the survey url to the current host
+function setSurveyURL() {
+  // alert('hi')
+  var location = document.URL
+                .replace(/https?:\/\//, '')
+                .match(/([^\/]+)/)[0];
+  
+  var currentAddr = $('#url_large').val();
+  var newAddr = currentAddr.replace('http://localhost:3000', location);
+  
+  $('#url_large').val(newAddr);
+}
 
 
