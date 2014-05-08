@@ -12,13 +12,11 @@ html(lang="en")
         include includes/nav_public
 
         #content-area
-            
-            //- div(id='response' class='hidden')
 
             h1(id='survey-title')= survey.name
                 span  Survey
 
-            div(id='spinner-container')
+            div(id='spinner-container' class='hidden')
                 div(id='spinner')
                 h3 Searching for your publications
 
@@ -29,10 +27,6 @@ html(lang="en")
                     input(id="checkall-pubs", type="checkbox", name="checkall", checked=undefined)
                     |check all
                     br
-
-            //- div(id='patents-box' class='hidden')
-            //-     h3 Are these your patents?
-            //-     h5 Check the ones that are yours.
 
             form(class='participant-survey' id='participant-survey-form')
                 each question in survey.questions
