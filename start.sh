@@ -8,6 +8,9 @@ use admin
 db.shutdownServer()
 EOF' 1 2 3 15
 
+# Make sure logs folder exists
+mkdir -p logs
+
 # Start database server
 mkdir -p db
 mongod --fork --dbpath ./db --logpath ./logs/mongod-`date +%F-%H-%M-%S`.log
