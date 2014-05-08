@@ -8,22 +8,36 @@ $(function() {
   $("#survey-title").hide();
   $("#participant-survey-form").hide();
 
-  startSpinner();
-
-  $('#checkall-pubs').on('change', function() {
-    checkAllPublication(this.checked);
-  })
-
-  // Get participant id from URL pathname and update value
-  var participant_id = window.location.pathname.split( '/' ).pop();
-  $("#participant_id").val(participant_id);
-
-  // Get participant firstname lastname and call publications api
-  getParticipant(participant_id);
+  // Check if survey has publication question
+  checkQuestions();
 
   $("#participant-survey-form").submit(postResponse);
     
 });
+
+function checkQuestions() {
+  if ($(".Publication").length == 0) {
+    console.log("No publication questions");
+    $("#spinner-container").hide();
+    $("#survey-title").show();
+    $("#participant-survey-form").show();
+  } else {
+    console.log("Found publication question");
+
+    startSpinner();
+
+    $('#checkall-pubs').on('change', function() {
+      checkAllPublication(this.checked);
+    });
+
+    // Get participant id from URL pathname and update value
+    var participant_id = window.location.pathname.split( '/' ).pop();
+    $("#participant_id").val(participant_id);
+
+    // Get participant firstname lastname and call publications api
+    getParticipant(participant_id);
+  }
+};
 
 function startSpinner() {
   var opts = {
