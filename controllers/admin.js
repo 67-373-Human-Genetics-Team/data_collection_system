@@ -40,6 +40,43 @@ exports.showSurvey = function(req,res) {
 	});
 };
 
+// Download individual survey as CSV
+exports.downloadSurvey = function(req,res) {
+	Survey.findById(req.params.id, function(err,survey) {
+		if (err) {
+			res.send("Survey doesn't exist.");
+		} else {
+			
+			var questions = survey.questions.map(function(q) {
+				return q.query;
+			});
+			
+			var questionsStr = ["Particiant", "Email"].concat(questions).join(', ')
+
+				Response
+				.find({ survey_id: req.params.id })
+				.populate('participant_id')
+				.populate('survey_id')
+				.exec(function (err,responses) {
+					if (err) {
+						res.send(err);
+					} else {
+						
+						var responsesStr = responses.map(function(r) {
+							var answers = r.answers.join(', ');
+							var name = r.participant_id.first_name + ' ' +
+												 r.participant_id.last_name
+							var email = r.participant_id.email
+							return [name, email].concat(answers).join(', ')
+						}).join('\n');
+						
+						res.write(questionsStr+"\n\n"+responsesStr)
+						res.end()
+					}
+				});
+		}
+	});
+};
 
 
 // Participant Controller =================================

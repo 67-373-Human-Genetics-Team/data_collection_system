@@ -46,6 +46,7 @@ app.get('/admin/surveys/new', auth, controllers.admin.newSurvey);
 app.get('/admin/surveys/:id/responses', auth, controllers.admin.listSurveyResponses);
 app.get('/admin/surveys/:id/responses/:response_id', auth, controllers.admin.showSurveyResponse);
 app.get('/admin/surveys/:id', auth, controllers.admin.showSurvey);
+app.get('/admin/surveys/:id/download', auth, controllers.admin.downloadSurvey);
 
 // Participant Routes
 app.get('/admin/participants', auth, controllers.admin.listParticipants);
