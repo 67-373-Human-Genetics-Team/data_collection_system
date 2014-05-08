@@ -10,7 +10,7 @@ EOF' 1 2 3 15
 
 # Start database server
 mkdir -p db
-mongod --fork --dbpath ./db --logpath ./mongod-`date +%F-%H-%M-%S`.log
+mongod --fork --dbpath ./db --logpath ./logs/mongod-`date +%F-%H-%M-%S`.log
 
 # Start node server
-node app.js > node-`date +%F-%H-%M-%S`.log 2>&1
+node app.js > ./logs/node-`date +%F-%H-%M-%S`.log 2>&1
