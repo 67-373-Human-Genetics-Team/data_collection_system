@@ -25,7 +25,7 @@ html(lang="en")
             if (survey.status === "Published" || survey.status === "Closed")
               a(class='survey-buttons' id='metrics-button' onclick='getSurveyResponses("'+survey._id+'")') Responses
             if (survey.status === "Published" || survey.status === "Closed")
-              a(class='survey-buttons' id='download-button' target="_blank" href='/admin/surveys/'+survey._id+'/download') Download
+              a(class='survey-buttons' id='download-button' target="_blank" href='/admin/surveys/'+survey._id+'/responses.csv') Download
             if (survey.status === "Published")
               a(class='survey-buttons' id='close-button' onclick='closeSurvey("'+survey._id+'")') Close
             else
