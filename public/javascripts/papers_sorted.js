@@ -26,7 +26,7 @@
   // search pubmed, returns a list of ids
   function _search(query, limit, cb) {
     query = query.replace(' ','+');
-    var url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmax=5000&term="+query;
+    var url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmax=999&term="+query;
     _contactServer(url, function(err,results) {
       if (err) { cb(err); return; }
       var allIds = results.eSearchResult.IdList.Id;
